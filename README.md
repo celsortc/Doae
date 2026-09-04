@@ -38,4 +38,4 @@ Em desenvolvimento.
 
 ## Projeto
 
-Este projeto faz parte da disciplina de **Desenvolvimento Sustentável**.
+Este projeto faz parte da disciplina de UPX II - FACENS e o tema é **Desenvolvimento Sustentável**.
