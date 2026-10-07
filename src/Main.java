@@ -11,7 +11,7 @@ public class Main {
       System.out.println("Controle de estoque da ONG");
       System.out.println();
 
-    int opcao = 1;
+    int opcao = 99;
     while (opcao != 0) {
 
 
@@ -21,6 +21,16 @@ public class Main {
       System.out.println("4 - Consultar Estoque");
       System.out.println("0 - Sair");
 
+
+      boolean verificaMenu = scan.hasNextInt();
+      if(verificaMenu == false) {
+        System.out.println("Use apenas números e escolha uma opção existente");
+        scan.nextLine();
+
+        System.out.println("\nPressione Enter para voltar ao menu.");
+        scan.nextLine();
+        continue;
+      }
       opcao = scan.nextInt();
       scan.nextLine();
 
@@ -30,7 +40,7 @@ public class Main {
       case 1:
 
       Boolean dadosCorretos = false;
-      
+
 while (dadosCorretos == false) {
   System.out.println("=== Cadastrar ===");
         System.out.println("Nome");
