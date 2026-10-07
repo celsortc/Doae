@@ -1,9 +1,11 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Main {
   public static void main(String[] args) {
 
     Scanner scan = new Scanner(System.in);
+    ArrayList<Item> itens= new ArrayList<>();
 
       System.out.println("=== Doae ===");
       System.out.println("Controle de estoque da ONG");
@@ -21,10 +23,16 @@ public class Main {
 
       opcao = scan.nextInt();
       scan.nextLine();
+
+
       
       switch (opcao) {
       case 1:
-        System.out.println("=== Cadastrar ===");
+
+      Boolean dadosCorretos = false;
+      
+while (dadosCorretos == false) {
+  System.out.println("=== Cadastrar ===");
         System.out.println("Nome");
         String nome = scan.nextLine();
         System.out.println("Descricao");
@@ -32,9 +40,14 @@ public class Main {
         System.out.println("Unidade de Medida");
         String unMedida = scan.nextLine();
 
+        if(nome.isBlank() || unMedida.isBlank()) {
+            System.out.println("Nome e unidade de medida são campos obrigatórios");
+        } else {
         Item item = new Item(nome, descricao, unMedida);
-
-        System.out.println(item.getNome());
+        itens.add(item);
+        dadosCorretos = true;
+        }
+}
         break;
       case 2:
         System.out.println("Registrar Entrada");
@@ -43,7 +56,15 @@ public class Main {
         System.out.println("Registrar Saída");
         break;
       case 4:
-        System.out.println("Estoque");
+
+        System.out.println("=== Estoque ===");
+        for(Item itemCadastrado : itens) {
+          System.out.println(itemCadastrado.getNome());
+        }
+
+
+        System.out.println("\nPressione Enter para voltar ao menu.");
+scan.nextLine();
         break;
       case 0: 
       System.out.println("Saindo...");
