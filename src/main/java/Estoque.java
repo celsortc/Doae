@@ -29,118 +29,253 @@ setLocationRelativeTo(null); // Centraliza na tela
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        bgNav = new javax.swing.JPanel();
+        btnEstoque = new javax.swing.JButton();
+        lblLogo = new javax.swing.JLabel();
+        btnHistorico = new javax.swing.JButton();
+        btnDoadores = new javax.swing.JButton();
+        btnItens = new javax.swing.JButton();
+        lblOperacao = new javax.swing.JLabel();
+        lblCadastro = new javax.swing.JLabel();
+        painelConteudoEstoque = new javax.swing.JPanel();
+        btnRegistrarEntrada = new javax.swing.JButton();
+        btnRegistrarSaida = new javax.swing.JButton();
+        painelCabecalhoEstoque = new javax.swing.JPanel();
+        lblTituloEstoque = new javax.swing.JLabel();
+        lblDescricaoEstoque = new javax.swing.JLabel();
+        scrollEstoque = new javax.swing.JScrollPane();
+        tblEstoque = new javax.swing.JTable();
+        painelPesquisa = new javax.swing.JPanel();
+        lblBuscaItem = new javax.swing.JLabel();
+        txtBuscaItem = new CampoBusca();
+        btnPesquisar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(205, 211, 215)));
-        jPanel2.setPreferredSize(new java.awt.Dimension(240, 481));
+        bgNav.setBackground(new java.awt.Color(255, 255, 255));
+        bgNav.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(205, 211, 215)));
+        bgNav.setPreferredSize(new java.awt.Dimension(240, 481));
 
-        jButton1.setBackground(new java.awt.Color(220, 240, 210));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setText("Estoque");
-        jButton1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(205, 211, 215))); // NOI18N
-        jButton1.setBorderPainted(false);
-        jButton1.setFocusPainted(false);
-        jButton1.setPreferredSize(new java.awt.Dimension(75, 40));
-        jButton1.addActionListener(this::jButton1ActionPerformed);
+        btnEstoque.setBackground(new java.awt.Color(220, 240, 210));
+        btnEstoque.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnEstoque.setText("Estoque");
+        btnEstoque.setBorder(null);
+        btnEstoque.setBorderPainted(false);
+        btnEstoque.setContentAreaFilled(false);
+        btnEstoque.setFocusPainted(false);
+        btnEstoque.setOpaque(true);
+        btnEstoque.setPreferredSize(new java.awt.Dimension(75, 40));
+        btnEstoque.addActionListener(this::btnEstoqueActionPerformed);
 
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Logo.png"))); // NOI18N
-        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(205, 211, 215)));
-        jLabel1.setOpaque(true);
-        jLabel1.setPreferredSize(new java.awt.Dimension(150, 72));
+        lblLogo.setBackground(new java.awt.Color(255, 255, 255));
+        lblLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Logo.png"))); // NOI18N
+        lblLogo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(205, 211, 215)));
+        lblLogo.setOpaque(true);
+        lblLogo.setPreferredSize(new java.awt.Dimension(150, 72));
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton3.setText("Histórico");
-        jButton3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(205, 211, 215))); // NOI18N
-        jButton3.setBorderPainted(false);
-        jButton3.setFocusPainted(false);
-        jButton3.setPreferredSize(new java.awt.Dimension(75, 40));
-        jButton3.addActionListener(this::jButton3ActionPerformed);
+        btnHistorico.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnHistorico.setText("Histórico");
+        btnHistorico.setBorder(null);
+        btnHistorico.setBorderPainted(false);
+        btnHistorico.setContentAreaFilled(false);
+        btnHistorico.setFocusPainted(false);
+        btnHistorico.setOpaque(true);
+        btnHistorico.setPreferredSize(new java.awt.Dimension(75, 40));
+        btnHistorico.addActionListener(this::btnHistoricoActionPerformed);
 
-        jButton4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton4.setText("Doadores");
-        jButton4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(205, 211, 215))); // NOI18N
-        jButton4.setBorderPainted(false);
-        jButton4.setFocusPainted(false);
-        jButton4.setPreferredSize(new java.awt.Dimension(75, 40));
-        jButton4.addActionListener(this::jButton4ActionPerformed);
+        btnDoadores.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnDoadores.setText("Doadores");
+        btnDoadores.setBorder(null);
+        btnDoadores.setBorderPainted(false);
+        btnDoadores.setContentAreaFilled(false);
+        btnDoadores.setFocusPainted(false);
+        btnDoadores.setOpaque(true);
+        btnDoadores.setPreferredSize(new java.awt.Dimension(75, 40));
+        btnDoadores.addActionListener(this::btnDoadoresActionPerformed);
 
-        jButton5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton5.setText("Itens");
-        jButton5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(205, 211, 215))); // NOI18N
-        jButton5.setBorderPainted(false);
-        jButton5.setFocusPainted(false);
-        jButton5.setPreferredSize(new java.awt.Dimension(75, 40));
-        jButton5.addActionListener(this::jButton5ActionPerformed);
+        btnItens.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnItens.setText("Itens");
+        btnItens.setBorder(null);
+        btnItens.setBorderPainted(false);
+        btnItens.setContentAreaFilled(false);
+        btnItens.setFocusPainted(false);
+        btnItens.setOpaque(true);
+        btnItens.setPreferredSize(new java.awt.Dimension(75, 40));
+        btnItens.addActionListener(this::btnItensActionPerformed);
 
-        jLabel2.setBackground(new java.awt.Color(205, 211, 215));
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Operação");
-        jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(205, 211, 215)));
-        jLabel2.setOpaque(true);
+        lblOperacao.setBackground(new java.awt.Color(205, 211, 215));
+        lblOperacao.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblOperacao.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblOperacao.setText("Operação");
+        lblOperacao.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(205, 211, 215)));
+        lblOperacao.setOpaque(true);
 
-        jLabel3.setBackground(new java.awt.Color(205, 211, 215));
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Cadastro");
-        jLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(205, 211, 215)));
-        jLabel3.setOpaque(true);
+        lblCadastro.setBackground(new java.awt.Color(205, 211, 215));
+        lblCadastro.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblCadastro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCadastro.setText("Cadastro");
+        lblCadastro.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(205, 211, 215)));
+        lblCadastro.setOpaque(true);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
-            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        javax.swing.GroupLayout bgNavLayout = new javax.swing.GroupLayout(bgNav);
+        bgNav.setLayout(bgNavLayout);
+        bgNavLayout.setHorizontalGroup(
+            bgNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnEstoque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+            .addComponent(btnHistorico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnItens, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblOperacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnDoadores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+        bgNavLayout.setVerticalGroup(
+            bgNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bgNavLayout.createSequentialGroup()
+                .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblOperacao, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnHistorico, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnItens, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnDoadores, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(382, Short.MAX_VALUE))
         );
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        painelConteudoEstoque.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1168, Short.MAX_VALUE)
+        btnRegistrarEntrada.setBackground(new java.awt.Color(76, 150, 53));
+        btnRegistrarEntrada.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnRegistrarEntrada.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegistrarEntrada.setText("Registrar entrada");
+        btnRegistrarEntrada.setContentAreaFilled(false);
+        btnRegistrarEntrada.setOpaque(true);
+
+        btnRegistrarSaida.setBackground(new java.awt.Color(172, 62, 64));
+        btnRegistrarSaida.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnRegistrarSaida.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegistrarSaida.setText("Registrar saída");
+        btnRegistrarSaida.setContentAreaFilled(false);
+        btnRegistrarSaida.setOpaque(true);
+
+        painelCabecalhoEstoque.setBackground(new java.awt.Color(255, 255, 255));
+        painelCabecalhoEstoque.setMinimumSize(new java.awt.Dimension(400, 66));
+        painelCabecalhoEstoque.setPreferredSize(new java.awt.Dimension(400, 66));
+
+        lblTituloEstoque.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTituloEstoque.setForeground(new java.awt.Color(36, 42, 45));
+        lblTituloEstoque.setText("Estoque");
+
+        lblDescricaoEstoque.setForeground(new java.awt.Color(101, 112, 120));
+        lblDescricaoEstoque.setText("Consulte os saldos e registre as movimentações de itens.");
+
+        javax.swing.GroupLayout painelCabecalhoEstoqueLayout = new javax.swing.GroupLayout(painelCabecalhoEstoque);
+        painelCabecalhoEstoque.setLayout(painelCabecalhoEstoqueLayout);
+        painelCabecalhoEstoqueLayout.setHorizontalGroup(
+            painelCabecalhoEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelCabecalhoEstoqueLayout.createSequentialGroup()
+                .addGroup(painelCabecalhoEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTituloEstoque)
+                    .addComponent(lblDescricaoEstoque))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        painelCabecalhoEstoqueLayout.setVerticalGroup(
+            painelCabecalhoEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelCabecalhoEstoqueLayout.createSequentialGroup()
+                .addComponent(lblTituloEstoque)
+                .addGap(8, 8, 8)
+                .addComponent(lblDescricaoEstoque)
+                .addGap(0, 17, Short.MAX_VALUE))
+        );
+
+        tblEstoque.setModel(new javax.swing.table.DefaultTableModel(
+            new Object[0][3], new String[] { "Item", "Unidade", "Saldo" }
+        ) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+        tblEstoque.setFont(new java.awt.Font("Segoe UI", 0, 14));
+        tblEstoque.setRowHeight(32);
+        tblEstoque.setFillsViewportHeight(true);
+        scrollEstoque.setViewportView(tblEstoque);
+        scrollEstoque.getViewport().setBackground(java.awt.Color.WHITE);
+
+        painelPesquisa.setBackground(java.awt.Color.WHITE);
+        lblBuscaItem.setText("Buscar por nome");
+        lblBuscaItem.setFont(new java.awt.Font("Segoe UI", 0, 14));
+        lblBuscaItem.setForeground(new java.awt.Color(36, 42, 45));
+        lblBuscaItem.setLabelFor(txtBuscaItem);
+        txtBuscaItem.setFont(new java.awt.Font("Segoe UI", 0, 14));
+        txtBuscaItem.setBackground(java.awt.Color.WHITE);
+        txtBuscaItem.setForeground(new java.awt.Color(36, 42, 45));
+        txtBuscaItem.setMargin(new java.awt.Insets(8, 12, 8, 12));
+        txtBuscaItem.setPlaceholder("Digite o nome do item");
+        txtBuscaItem.setToolTipText("Digite o nome do item");
+        btnPesquisar.setText("Pesquisar");
+        btnPesquisar.setFont(new java.awt.Font("Segoe UI", 1, 14));
+        btnPesquisar.setBackground(new java.awt.Color(76, 150, 53));
+        btnPesquisar.setForeground(java.awt.Color.WHITE);
+        btnPesquisar.setContentAreaFilled(false);
+        btnPesquisar.setOpaque(true);
+
+        javax.swing.GroupLayout painelPesquisaLayout = new javax.swing.GroupLayout(painelPesquisa);
+        painelPesquisa.setLayout(painelPesquisaLayout);
+        painelPesquisaLayout.setHorizontalGroup(
+            painelPesquisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(lblBuscaItem)
+                .addGroup(painelPesquisaLayout.createSequentialGroup()
+                    .addComponent(txtBuscaItem, 200, 600, Short.MAX_VALUE)
+                    .addGap(12, 12, 12)
+                    .addComponent(btnPesquisar, 132, 132, 132))
+        );
+        painelPesquisaLayout.setVerticalGroup(
+            painelPesquisaLayout.createSequentialGroup()
+                .addComponent(lblBuscaItem, 20, 20, 20)
+                .addGap(8, 8, 8)
+                .addGroup(painelPesquisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtBuscaItem, 42, 42, 42)
+                    .addComponent(btnPesquisar, 42, 42, 42))
+        );
+
+        javax.swing.GroupLayout painelConteudoEstoqueLayout = new javax.swing.GroupLayout(painelConteudoEstoque);
+        painelConteudoEstoque.setLayout(painelConteudoEstoqueLayout);
+        painelConteudoEstoqueLayout.setHorizontalGroup(
+            painelConteudoEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelConteudoEstoqueLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(painelConteudoEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelConteudoEstoqueLayout.createSequentialGroup()
+                        .addComponent(painelCabecalhoEstoque, 400, 400, 400)
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(btnRegistrarEntrada, 173, 173, 173)
+                        .addGap(12, 12, 12)
+                        .addComponent(btnRegistrarSaida, 173, 173, 173))
+                    .addComponent(painelPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(scrollEstoque, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(40, 40, 40))
+        );
+        painelConteudoEstoqueLayout.setVerticalGroup(
+            painelConteudoEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelConteudoEstoqueLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(painelConteudoEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(painelCabecalhoEstoque, 66, 66, 66)
+                    .addComponent(btnRegistrarEntrada, 42, 42, 42)
+                    .addComponent(btnRegistrarSaida, 42, 42, 42))
+                .addGap(32, 32, 32)
+                .addComponent(painelPesquisa, 70, 70, 70)
+                .addGap(32, 32, 32)
+                .addComponent(scrollEstoque, 100, 380, Short.MAX_VALUE)
+                .addGap(40, 40, 40))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -148,37 +283,37 @@ setLocationRelativeTo(null); // Centraliza na tela
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bgNav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(painelConteudoEstoque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)))
+                    .addComponent(painelConteudoEstoque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bgNav, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstoqueActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnEstoqueActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoricoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnHistoricoActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnDoadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoadoresActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnDoadoresActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btnItensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnItensActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btnItensActionPerformed
 
     /**
      * @param args the command line arguments
@@ -206,14 +341,25 @@ setLocationRelativeTo(null); // Centraliza na tela
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel bgNav;
+    private javax.swing.JButton btnDoadores;
+    private javax.swing.JButton btnEstoque;
+    private javax.swing.JButton btnHistorico;
+    private javax.swing.JButton btnItens;
+    private javax.swing.JButton btnRegistrarEntrada;
+    private javax.swing.JButton btnRegistrarSaida;
+    private javax.swing.JScrollPane scrollEstoque;
+    private javax.swing.JTable tblEstoque;
+    private javax.swing.JLabel lblCadastro;
+    private javax.swing.JLabel lblDescricaoEstoque;
+    private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblOperacao;
+    private javax.swing.JLabel lblTituloEstoque;
+    private javax.swing.JPanel painelCabecalhoEstoque;
+    private javax.swing.JPanel painelConteudoEstoque;
+    private javax.swing.JPanel painelPesquisa;
+    private javax.swing.JLabel lblBuscaItem;
+    private CampoBusca txtBuscaItem;
+    private javax.swing.JButton btnPesquisar;
     // End of variables declaration//GEN-END:variables
 }
