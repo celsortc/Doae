@@ -1,3 +1,7 @@
+package br.com.doae;
+
+import br.com.doae.modelo.Item;
+import br.com.doae.visao.Estoque;
 import java.util.Scanner;
 import java.util.ArrayList;
 

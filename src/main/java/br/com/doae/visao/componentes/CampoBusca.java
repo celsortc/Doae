@@ -1,3 +1,5 @@
+package br.com.doae.visao.componentes;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Insets;
