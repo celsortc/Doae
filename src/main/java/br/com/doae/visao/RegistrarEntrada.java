@@ -26,32 +26,87 @@ public class RegistrarEntrada extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblRegistrarEntrada = new javax.swing.JLabel();
+        painelCabecalhoRegistro = new javax.swing.JPanel();
+        lblTituloRegistrarEntrada = new javax.swing.JLabel();
+        lblDescricaoRegistrarEntrada = new javax.swing.JLabel();
+        PainelDadosEntrada = new javax.swing.JPanel();
 
-        lblRegistrarEntrada.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblRegistrarEntrada.setForeground(new java.awt.Color(36, 42, 45));
-        lblRegistrarEntrada.setText("Registrar Entrada");
+        setBackground(new java.awt.Color(255, 255, 255));
+        setPreferredSize(new java.awt.Dimension(1200, 681));
+
+        painelCabecalhoRegistro.setBackground(new java.awt.Color(255, 255, 255));
+        painelCabecalhoRegistro.setMinimumSize(new java.awt.Dimension(400, 66));
+        painelCabecalhoRegistro.setPreferredSize(new java.awt.Dimension(400, 66));
+
+        lblTituloRegistrarEntrada.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
+        lblTituloRegistrarEntrada.setForeground(new java.awt.Color(36, 42, 45));
+        lblTituloRegistrarEntrada.setText("Registrar Entrada");
+
+        lblDescricaoRegistrarEntrada.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblDescricaoRegistrarEntrada.setForeground(new java.awt.Color(101, 112, 120));
+        lblDescricaoRegistrarEntrada.setText("Consulte os saldos e registre as movimentações de itens.");
+
+        javax.swing.GroupLayout painelCabecalhoRegistroLayout = new javax.swing.GroupLayout(painelCabecalhoRegistro);
+        painelCabecalhoRegistro.setLayout(painelCabecalhoRegistroLayout);
+        painelCabecalhoRegistroLayout.setHorizontalGroup(
+            painelCabecalhoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelCabecalhoRegistroLayout.createSequentialGroup()
+                .addGroup(painelCabecalhoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTituloRegistrarEntrada)
+                    .addComponent(lblDescricaoRegistrarEntrada))
+                .addGap(454, 454, 454))
+        );
+        painelCabecalhoRegistroLayout.setVerticalGroup(
+            painelCabecalhoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelCabecalhoRegistroLayout.createSequentialGroup()
+                .addComponent(lblTituloRegistrarEntrada)
+                .addGap(8, 8, 8)
+                .addComponent(lblDescricaoRegistrarEntrada)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        PainelDadosEntrada.setBackground(new java.awt.Color(255, 255, 255));
+        PainelDadosEntrada.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(205, 211, 215)));
+        PainelDadosEntrada.setPreferredSize(new java.awt.Dimension(2, 450));
+
+        javax.swing.GroupLayout PainelDadosEntradaLayout = new javax.swing.GroupLayout(PainelDadosEntrada);
+        PainelDadosEntrada.setLayout(PainelDadosEntradaLayout);
+        PainelDadosEntradaLayout.setHorizontalGroup(
+            PainelDadosEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        PainelDadosEntradaLayout.setVerticalGroup(
+            PainelDadosEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 448, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(lblRegistrarEntrada)
-                .addContainerGap(571, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(PainelDadosEntrada, javax.swing.GroupLayout.DEFAULT_SIZE, 1154, Short.MAX_VALUE)
+                    .addComponent(painelCabecalhoRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, 1154, Short.MAX_VALUE))
+                .addGap(23, 23, 23))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblRegistrarEntrada)
-                .addContainerGap(444, Short.MAX_VALUE))
+                .addGap(40, 40, 40)
+                .addComponent(painelCabecalhoRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(PainelDadosEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(95, 95, 95))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel lblRegistrarEntrada;
+    private javax.swing.JPanel PainelDadosEntrada;
+    private javax.swing.JLabel lblDescricaoRegistrarEntrada;
+    private javax.swing.JLabel lblTituloRegistrarEntrada;
+    private javax.swing.JPanel painelCabecalhoRegistro;
     // End of variables declaration//GEN-END:variables
 }

@@ -205,10 +205,11 @@ public class Estoque extends javax.swing.JFrame {
         painelCabecalhoEstoque.setMinimumSize(new java.awt.Dimension(400, 66));
         painelCabecalhoEstoque.setPreferredSize(new java.awt.Dimension(400, 66));
 
-        lblTituloEstoque.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTituloEstoque.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
         lblTituloEstoque.setForeground(new java.awt.Color(36, 42, 45));
         lblTituloEstoque.setText("Estoque");
 
+        lblDescricaoEstoque.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblDescricaoEstoque.setForeground(new java.awt.Color(101, 112, 120));
         lblDescricaoEstoque.setText("Consulte os saldos e registre as movimentações de itens.");
 
@@ -220,7 +221,7 @@ public class Estoque extends javax.swing.JFrame {
                 .addGroup(painelCabecalhoEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblTituloEstoque)
                     .addComponent(lblDescricaoEstoque))
-                .addGap(0, 102, Short.MAX_VALUE))
+                .addGap(0, 8, Short.MAX_VALUE))
         );
         painelCabecalhoEstoqueLayout.setVerticalGroup(
             painelCabecalhoEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,7 +229,7 @@ public class Estoque extends javax.swing.JFrame {
                 .addComponent(lblTituloEstoque)
                 .addGap(8, 8, 8)
                 .addComponent(lblDescricaoEstoque)
-                .addGap(0, 17, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         painelPesquisa.setBackground(new java.awt.Color(255, 255, 255));
@@ -320,7 +321,7 @@ public class Estoque extends javax.swing.JFrame {
                     .addComponent(btnRegistrarEntrada, 42, 42, 42)
                     .addComponent(btnRegistrarSaida, 42, 42, 42))
                 .addGap(32, 32, 32)
-                .addComponent(painelPesquisa)
+                .addComponent(painelPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addComponent(scrollEstoque, 100, 508, Short.MAX_VALUE)
                 .addGap(40, 40, 40))
