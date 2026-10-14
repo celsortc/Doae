@@ -186,6 +186,7 @@ public class Estoque extends javax.swing.JFrame {
         btnRegistrarEntrada.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnRegistrarEntrada.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistrarEntrada.setText("Registrar entrada");
+        btnRegistrarEntrada.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(76, 150, 53), 2, true));
         btnRegistrarEntrada.setContentAreaFilled(false);
         btnRegistrarEntrada.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegistrarEntrada.setOpaque(true);
@@ -195,6 +196,7 @@ public class Estoque extends javax.swing.JFrame {
         btnRegistrarSaida.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnRegistrarSaida.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistrarSaida.setText("Registrar saída");
+        btnRegistrarSaida.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(130, 40, 42), 2, true));
         btnRegistrarSaida.setContentAreaFilled(false);
         btnRegistrarSaida.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegistrarSaida.setOpaque(true);
@@ -226,7 +228,7 @@ public class Estoque extends javax.swing.JFrame {
                 .addComponent(lblTituloEstoque)
                 .addGap(8, 8, 8)
                 .addComponent(lblDescricaoEstoque)
-                .addGap(0, 81, Short.MAX_VALUE))
+                .addGap(0, 17, Short.MAX_VALUE))
         );
 
         painelPesquisa.setBackground(new java.awt.Color(255, 255, 255));
@@ -246,6 +248,7 @@ public class Estoque extends javax.swing.JFrame {
         btnPesquisar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnPesquisar.setForeground(new java.awt.Color(255, 255, 255));
         btnPesquisar.setText("Pesquisar");
+        btnPesquisar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(76, 150, 53), 2, true));
         btnPesquisar.setContentAreaFilled(false);
         btnPesquisar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnPesquisar.setOpaque(true);
@@ -271,8 +274,6 @@ public class Estoque extends javax.swing.JFrame {
         );
 
         tblEstoque.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tblEstoque.setRowHeight(32);
-        tblEstoque.setFillsViewportHeight(true);
         tblEstoque.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -289,6 +290,8 @@ public class Estoque extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblEstoque.setFillsViewportHeight(true);
+        tblEstoque.setRowHeight(32);
         scrollEstoque.setViewportView(tblEstoque);
 
         javax.swing.GroupLayout painelConteudoEstoqueLayout = new javax.swing.GroupLayout(painelConteudoEstoque);
@@ -304,8 +307,8 @@ public class Estoque extends javax.swing.JFrame {
                         .addComponent(btnRegistrarEntrada, 173, 173, 173)
                         .addGap(12, 12, 12)
                         .addComponent(btnRegistrarSaida, 173, 173, 173))
-                    .addComponent(painelPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(scrollEstoque, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(scrollEstoque, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(painelPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(40, 40, 40))
         );
         painelConteudoEstoqueLayout.setVerticalGroup(
@@ -313,13 +316,13 @@ public class Estoque extends javax.swing.JFrame {
             .addGroup(painelConteudoEstoqueLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(painelConteudoEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(painelCabecalhoEstoque, 130, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(painelCabecalhoEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRegistrarEntrada, 42, 42, 42)
                     .addComponent(btnRegistrarSaida, 42, 42, 42))
                 .addGap(32, 32, 32)
-                .addComponent(painelPesquisa, 70, 70, 70)
+                .addComponent(painelPesquisa)
                 .addGap(32, 32, 32)
-                .addComponent(scrollEstoque, 100, 380, Short.MAX_VALUE)
+                .addComponent(scrollEstoque, 100, 508, Short.MAX_VALUE)
                 .addGap(40, 40, 40))
         );
 
