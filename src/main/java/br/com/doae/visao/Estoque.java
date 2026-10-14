@@ -89,6 +89,7 @@ public class Estoque extends javax.swing.JFrame {
         btnEstoque.setBorder(null);
         btnEstoque.setBorderPainted(false);
         btnEstoque.setContentAreaFilled(false);
+        btnEstoque.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEstoque.setFocusPainted(false);
         btnEstoque.setOpaque(true);
         btnEstoque.setPreferredSize(new java.awt.Dimension(75, 40));
@@ -106,6 +107,7 @@ public class Estoque extends javax.swing.JFrame {
         btnHistorico.setBorder(null);
         btnHistorico.setBorderPainted(false);
         btnHistorico.setContentAreaFilled(false);
+        btnHistorico.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnHistorico.setFocusPainted(false);
         btnHistorico.setOpaque(true);
         btnHistorico.setPreferredSize(new java.awt.Dimension(75, 40));
@@ -116,6 +118,7 @@ public class Estoque extends javax.swing.JFrame {
         btnDoadores.setBorder(null);
         btnDoadores.setBorderPainted(false);
         btnDoadores.setContentAreaFilled(false);
+        btnDoadores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDoadores.setFocusPainted(false);
         btnDoadores.setOpaque(true);
         btnDoadores.setPreferredSize(new java.awt.Dimension(75, 40));
@@ -126,6 +129,7 @@ public class Estoque extends javax.swing.JFrame {
         btnItens.setBorder(null);
         btnItens.setBorderPainted(false);
         btnItens.setContentAreaFilled(false);
+        btnItens.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnItens.setFocusPainted(false);
         btnItens.setOpaque(true);
         btnItens.setPreferredSize(new java.awt.Dimension(75, 40));
@@ -183,6 +187,7 @@ public class Estoque extends javax.swing.JFrame {
         btnRegistrarEntrada.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistrarEntrada.setText("Registrar entrada");
         btnRegistrarEntrada.setContentAreaFilled(false);
+        btnRegistrarEntrada.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegistrarEntrada.setOpaque(true);
         btnRegistrarEntrada.addActionListener(this::btnRegistrarEntradaActionPerformed);
 
@@ -191,6 +196,7 @@ public class Estoque extends javax.swing.JFrame {
         btnRegistrarSaida.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistrarSaida.setText("Registrar saída");
         btnRegistrarSaida.setContentAreaFilled(false);
+        btnRegistrarSaida.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegistrarSaida.setOpaque(true);
 
         painelCabecalhoEstoque.setBackground(new java.awt.Color(255, 255, 255));
@@ -241,6 +247,7 @@ public class Estoque extends javax.swing.JFrame {
         btnPesquisar.setForeground(new java.awt.Color(255, 255, 255));
         btnPesquisar.setText("Pesquisar");
         btnPesquisar.setContentAreaFilled(false);
+        btnPesquisar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnPesquisar.setOpaque(true);
 
         javax.swing.GroupLayout painelPesquisaLayout = new javax.swing.GroupLayout(painelPesquisa);
