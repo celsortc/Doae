@@ -6,12 +6,17 @@ import br.com.doae.visao.componentes.CampoBusca;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author Celsinho
  */
 public class Estoque extends javax.swing.JFrame {
+
+    private final java.awt.CardLayout layoutTelas
+            = new java.awt.CardLayout();
+
+    private final javax.swing.JPanel painelTelas
+            = new javax.swing.JPanel(layoutTelas);
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Estoque.class.getName());
 
@@ -21,7 +26,25 @@ public class Estoque extends javax.swing.JFrame {
     public Estoque() {
         initComponents();
         setSize(1280, 720);
-setLocationRelativeTo(null); // Centraliza na tela
+        setLocationRelativeTo(null); // Centraliza na tela
+        configurarTelas();
+
+    }
+
+    private void configurarTelas() {
+        java.awt.Container conteudo = getContentPane();
+
+        conteudo.removeAll();
+
+        conteudo.setLayout(new java.awt.BorderLayout(6, 0));
+
+        painelTelas.add(painelConteudoEstoque, "estoque");
+        painelTelas.add(new RegistrarEntrada(), "entrada");
+        conteudo.add(bgNav, java.awt.BorderLayout.WEST);
+        conteudo.add(painelTelas, java.awt.BorderLayout.CENTER);
+
+        layoutTelas.show(painelTelas, "estoque");
+
     }
 
     /**
@@ -47,12 +70,12 @@ setLocationRelativeTo(null); // Centraliza na tela
         painelCabecalhoEstoque = new javax.swing.JPanel();
         lblTituloEstoque = new javax.swing.JLabel();
         lblDescricaoEstoque = new javax.swing.JLabel();
-        scrollEstoque = new javax.swing.JScrollPane();
-        tblEstoque = new javax.swing.JTable();
         painelPesquisa = new javax.swing.JPanel();
         lblBuscaItem = new javax.swing.JLabel();
-        txtBuscaItem = new CampoBusca();
+        txtBuscaItem = new br.com.doae.visao.componentes.CampoBusca();
         btnPesquisar = new javax.swing.JButton();
+        scrollEstoque = new javax.swing.JScrollPane();
+        tblEstoque = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,6 +89,7 @@ setLocationRelativeTo(null); // Centraliza na tela
         btnEstoque.setBorder(null);
         btnEstoque.setBorderPainted(false);
         btnEstoque.setContentAreaFilled(false);
+        btnEstoque.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEstoque.setFocusPainted(false);
         btnEstoque.setOpaque(true);
         btnEstoque.setPreferredSize(new java.awt.Dimension(75, 40));
@@ -83,6 +107,7 @@ setLocationRelativeTo(null); // Centraliza na tela
         btnHistorico.setBorder(null);
         btnHistorico.setBorderPainted(false);
         btnHistorico.setContentAreaFilled(false);
+        btnHistorico.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnHistorico.setFocusPainted(false);
         btnHistorico.setOpaque(true);
         btnHistorico.setPreferredSize(new java.awt.Dimension(75, 40));
@@ -93,6 +118,7 @@ setLocationRelativeTo(null); // Centraliza na tela
         btnDoadores.setBorder(null);
         btnDoadores.setBorderPainted(false);
         btnDoadores.setContentAreaFilled(false);
+        btnDoadores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDoadores.setFocusPainted(false);
         btnDoadores.setOpaque(true);
         btnDoadores.setPreferredSize(new java.awt.Dimension(75, 40));
@@ -103,6 +129,7 @@ setLocationRelativeTo(null); // Centraliza na tela
         btnItens.setBorder(null);
         btnItens.setBorderPainted(false);
         btnItens.setContentAreaFilled(false);
+        btnItens.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnItens.setFocusPainted(false);
         btnItens.setOpaque(true);
         btnItens.setPreferredSize(new java.awt.Dimension(75, 40));
@@ -160,13 +187,16 @@ setLocationRelativeTo(null); // Centraliza na tela
         btnRegistrarEntrada.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistrarEntrada.setText("Registrar entrada");
         btnRegistrarEntrada.setContentAreaFilled(false);
+        btnRegistrarEntrada.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegistrarEntrada.setOpaque(true);
+        btnRegistrarEntrada.addActionListener(this::btnRegistrarEntradaActionPerformed);
 
         btnRegistrarSaida.setBackground(new java.awt.Color(172, 62, 64));
         btnRegistrarSaida.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnRegistrarSaida.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistrarSaida.setText("Registrar saída");
         btnRegistrarSaida.setContentAreaFilled(false);
+        btnRegistrarSaida.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegistrarSaida.setOpaque(true);
 
         painelCabecalhoEstoque.setBackground(new java.awt.Color(255, 255, 255));
@@ -188,7 +218,7 @@ setLocationRelativeTo(null); // Centraliza na tela
                 .addGroup(painelCabecalhoEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblTituloEstoque)
                     .addComponent(lblDescricaoEstoque))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 102, Short.MAX_VALUE))
         );
         painelCabecalhoEstoqueLayout.setVerticalGroup(
             painelCabecalhoEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,59 +226,70 @@ setLocationRelativeTo(null); // Centraliza na tela
                 .addComponent(lblTituloEstoque)
                 .addGap(8, 8, 8)
                 .addComponent(lblDescricaoEstoque)
-                .addGap(0, 17, Short.MAX_VALUE))
+                .addGap(0, 81, Short.MAX_VALUE))
         );
 
-        tblEstoque.setModel(new javax.swing.table.DefaultTableModel(
-            new Object[0][3], new String[] { "Item", "Unidade", "Saldo" }
-        ) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        });
-        tblEstoque.setFont(new java.awt.Font("Segoe UI", 0, 14));
-        tblEstoque.setRowHeight(32);
-        tblEstoque.setFillsViewportHeight(true);
-        scrollEstoque.setViewportView(tblEstoque);
-        scrollEstoque.getViewport().setBackground(java.awt.Color.WHITE);
+        painelPesquisa.setBackground(new java.awt.Color(255, 255, 255));
 
-        painelPesquisa.setBackground(java.awt.Color.WHITE);
-        lblBuscaItem.setText("Buscar por nome");
-        lblBuscaItem.setFont(new java.awt.Font("Segoe UI", 0, 14));
+        lblBuscaItem.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblBuscaItem.setForeground(new java.awt.Color(36, 42, 45));
         lblBuscaItem.setLabelFor(txtBuscaItem);
-        txtBuscaItem.setFont(new java.awt.Font("Segoe UI", 0, 14));
-        txtBuscaItem.setBackground(java.awt.Color.WHITE);
+        lblBuscaItem.setText("Buscar por nome");
+
         txtBuscaItem.setForeground(new java.awt.Color(36, 42, 45));
+        txtBuscaItem.setToolTipText("Digite o nome do item");
+        txtBuscaItem.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtBuscaItem.setMargin(new java.awt.Insets(8, 12, 8, 12));
         txtBuscaItem.setPlaceholder("Digite o nome do item");
-        txtBuscaItem.setToolTipText("Digite o nome do item");
-        btnPesquisar.setText("Pesquisar");
-        btnPesquisar.setFont(new java.awt.Font("Segoe UI", 1, 14));
+
         btnPesquisar.setBackground(new java.awt.Color(76, 150, 53));
-        btnPesquisar.setForeground(java.awt.Color.WHITE);
+        btnPesquisar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnPesquisar.setForeground(new java.awt.Color(255, 255, 255));
+        btnPesquisar.setText("Pesquisar");
         btnPesquisar.setContentAreaFilled(false);
+        btnPesquisar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnPesquisar.setOpaque(true);
 
         javax.swing.GroupLayout painelPesquisaLayout = new javax.swing.GroupLayout(painelPesquisa);
         painelPesquisa.setLayout(painelPesquisaLayout);
         painelPesquisaLayout.setHorizontalGroup(
             painelPesquisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(lblBuscaItem)
-                .addGroup(painelPesquisaLayout.createSequentialGroup()
-                    .addComponent(txtBuscaItem, 200, 600, Short.MAX_VALUE)
-                    .addGap(12, 12, 12)
-                    .addComponent(btnPesquisar, 132, 132, 132))
+            .addComponent(lblBuscaItem)
+            .addGroup(painelPesquisaLayout.createSequentialGroup()
+                .addComponent(txtBuscaItem, 200, 600, Short.MAX_VALUE)
+                .addGap(12, 12, 12)
+                .addComponent(btnPesquisar, 132, 132, 132))
         );
         painelPesquisaLayout.setVerticalGroup(
-            painelPesquisaLayout.createSequentialGroup()
+            painelPesquisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelPesquisaLayout.createSequentialGroup()
                 .addComponent(lblBuscaItem, 20, 20, 20)
                 .addGap(8, 8, 8)
                 .addGroup(painelPesquisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtBuscaItem, 42, 42, 42)
-                    .addComponent(btnPesquisar, 42, 42, 42))
+                    .addComponent(btnPesquisar, 42, 42, 42)))
         );
+
+        tblEstoque.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tblEstoque.setRowHeight(32);
+        tblEstoque.setFillsViewportHeight(true);
+        tblEstoque.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Item", "Unidade", "Saldo"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        scrollEstoque.setViewportView(tblEstoque);
 
         javax.swing.GroupLayout painelConteudoEstoqueLayout = new javax.swing.GroupLayout(painelConteudoEstoque);
         painelConteudoEstoque.setLayout(painelConteudoEstoqueLayout);
@@ -258,8 +299,8 @@ setLocationRelativeTo(null); // Centraliza na tela
                 .addGap(40, 40, 40)
                 .addGroup(painelConteudoEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(painelConteudoEstoqueLayout.createSequentialGroup()
-                        .addComponent(painelCabecalhoEstoque, 400, 400, 400)
-                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(painelCabecalhoEstoque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnRegistrarEntrada, 173, 173, 173)
                         .addGap(12, 12, 12)
                         .addComponent(btnRegistrarSaida, 173, 173, 173))
@@ -272,7 +313,7 @@ setLocationRelativeTo(null); // Centraliza na tela
             .addGroup(painelConteudoEstoqueLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(painelConteudoEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(painelCabecalhoEstoque, 66, 66, 66)
+                    .addComponent(painelCabecalhoEstoque, 130, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRegistrarEntrada, 42, 42, 42)
                     .addComponent(btnRegistrarSaida, 42, 42, 42))
                 .addGap(32, 32, 32)
@@ -304,7 +345,7 @@ setLocationRelativeTo(null); // Centraliza na tela
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstoqueActionPerformed
-        // TODO add your handling code here:
+        layoutTelas.show(painelTelas, "estoque");
     }//GEN-LAST:event_btnEstoqueActionPerformed
 
     private void btnHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoricoActionPerformed
@@ -318,6 +359,10 @@ setLocationRelativeTo(null); // Centraliza na tela
     private void btnItensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnItensActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnItensActionPerformed
+
+    private void btnRegistrarEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarEntradaActionPerformed
+        layoutTelas.show(painelTelas, "entrada");
+    }//GEN-LAST:event_btnRegistrarEntradaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -350,10 +395,10 @@ setLocationRelativeTo(null); // Centraliza na tela
     private javax.swing.JButton btnEstoque;
     private javax.swing.JButton btnHistorico;
     private javax.swing.JButton btnItens;
+    private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnRegistrarEntrada;
     private javax.swing.JButton btnRegistrarSaida;
-    private javax.swing.JScrollPane scrollEstoque;
-    private javax.swing.JTable tblEstoque;
+    private javax.swing.JLabel lblBuscaItem;
     private javax.swing.JLabel lblCadastro;
     private javax.swing.JLabel lblDescricaoEstoque;
     private javax.swing.JLabel lblLogo;
@@ -362,8 +407,8 @@ setLocationRelativeTo(null); // Centraliza na tela
     private javax.swing.JPanel painelCabecalhoEstoque;
     private javax.swing.JPanel painelConteudoEstoque;
     private javax.swing.JPanel painelPesquisa;
-    private javax.swing.JLabel lblBuscaItem;
-    private CampoBusca txtBuscaItem;
-    private javax.swing.JButton btnPesquisar;
+    private javax.swing.JScrollPane scrollEstoque;
+    private javax.swing.JTable tblEstoque;
+    private br.com.doae.visao.componentes.CampoBusca txtBuscaItem;
     // End of variables declaration//GEN-END:variables
 }
