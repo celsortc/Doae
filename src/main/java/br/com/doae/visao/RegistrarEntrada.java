@@ -30,6 +30,12 @@ public class RegistrarEntrada extends javax.swing.JPanel {
         lblTituloRegistrarEntrada = new javax.swing.JLabel();
         lblDescricaoRegistrarEntrada = new javax.swing.JLabel();
         PainelDadosEntrada = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        lblUnidade = new javax.swing.JLabel();
+        txtUnidade = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1200, 681));
@@ -69,27 +75,80 @@ public class RegistrarEntrada extends javax.swing.JPanel {
         PainelDadosEntrada.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(205, 211, 215)));
         PainelDadosEntrada.setPreferredSize(new java.awt.Dimension(2, 450));
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        jLabel1.setText("Dados da entrada");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(101, 112, 120));
+        jLabel2.setText("* Campos obrigatórios");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(36, 42, 45));
+        jLabel3.setText("Item *");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        lblUnidade.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblUnidade.setForeground(new java.awt.Color(36, 42, 45));
+        lblUnidade.setText("Unidade");
+
+        txtUnidade.setBackground(new java.awt.Color(205, 211, 215));
+        txtUnidade.setEnabled(false);
+        txtUnidade.addActionListener(this::txtUnidadeActionPerformed);
+
         javax.swing.GroupLayout PainelDadosEntradaLayout = new javax.swing.GroupLayout(PainelDadosEntrada);
         PainelDadosEntrada.setLayout(PainelDadosEntradaLayout);
         PainelDadosEntradaLayout.setHorizontalGroup(
             PainelDadosEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(PainelDadosEntradaLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(PainelDadosEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1)
+                    .addGroup(PainelDadosEntradaLayout.createSequentialGroup()
+                        .addGroup(PainelDadosEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
+                        .addGroup(PainelDadosEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblUnidade)
+                            .addComponent(txtUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         PainelDadosEntradaLayout.setVerticalGroup(
             PainelDadosEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 448, Short.MAX_VALUE)
+            .addGroup(PainelDadosEntradaLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(PainelDadosEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelDadosEntradaLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel2)
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel3)
+                        .addGap(8, 8, 8))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelDadosEntradaLayout.createSequentialGroup()
+                        .addComponent(lblUnidade)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(PainelDadosEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                    .addComponent(txtUnidade, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
+                .addContainerGap(267, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(PainelDadosEntrada, javax.swing.GroupLayout.DEFAULT_SIZE, 1154, Short.MAX_VALUE)
-                    .addComponent(painelCabecalhoRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, 1154, Short.MAX_VALUE))
-                .addGap(23, 23, 23))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(PainelDadosEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 760, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(painelCabecalhoRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, 1137, Short.MAX_VALUE)
+                        .addGap(23, 23, 23))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,16 +156,26 @@ public class RegistrarEntrada extends javax.swing.JPanel {
                 .addGap(40, 40, 40)
                 .addComponent(painelCabecalhoRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(PainelDadosEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(PainelDadosEntrada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(95, 95, 95))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtUnidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUnidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUnidadeActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PainelDadosEntrada;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lblDescricaoRegistrarEntrada;
     private javax.swing.JLabel lblTituloRegistrarEntrada;
+    private javax.swing.JLabel lblUnidade;
     private javax.swing.JPanel painelCabecalhoRegistro;
+    private javax.swing.JTextField txtUnidade;
     // End of variables declaration//GEN-END:variables
 }

@@ -25,9 +25,10 @@ public class Estoque extends javax.swing.JFrame {
      */
     public Estoque() {
         initComponents();
+        configurarTelas();
+
         setSize(1280, 720);
         setLocationRelativeTo(null); // Centraliza na tela
-        configurarTelas();
 
     }
 
@@ -36,7 +37,7 @@ public class Estoque extends javax.swing.JFrame {
 
         conteudo.removeAll();
 
-        conteudo.setLayout(new java.awt.BorderLayout(6, 0));
+        conteudo.setLayout(new java.awt.BorderLayout(0, 0));
 
         painelTelas.add(painelConteudoEstoque, "estoque");
         painelTelas.add(new RegistrarEntrada(), "entrada");
