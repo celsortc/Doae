@@ -1,9 +1,7 @@
 package br.com.doae;
 
-import br.com.doae.modelo.Item;
 import br.com.doae.servico.CadastroItens;
 import br.com.doae.visao.Estoque;
-import java.util.List;
 
 public class Main {
 
@@ -22,12 +20,6 @@ public class Main {
             cadastro.cadastrar("Leite", "Italac", "Litro");
 
             new Estoque(cadastro).setVisible(true);
-
-            List<Item> itens = cadastro.listar();
-
-            for (Item item : itens) {
-                System.out.println(item.getNome());
-            }
 
         });
 
