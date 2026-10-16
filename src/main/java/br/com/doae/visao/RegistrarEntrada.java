@@ -128,6 +128,7 @@ public class RegistrarEntrada extends javax.swing.JPanel {
 
         txtUnidade.setBackground(new java.awt.Color(205, 211, 215));
         txtUnidade.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        txtUnidade.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtUnidade.setEnabled(false);
         txtUnidade.addActionListener(this::txtUnidadeActionPerformed);
 
