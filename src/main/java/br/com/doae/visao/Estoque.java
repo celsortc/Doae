@@ -1,6 +1,7 @@
 package br.com.doae.visao;
 
 import br.com.doae.visao.componentes.CampoBusca;
+import br.com.doae.servico.CadastroItens;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -20,10 +21,12 @@ public class Estoque extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Estoque.class.getName());
 
-    /**
-     * Creates new form Estoque
-     */
-    public Estoque() {
+    private final CadastroItens cadastroItens;
+
+
+    public Estoque(CadastroItens cadastroItens) {
+        this.cadastroItens = cadastroItens;
+
         initComponents();
         configurarTelas();
 
@@ -40,7 +43,7 @@ public class Estoque extends javax.swing.JFrame {
         conteudo.setLayout(new java.awt.BorderLayout(0, 0));
 
         painelTelas.add(painelConteudoEstoque, "estoque");
-        painelTelas.add(new RegistrarEntrada(), "entrada");
+        painelTelas.add(new RegistrarEntrada(cadastroItens), "entrada");
         conteudo.add(bgNav, java.awt.BorderLayout.WEST);
         conteudo.add(painelTelas, java.awt.BorderLayout.CENTER);
 
@@ -407,7 +410,7 @@ public class Estoque extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Estoque().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new Estoque(new CadastroItens()).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

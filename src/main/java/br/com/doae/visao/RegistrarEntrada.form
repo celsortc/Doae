@@ -140,7 +140,7 @@
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jComboBox1" alignment="0" min="-2" pref="472" max="-2" attributes="0"/>
+                              <Component id="cmbItem" alignment="0" min="-2" pref="472" max="-2" attributes="0"/>
                               <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -173,7 +173,7 @@
                       </Group>
                   </Group>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jComboBox1" pref="42" max="32767" attributes="0"/>
+                      <Component id="cmbItem" pref="42" max="32767" attributes="0"/>
                       <Component id="txtUnidade" pref="42" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="267" max="32767" attributes="0"/>
@@ -212,7 +212,7 @@
             <Property name="text" type="java.lang.String" value="Item *"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox1">
+        <Component class="javax.swing.JComboBox" name="cmbItem">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">

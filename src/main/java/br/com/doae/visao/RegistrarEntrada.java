@@ -1,20 +1,32 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package br.com.doae.visao;
+
+import br.com.doae.servico.CadastroItens;
+import br.com.doae.modelo.Item;
+import java.util.List;
 
 /**
  *
- * @author Celsinho
+ * @author Celso
  */
 public class RegistrarEntrada extends javax.swing.JPanel {
 
-    /**
-     * Creates new form RegistrarEntrada
-     */
-    public RegistrarEntrada() {
+    private List<Item> itensDisponiveis = List.of();
+
+    public RegistrarEntrada(CadastroItens cadastroItens) {
         initComponents();
+
+        carregarItens(cadastroItens);
+    }
+
+    private void carregarItens(CadastroItens cadastroItens) {
+        itensDisponiveis = cadastroItens.listar();
+
+        cmbItem.removeAllItems();
+
+        for (Item item : cadastroItens.listar()) {
+
+            cmbItem.addItem(item.getNome());
+        }
     }
 
     /**
@@ -33,7 +45,7 @@ public class RegistrarEntrada extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmbItem = new javax.swing.JComboBox<>();
         lblUnidade = new javax.swing.JLabel();
         txtUnidade = new javax.swing.JTextField();
 
@@ -86,7 +98,7 @@ public class RegistrarEntrada extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(36, 42, 45));
         jLabel3.setText("Item *");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbItem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         lblUnidade.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblUnidade.setForeground(new java.awt.Color(36, 42, 45));
@@ -107,7 +119,7 @@ public class RegistrarEntrada extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addGroup(PainelDadosEntradaLayout.createSequentialGroup()
                         .addGroup(PainelDadosEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbItem, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
                         .addGap(18, 18, 18)
                         .addGroup(PainelDadosEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,7 +143,7 @@ public class RegistrarEntrada extends javax.swing.JPanel {
                         .addComponent(lblUnidade)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(PainelDadosEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                    .addComponent(cmbItem, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
                     .addComponent(txtUnidade, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
                 .addContainerGap(267, Short.MAX_VALUE))
         );
@@ -168,7 +180,7 @@ public class RegistrarEntrada extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PainelDadosEntrada;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cmbItem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
