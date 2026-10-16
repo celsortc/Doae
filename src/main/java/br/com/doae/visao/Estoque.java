@@ -191,6 +191,14 @@ public class Estoque extends javax.swing.JFrame {
         btnRegistrarEntrada.setContentAreaFilled(false);
         btnRegistrarEntrada.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegistrarEntrada.setOpaque(true);
+        btnRegistrarEntrada.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRegistrarEntradaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRegistrarEntradaMouseExited(evt);
+            }
+        });
         btnRegistrarEntrada.addActionListener(this::btnRegistrarEntradaActionPerformed);
 
         btnRegistrarSaida.setBackground(new java.awt.Color(172, 62, 64));
@@ -368,6 +376,14 @@ public class Estoque extends javax.swing.JFrame {
     private void btnRegistrarEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarEntradaActionPerformed
         layoutTelas.show(painelTelas, "entrada");
     }//GEN-LAST:event_btnRegistrarEntradaActionPerformed
+
+    private void btnRegistrarEntradaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarEntradaMouseEntered
+        btnRegistrarEntrada.setBackground(new java.awt.Color(52, 110, 35));
+    }//GEN-LAST:event_btnRegistrarEntradaMouseEntered
+
+    private void btnRegistrarEntradaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarEntradaMouseExited
+       btnRegistrarEntrada.setBackground(new java.awt.Color(76, 150, 53));
+    }//GEN-LAST:event_btnRegistrarEntradaMouseExited
 
     /**
      * @param args the command line arguments
