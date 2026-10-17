@@ -418,7 +418,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel6">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="&lt;html&gt;Informe uma quantidade maior que &lt;br&gt;zero.&lt;/html&gt;"/>
+                    <Property name="text" type="java.lang.String" value="&lt;html&gt;Informe uma quantidade maior que &lt;br&gt;zero. (apenas n&#xfa;meros inteiros)&lt;/html&gt;"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel8">

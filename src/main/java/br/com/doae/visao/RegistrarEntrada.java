@@ -3,6 +3,7 @@ package br.com.doae.visao;
 import br.com.doae.servico.CadastroItens;
 import br.com.doae.modelo.Item;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,6 +31,28 @@ public class RegistrarEntrada extends javax.swing.JPanel {
         }
     }
 
+    private boolean verificaQuantidade(String qtd) {
+        String texto = qtd.trim();
+
+        if (texto.isBlank()) {
+            JOptionPane.showMessageDialog(this, "Quantidade não informada, digite um número inteiro!");
+            return false;
+        }
+        try {
+            int numero = Integer.parseInt(texto);
+
+            if (numero <= 0) {
+                JOptionPane.showMessageDialog(this, "Informe uma quantidade maior que zero.");
+                return false;
+            }
+
+            return true;
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Digite apenas números!");
+            return false;
+
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -155,7 +178,7 @@ public class RegistrarEntrada extends javax.swing.JPanel {
         chkDoacaoAnonima.setText("Doação anônima");
         chkDoacaoAnonima.addActionListener(this::chkDoacaoAnonimaActionPerformed);
 
-        jLabel6.setText("<html>Informe uma quantidade maior que <br>zero.</html>");
+        jLabel6.setText("<html>Informe uma quantidade maior que <br>zero. (apenas números inteiros)</html>");
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(36, 42, 45));
@@ -331,7 +354,7 @@ public class RegistrarEntrada extends javax.swing.JPanel {
     }//GEN-LAST:event_cmbDoadorActionPerformed
 
     private void txtQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuantidadeActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtQuantidadeActionPerformed
 
     private void chkDoacaoAnonimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkDoacaoAnonimaActionPerformed
@@ -343,18 +366,25 @@ public class RegistrarEntrada extends javax.swing.JPanel {
     }//GEN-LAST:event_txtDataHoraActionPerformed
 
     private void btnRevisarEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevisarEntradaActionPerformed
-        // TODO add your handling code here:
+
+        String textoQuantidade = txtQuantidade.getText();
+
+        boolean quantidadeValida = verificaQuantidade(textoQuantidade);
+
+        if(!quantidadeValida) {
+            return;
+        }
+
     }//GEN-LAST:event_btnRevisarEntradaActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
+//        layoutTelas.show(painelTelas, "estoque");
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void cmbItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbItemActionPerformed
         Item itemSelecionado = (Item) cmbItem.getSelectedItem();
 
-
-        if(itemSelecionado == null) {
+        if (itemSelecionado == null) {
 
             return;
         }
