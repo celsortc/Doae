@@ -1,6 +1,7 @@
 package br.com.doae.visao;
 
 import br.com.doae.visao.componentes.CampoBusca;
+import br.com.doae.servico.CadastroItens;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -20,14 +21,17 @@ public class Estoque extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Estoque.class.getName());
 
-    /**
-     * Creates new form Estoque
-     */
-    public Estoque() {
+    private final CadastroItens cadastroItens;
+
+
+    public Estoque(CadastroItens cadastroItens) {
+        this.cadastroItens = cadastroItens;
+
         initComponents();
+        configurarTelas();
+
         setSize(1280, 720);
         setLocationRelativeTo(null); // Centraliza na tela
-        configurarTelas();
 
     }
 
@@ -36,10 +40,10 @@ public class Estoque extends javax.swing.JFrame {
 
         conteudo.removeAll();
 
-        conteudo.setLayout(new java.awt.BorderLayout(6, 0));
+        conteudo.setLayout(new java.awt.BorderLayout(0, 0));
 
         painelTelas.add(painelConteudoEstoque, "estoque");
-        painelTelas.add(new RegistrarEntrada(), "entrada");
+        painelTelas.add(new RegistrarEntrada(cadastroItens), "entrada");
         conteudo.add(bgNav, java.awt.BorderLayout.WEST);
         conteudo.add(painelTelas, java.awt.BorderLayout.CENTER);
 
@@ -186,15 +190,25 @@ public class Estoque extends javax.swing.JFrame {
         btnRegistrarEntrada.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnRegistrarEntrada.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistrarEntrada.setText("Registrar entrada");
+        btnRegistrarEntrada.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(76, 150, 53), 2, true));
         btnRegistrarEntrada.setContentAreaFilled(false);
         btnRegistrarEntrada.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegistrarEntrada.setOpaque(true);
+        btnRegistrarEntrada.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRegistrarEntradaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRegistrarEntradaMouseExited(evt);
+            }
+        });
         btnRegistrarEntrada.addActionListener(this::btnRegistrarEntradaActionPerformed);
 
         btnRegistrarSaida.setBackground(new java.awt.Color(172, 62, 64));
         btnRegistrarSaida.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnRegistrarSaida.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistrarSaida.setText("Registrar saída");
+        btnRegistrarSaida.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(130, 40, 42), 2, true));
         btnRegistrarSaida.setContentAreaFilled(false);
         btnRegistrarSaida.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegistrarSaida.setOpaque(true);
@@ -203,10 +217,11 @@ public class Estoque extends javax.swing.JFrame {
         painelCabecalhoEstoque.setMinimumSize(new java.awt.Dimension(400, 66));
         painelCabecalhoEstoque.setPreferredSize(new java.awt.Dimension(400, 66));
 
-        lblTituloEstoque.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTituloEstoque.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
         lblTituloEstoque.setForeground(new java.awt.Color(36, 42, 45));
         lblTituloEstoque.setText("Estoque");
 
+        lblDescricaoEstoque.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblDescricaoEstoque.setForeground(new java.awt.Color(101, 112, 120));
         lblDescricaoEstoque.setText("Consulte os saldos e registre as movimentações de itens.");
 
@@ -218,7 +233,7 @@ public class Estoque extends javax.swing.JFrame {
                 .addGroup(painelCabecalhoEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblTituloEstoque)
                     .addComponent(lblDescricaoEstoque))
-                .addGap(0, 102, Short.MAX_VALUE))
+                .addGap(0, 8, Short.MAX_VALUE))
         );
         painelCabecalhoEstoqueLayout.setVerticalGroup(
             painelCabecalhoEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,7 +241,7 @@ public class Estoque extends javax.swing.JFrame {
                 .addComponent(lblTituloEstoque)
                 .addGap(8, 8, 8)
                 .addComponent(lblDescricaoEstoque)
-                .addGap(0, 81, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         painelPesquisa.setBackground(new java.awt.Color(255, 255, 255));
@@ -246,6 +261,7 @@ public class Estoque extends javax.swing.JFrame {
         btnPesquisar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnPesquisar.setForeground(new java.awt.Color(255, 255, 255));
         btnPesquisar.setText("Pesquisar");
+        btnPesquisar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(76, 150, 53), 2, true));
         btnPesquisar.setContentAreaFilled(false);
         btnPesquisar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnPesquisar.setOpaque(true);
@@ -271,8 +287,6 @@ public class Estoque extends javax.swing.JFrame {
         );
 
         tblEstoque.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tblEstoque.setRowHeight(32);
-        tblEstoque.setFillsViewportHeight(true);
         tblEstoque.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -289,6 +303,8 @@ public class Estoque extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblEstoque.setFillsViewportHeight(true);
+        tblEstoque.setRowHeight(32);
         scrollEstoque.setViewportView(tblEstoque);
 
         javax.swing.GroupLayout painelConteudoEstoqueLayout = new javax.swing.GroupLayout(painelConteudoEstoque);
@@ -304,8 +320,8 @@ public class Estoque extends javax.swing.JFrame {
                         .addComponent(btnRegistrarEntrada, 173, 173, 173)
                         .addGap(12, 12, 12)
                         .addComponent(btnRegistrarSaida, 173, 173, 173))
-                    .addComponent(painelPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(scrollEstoque, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(scrollEstoque, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(painelPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(40, 40, 40))
         );
         painelConteudoEstoqueLayout.setVerticalGroup(
@@ -313,13 +329,13 @@ public class Estoque extends javax.swing.JFrame {
             .addGroup(painelConteudoEstoqueLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(painelConteudoEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(painelCabecalhoEstoque, 130, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(painelCabecalhoEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRegistrarEntrada, 42, 42, 42)
                     .addComponent(btnRegistrarSaida, 42, 42, 42))
                 .addGap(32, 32, 32)
-                .addComponent(painelPesquisa, 70, 70, 70)
+                .addComponent(painelPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
-                .addComponent(scrollEstoque, 100, 380, Short.MAX_VALUE)
+                .addComponent(scrollEstoque, 100, 508, Short.MAX_VALUE)
                 .addGap(40, 40, 40))
         );
 
@@ -364,6 +380,14 @@ public class Estoque extends javax.swing.JFrame {
         layoutTelas.show(painelTelas, "entrada");
     }//GEN-LAST:event_btnRegistrarEntradaActionPerformed
 
+    private void btnRegistrarEntradaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarEntradaMouseEntered
+        btnRegistrarEntrada.setBackground(new java.awt.Color(52, 110, 35));
+    }//GEN-LAST:event_btnRegistrarEntradaMouseEntered
+
+    private void btnRegistrarEntradaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarEntradaMouseExited
+       btnRegistrarEntrada.setBackground(new java.awt.Color(76, 150, 53));
+    }//GEN-LAST:event_btnRegistrarEntradaMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -386,7 +410,7 @@ public class Estoque extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Estoque().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new Estoque(new CadastroItens()).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

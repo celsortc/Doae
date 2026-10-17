@@ -1,20 +1,57 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package br.com.doae.visao;
+
+import br.com.doae.servico.CadastroItens;
+import br.com.doae.modelo.Item;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author Celsinho
+ * @author Celso
  */
 public class RegistrarEntrada extends javax.swing.JPanel {
 
-    /**
-     * Creates new form RegistrarEntrada
-     */
-    public RegistrarEntrada() {
+    private List<Item> itensDisponiveis = List.of();
+
+    public RegistrarEntrada(CadastroItens cadastroItens) {
         initComponents();
+
+        scrollEntrada.getVerticalScrollBar().setUnitIncrement(20);
+        carregarItens(cadastroItens);
+    }
+
+    private void carregarItens(CadastroItens cadastroItens) {
+        itensDisponiveis = cadastroItens.listar();
+
+        cmbItem.removeAllItems();
+
+        for (Item item : itensDisponiveis) {
+
+            cmbItem.addItem(item);
+        }
+    }
+
+    private boolean verificaQuantidade(String qtd) {
+        String texto = qtd.trim();
+
+        if (texto.isBlank()) {
+            JOptionPane.showMessageDialog(this, "Quantidade não informada, digite um número inteiro!");
+            return false;
+        }
+        try {
+            int numero = Integer.parseInt(texto);
+
+            if (numero <= 0) {
+                JOptionPane.showMessageDialog(this, "Informe uma quantidade maior que zero.");
+                return false;
+            }
+
+            return true;
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Digite apenas números inteiros!");
+            return false;
+
+        }
     }
 
     /**
@@ -26,32 +63,364 @@ public class RegistrarEntrada extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblRegistrarEntrada = new javax.swing.JLabel();
+        scrollEntrada = new javax.swing.JScrollPane();
+        PainelFormulario = new javax.swing.JPanel();
+        painelCabecalhoRegistro = new javax.swing.JPanel();
+        lblTituloRegistrarEntrada = new javax.swing.JLabel();
+        lblDescricaoRegistrarEntrada = new javax.swing.JLabel();
+        PainelDadosEntrada = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        cmbItem = new javax.swing.JComboBox<>();
+        lblUnidade = new javax.swing.JLabel();
+        txtUnidade = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        cmbDoador = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        txtQuantidade = new javax.swing.JTextField();
+        chkDoacaoAnonima = new javax.swing.JCheckBox();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtObservacao = new javax.swing.JTextArea();
+        jLabel9 = new javax.swing.JLabel();
+        txtDataHora = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        btnRevisarEntrada = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
-        lblRegistrarEntrada.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblRegistrarEntrada.setForeground(new java.awt.Color(36, 42, 45));
-        lblRegistrarEntrada.setText("Registrar Entrada");
+        setBackground(new java.awt.Color(255, 255, 255));
+        setPreferredSize(new java.awt.Dimension(1200, 681));
+        setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(lblRegistrarEntrada)
-                .addContainerGap(571, Short.MAX_VALUE))
+        PainelFormulario.setBackground(new java.awt.Color(255, 255, 255));
+
+        painelCabecalhoRegistro.setBackground(new java.awt.Color(255, 255, 255));
+        painelCabecalhoRegistro.setMinimumSize(new java.awt.Dimension(400, 66));
+        painelCabecalhoRegistro.setPreferredSize(new java.awt.Dimension(400, 66));
+
+        lblTituloRegistrarEntrada.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
+        lblTituloRegistrarEntrada.setForeground(new java.awt.Color(36, 42, 45));
+        lblTituloRegistrarEntrada.setText("Registrar Entrada");
+
+        lblDescricaoRegistrarEntrada.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblDescricaoRegistrarEntrada.setForeground(new java.awt.Color(101, 112, 120));
+        lblDescricaoRegistrarEntrada.setText("Consulte os saldos e registre as movimentações de itens.");
+
+        javax.swing.GroupLayout painelCabecalhoRegistroLayout = new javax.swing.GroupLayout(painelCabecalhoRegistro);
+        painelCabecalhoRegistro.setLayout(painelCabecalhoRegistroLayout);
+        painelCabecalhoRegistroLayout.setHorizontalGroup(
+            painelCabecalhoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelCabecalhoRegistroLayout.createSequentialGroup()
+                .addGroup(painelCabecalhoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTituloRegistrarEntrada)
+                    .addComponent(lblDescricaoRegistrarEntrada))
+                .addGap(454, 454, 454))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblRegistrarEntrada)
-                .addContainerGap(444, Short.MAX_VALUE))
+        painelCabecalhoRegistroLayout.setVerticalGroup(
+            painelCabecalhoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelCabecalhoRegistroLayout.createSequentialGroup()
+                .addComponent(lblTituloRegistrarEntrada)
+                .addGap(8, 8, 8)
+                .addComponent(lblDescricaoRegistrarEntrada)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
+
+        PainelDadosEntrada.setBackground(new java.awt.Color(255, 255, 255));
+        PainelDadosEntrada.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(205, 211, 215)));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(36, 42, 45));
+        jLabel1.setText("Dados da entrada");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(101, 112, 120));
+        jLabel2.setText("* Campos obrigatórios");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(36, 42, 45));
+        jLabel3.setText("Item *");
+
+        cmbItem.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cmbItem.setForeground(new java.awt.Color(36, 42, 45));
+        cmbItem.addActionListener(this::cmbItemActionPerformed);
+
+        lblUnidade.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblUnidade.setForeground(new java.awt.Color(36, 42, 45));
+        lblUnidade.setText("Unidade");
+
+        txtUnidade.setBackground(new java.awt.Color(205, 211, 215));
+        txtUnidade.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        txtUnidade.setForeground(new java.awt.Color(36, 42, 45));
+        txtUnidade.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtUnidade.setEnabled(false);
+        txtUnidade.addActionListener(this::txtUnidadeActionPerformed);
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(36, 42, 45));
+        jLabel4.setText("Doador (opcional)");
+
+        cmbDoador.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cmbDoador.setForeground(new java.awt.Color(36, 42, 45));
+        cmbDoador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbDoador.addActionListener(this::cmbDoadorActionPerformed);
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(36, 42, 45));
+        jLabel5.setText("Quantidade *");
+
+        txtQuantidade.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        txtQuantidade.setForeground(new java.awt.Color(36, 42, 45));
+        txtQuantidade.addActionListener(this::txtQuantidadeActionPerformed);
+
+        chkDoacaoAnonima.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        chkDoacaoAnonima.setText("Doação anônima");
+        chkDoacaoAnonima.addActionListener(this::chkDoacaoAnonimaActionPerformed);
+
+        jLabel6.setText("<html>Informe uma quantidade maior que <br>zero. (apenas números inteiros)</html>");
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(36, 42, 45));
+        jLabel8.setText("Observação (opcional)");
+
+        txtObservacao.setColumns(20);
+        txtObservacao.setForeground(new java.awt.Color(36, 42, 45));
+        txtObservacao.setRows(5);
+        jScrollPane1.setViewportView(txtObservacao);
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(36, 42, 45));
+        jLabel9.setText("Data/hora automática");
+
+        txtDataHora.setBackground(new java.awt.Color(205, 211, 215));
+        txtDataHora.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        txtDataHora.setForeground(new java.awt.Color(36, 42, 45));
+        txtDataHora.setEnabled(false);
+        txtDataHora.addActionListener(this::txtDataHoraActionPerformed);
+
+        jLabel7.setText("Preenchida automaticamente pelo sistema.");
+
+        btnRevisarEntrada.setBackground(new java.awt.Color(76, 150, 53));
+        btnRevisarEntrada.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnRevisarEntrada.setForeground(new java.awt.Color(255, 255, 255));
+        btnRevisarEntrada.setText("Revisar entrada");
+        btnRevisarEntrada.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(76, 150, 53), 2, true));
+        btnRevisarEntrada.setContentAreaFilled(false);
+        btnRevisarEntrada.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRevisarEntrada.setOpaque(true);
+        btnRevisarEntrada.addActionListener(this::btnRevisarEntradaActionPerformed);
+
+        btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnCancelar.setForeground(new java.awt.Color(36, 42, 45));
+        btnCancelar.setText("Cancelar");
+        btnCancelar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(205, 211, 215), 2, true));
+        btnCancelar.setContentAreaFilled(false);
+        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelar.setOpaque(true);
+        btnCancelar.addActionListener(this::btnCancelarActionPerformed);
+
+        javax.swing.GroupLayout PainelDadosEntradaLayout = new javax.swing.GroupLayout(PainelDadosEntrada);
+        PainelDadosEntrada.setLayout(PainelDadosEntradaLayout);
+        PainelDadosEntradaLayout.setHorizontalGroup(
+            PainelDadosEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PainelDadosEntradaLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(PainelDadosEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PainelDadosEntradaLayout.createSequentialGroup()
+                        .addComponent(btnRevisarEntrada, 173, 173, 173)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel7)
+                    .addGroup(PainelDadosEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel9)
+                        .addComponent(jLabel8)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(chkDoacaoAnonima)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel1)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelDadosEntradaLayout.createSequentialGroup()
+                            .addGroup(PainelDadosEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel5)
+                                .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(PainelDadosEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(cmbDoador, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel4)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelDadosEntradaLayout.createSequentialGroup()
+                            .addGroup(PainelDadosEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(cmbItem, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel3))
+                            .addGap(18, 18, 18)
+                            .addComponent(lblUnidade)
+                            .addGap(164, 164, 164))
+                        .addComponent(jScrollPane1)
+                        .addComponent(txtDataHora)))
+                .addContainerGap(24, Short.MAX_VALUE))
+            .addGroup(PainelDadosEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelDadosEntradaLayout.createSequentialGroup()
+                    .addContainerGap(514, Short.MAX_VALUE)
+                    .addComponent(txtUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(24, 24, 24)))
+        );
+        PainelDadosEntradaLayout.setVerticalGroup(
+            PainelDadosEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PainelDadosEntradaLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(PainelDadosEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelDadosEntradaLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel2)
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel3)
+                        .addGap(8, 8, 8))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelDadosEntradaLayout.createSequentialGroup()
+                        .addComponent(lblUnidade)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addComponent(cmbItem, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addGroup(PainelDadosEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addGap(8, 8, 8)
+                .addGroup(PainelDadosEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtQuantidade)
+                    .addComponent(cmbDoador, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
+                .addGap(8, 8, 8)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(chkDoacaoAnonima)
+                .addGap(20, 20, 20)
+                .addComponent(jLabel8)
+                .addGap(8, 8, 8)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(jLabel9)
+                .addGap(8, 8, 8)
+                .addComponent(txtDataHora, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(jLabel7)
+                .addGap(20, 20, 20)
+                .addGroup(PainelDadosEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRevisarEntrada, 42, 42, 42)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(31, Short.MAX_VALUE))
+            .addGroup(PainelDadosEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PainelDadosEntradaLayout.createSequentialGroup()
+                    .addGap(139, 139, 139)
+                    .addComponent(txtUnidade, 42, 42, 42)
+                    .addGap(515, 515, 515)))
+        );
+
+        javax.swing.GroupLayout PainelFormularioLayout = new javax.swing.GroupLayout(PainelFormulario);
+        PainelFormulario.setLayout(PainelFormularioLayout);
+        PainelFormularioLayout.setHorizontalGroup(
+            PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1203, Short.MAX_VALUE)
+            .addGroup(PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PainelFormularioLayout.createSequentialGroup()
+                    .addGap(40, 40, 40)
+                    .addGroup(PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(PainelFormularioLayout.createSequentialGroup()
+                            .addComponent(PainelDadosEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(377, 377, 377))
+                        .addComponent(painelCabecalhoRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, 1137, Short.MAX_VALUE))
+                    .addGap(26, 26, 26)))
+        );
+        PainelFormularioLayout.setVerticalGroup(
+            PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 888, Short.MAX_VALUE)
+            .addGroup(PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PainelFormularioLayout.createSequentialGroup()
+                    .addGap(40, 40, 40)
+                    .addComponent(painelCabecalhoRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(PainelDadosEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(78, Short.MAX_VALUE)))
+        );
+
+        scrollEntrada.setViewportView(PainelFormulario);
+
+        add(scrollEntrada, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtUnidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUnidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUnidadeActionPerformed
+
+    private void cmbDoadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDoadorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbDoadorActionPerformed
+
+    private void txtQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuantidadeActionPerformed
+
+    }//GEN-LAST:event_txtQuantidadeActionPerformed
+
+    private void chkDoacaoAnonimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkDoacaoAnonimaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkDoacaoAnonimaActionPerformed
+
+    private void txtDataHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataHoraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDataHoraActionPerformed
+
+    private void btnRevisarEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevisarEntradaActionPerformed
+
+        String textoQuantidade = txtQuantidade.getText();
+
+        boolean quantidadeValida = verificaQuantidade(textoQuantidade);
+
+        if (!quantidadeValida) {
+            return;
+        }
+
+    }//GEN-LAST:event_btnRevisarEntradaActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+//        layoutTelas.show(painelTelas, "estoque");
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void cmbItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbItemActionPerformed
+        Item itemSelecionado = (Item) cmbItem.getSelectedItem();
+
+        if (itemSelecionado == null) {
+
+            return;
+        }
+
+        txtUnidade.setText(itemSelecionado.getUnidadeMedida());
+
+
+    }//GEN-LAST:event_cmbItemActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel lblRegistrarEntrada;
+    private javax.swing.JPanel PainelDadosEntrada;
+    private javax.swing.JPanel PainelFormulario;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnRevisarEntrada;
+    private javax.swing.JCheckBox chkDoacaoAnonima;
+    private javax.swing.JComboBox<String> cmbDoador;
+    private javax.swing.JComboBox<Item> cmbItem;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblDescricaoRegistrarEntrada;
+    private javax.swing.JLabel lblTituloRegistrarEntrada;
+    private javax.swing.JLabel lblUnidade;
+    private javax.swing.JPanel painelCabecalhoRegistro;
+    private javax.swing.JScrollPane scrollEntrada;
+    private javax.swing.JTextField txtDataHora;
+    private javax.swing.JTextArea txtObservacao;
+    private javax.swing.JTextField txtQuantidade;
+    private javax.swing.JTextField txtUnidade;
     // End of variables declaration//GEN-END:variables
 }
