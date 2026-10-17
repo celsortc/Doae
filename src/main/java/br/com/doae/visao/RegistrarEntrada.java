@@ -48,7 +48,7 @@ public class RegistrarEntrada extends javax.swing.JPanel {
 
             return true;
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Digite apenas números!");
+            JOptionPane.showMessageDialog(this, "Digite apenas números inteiros!");
             return false;
 
         }
@@ -371,7 +371,7 @@ public class RegistrarEntrada extends javax.swing.JPanel {
 
         boolean quantidadeValida = verificaQuantidade(textoQuantidade);
 
-        if(!quantidadeValida) {
+        if (!quantidadeValida) {
             return;
         }
 
