@@ -24,4 +24,9 @@ public class Item {
         return unidadeMedida;
     }
 
+    @Override
+    public String toString() {
+        return nome + " (" + unidadeMedida + ")";
+    }
+
 }

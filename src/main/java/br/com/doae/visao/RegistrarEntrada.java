@@ -24,9 +24,9 @@ public class RegistrarEntrada extends javax.swing.JPanel {
 
         cmbItem.removeAllItems();
 
-        for (Item item : cadastroItens.listar()) {
+        for (Item item : itensDisponiveis) {
 
-            cmbItem.addItem(item.getNome());
+            cmbItem.addItem(item);
         }
     }
 
@@ -120,7 +120,7 @@ public class RegistrarEntrada extends javax.swing.JPanel {
         jLabel3.setText("Item *");
 
         cmbItem.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        cmbItem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbItem.addActionListener(this::cmbItemActionPerformed);
 
         lblUnidade.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblUnidade.setForeground(new java.awt.Color(36, 42, 45));
@@ -343,6 +343,20 @@ public class RegistrarEntrada extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void cmbItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbItemActionPerformed
+        Item itemSelecionado = (Item) cmbItem.getSelectedItem();
+
+
+        if(itemSelecionado == null) {
+
+            return;
+        }
+
+        txtUnidade.setText(itemSelecionado.getUnidadeMedida());
+
+
+    }//GEN-LAST:event_cmbItemActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PainelDadosEntrada;
@@ -351,7 +365,7 @@ public class RegistrarEntrada extends javax.swing.JPanel {
     private javax.swing.JButton btnRevisarEntrada;
     private javax.swing.JCheckBox chkDoacaoAnonima;
     private javax.swing.JComboBox<String> cmbDoador;
-    private javax.swing.JComboBox<String> cmbItem;
+    private javax.swing.JComboBox<Item> cmbItem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

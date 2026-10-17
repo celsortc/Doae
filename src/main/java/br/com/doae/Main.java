@@ -18,6 +18,7 @@ public class Main {
             CadastroItens cadastro = new CadastroItens();
             cadastro.cadastrar("Arroz", "arroz top", "pacote");
             cadastro.cadastrar("Leite", "Italac", "Litro");
+            cadastro.cadastrar("Arroz", "Arroz por peso", "kg");
 
             new Estoque(cadastro).setVisible(true);
 
