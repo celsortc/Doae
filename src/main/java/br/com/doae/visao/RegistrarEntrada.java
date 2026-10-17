@@ -120,6 +120,7 @@ public class RegistrarEntrada extends javax.swing.JPanel {
         jLabel3.setText("Item *");
 
         cmbItem.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cmbItem.setForeground(new java.awt.Color(36, 42, 45));
         cmbItem.addActionListener(this::cmbItemActionPerformed);
 
         lblUnidade.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -128,6 +129,7 @@ public class RegistrarEntrada extends javax.swing.JPanel {
 
         txtUnidade.setBackground(new java.awt.Color(205, 211, 215));
         txtUnidade.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        txtUnidade.setForeground(new java.awt.Color(36, 42, 45));
         txtUnidade.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtUnidade.setEnabled(false);
         txtUnidade.addActionListener(this::txtUnidadeActionPerformed);
@@ -137,6 +139,7 @@ public class RegistrarEntrada extends javax.swing.JPanel {
         jLabel4.setText("Doador (opcional)");
 
         cmbDoador.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cmbDoador.setForeground(new java.awt.Color(36, 42, 45));
         cmbDoador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbDoador.addActionListener(this::cmbDoadorActionPerformed);
 
@@ -144,6 +147,8 @@ public class RegistrarEntrada extends javax.swing.JPanel {
         jLabel5.setForeground(new java.awt.Color(36, 42, 45));
         jLabel5.setText("Quantidade *");
 
+        txtQuantidade.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        txtQuantidade.setForeground(new java.awt.Color(36, 42, 45));
         txtQuantidade.addActionListener(this::txtQuantidadeActionPerformed);
 
         chkDoacaoAnonima.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -157,6 +162,7 @@ public class RegistrarEntrada extends javax.swing.JPanel {
         jLabel8.setText("Observação (opcional)");
 
         txtObservacao.setColumns(20);
+        txtObservacao.setForeground(new java.awt.Color(36, 42, 45));
         txtObservacao.setRows(5);
         jScrollPane1.setViewportView(txtObservacao);
 
@@ -166,6 +172,7 @@ public class RegistrarEntrada extends javax.swing.JPanel {
 
         txtDataHora.setBackground(new java.awt.Color(205, 211, 215));
         txtDataHora.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        txtDataHora.setForeground(new java.awt.Color(36, 42, 45));
         txtDataHora.setEnabled(false);
         txtDataHora.addActionListener(this::txtDataHoraActionPerformed);
 
