@@ -177,6 +177,7 @@ public class RegistrarEntrada extends javax.swing.JPanel {
         txtQuantidade.setForeground(new java.awt.Color(36, 42, 45));
         txtQuantidade.addActionListener(this::txtQuantidadeActionPerformed);
 
+        chkDoacaoAnonima.setBackground(new java.awt.Color(255, 255, 255));
         chkDoacaoAnonima.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         chkDoacaoAnonima.setText("Doação anônima");
         chkDoacaoAnonima.addActionListener(this::chkDoacaoAnonimaActionPerformed);
