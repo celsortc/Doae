@@ -12,8 +12,11 @@ import javax.swing.JOptionPane;
 public class RegistrarEntrada extends javax.swing.JPanel {
 
     private List<Item> itensDisponiveis = List.of();
+    private final Runnable aoCancelar;
 
-    public RegistrarEntrada(CadastroItens cadastroItens) {
+    public RegistrarEntrada(CadastroItens cadastroItens, Runnable aoCancelar) {
+        this.aoCancelar = aoCancelar;
+
         initComponents();
 
         scrollEntrada.getVerticalScrollBar().setUnitIncrement(20);
@@ -378,7 +381,7 @@ public class RegistrarEntrada extends javax.swing.JPanel {
     }//GEN-LAST:event_btnRevisarEntradaActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-//        layoutTelas.show(painelTelas, "estoque");
+        aoCancelar.run();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void cmbItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbItemActionPerformed

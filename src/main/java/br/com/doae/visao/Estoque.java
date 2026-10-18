@@ -43,7 +43,12 @@ public class Estoque extends javax.swing.JFrame {
         conteudo.setLayout(new java.awt.BorderLayout(0, 0));
 
         painelTelas.add(painelConteudoEstoque, "estoque");
-        painelTelas.add(new RegistrarEntrada(cadastroItens), "entrada");
+        painelTelas.add(
+                new RegistrarEntrada(
+                        cadastroItens,
+                        () -> layoutTelas.show(painelTelas, "estoque")
+                ),
+                "entrada");
         conteudo.add(bgNav, java.awt.BorderLayout.WEST);
         conteudo.add(painelTelas, java.awt.BorderLayout.CENTER);
 
