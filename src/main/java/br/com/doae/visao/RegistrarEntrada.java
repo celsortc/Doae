@@ -2,6 +2,7 @@ package br.com.doae.visao;
 
 import br.com.doae.servico.CadastroItens;
 import br.com.doae.modelo.Item;
+import br.com.doae.servico.ControleEstoque;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -12,8 +13,15 @@ import javax.swing.JOptionPane;
 public class RegistrarEntrada extends javax.swing.JPanel {
 
     private List<Item> itensDisponiveis = List.of();
+    private final ControleEstoque controleEstoque;
+    private final Runnable aoCancelar;
 
-    public RegistrarEntrada(CadastroItens cadastroItens) {
+    public RegistrarEntrada(CadastroItens cadastroItens,
+            ControleEstoque controleEstoque,
+            Runnable aoCancelar) {
+        this.controleEstoque = controleEstoque;
+        this.aoCancelar = aoCancelar;
+
         initComponents();
 
         scrollEntrada.getVerticalScrollBar().setUnitIncrement(20);
@@ -174,6 +182,7 @@ public class RegistrarEntrada extends javax.swing.JPanel {
         txtQuantidade.setForeground(new java.awt.Color(36, 42, 45));
         txtQuantidade.addActionListener(this::txtQuantidadeActionPerformed);
 
+        chkDoacaoAnonima.setBackground(new java.awt.Color(255, 255, 255));
         chkDoacaoAnonima.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         chkDoacaoAnonima.setText("Doação anônima");
         chkDoacaoAnonima.addActionListener(this::chkDoacaoAnonimaActionPerformed);
@@ -367,18 +376,34 @@ public class RegistrarEntrada extends javax.swing.JPanel {
 
     private void btnRevisarEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevisarEntradaActionPerformed
 
+        // Recebe valor de qtd String
         String textoQuantidade = txtQuantidade.getText();
 
+        // Chama método que verifica se é num inteiro ou não
         boolean quantidadeValida = verificaQuantidade(textoQuantidade);
 
         if (!quantidadeValida) {
             return;
         }
 
+        Item itemSelecionado = (Item) cmbItem.getSelectedItem();
+
+        if (itemSelecionado == null) {
+            JOptionPane.showMessageDialog(this, "Selecione um item.");
+            return;
+        }
+
+        int quantidade = Integer.parseInt(textoQuantidade.trim());
+
+        controleEstoque.registrarEntrada(itemSelecionado, quantidade);
+
+        JOptionPane.showMessageDialog(this, "Entrada registrada com suceso!");
+
+        aoCancelar.run();
     }//GEN-LAST:event_btnRevisarEntradaActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-//        layoutTelas.show(painelTelas, "estoque");
+        aoCancelar.run();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void cmbItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbItemActionPerformed

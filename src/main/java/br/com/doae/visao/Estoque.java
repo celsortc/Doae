@@ -2,6 +2,12 @@ package br.com.doae.visao;
 
 import br.com.doae.visao.componentes.CampoBusca;
 import br.com.doae.servico.CadastroItens;
+import br.com.doae.servico.ControleEstoque;
+import br.com.doae.modelo.Item;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -22,7 +28,7 @@ public class Estoque extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Estoque.class.getName());
 
     private final CadastroItens cadastroItens;
-
+    private final ControleEstoque controleEstoque = new ControleEstoque();
 
     public Estoque(CadastroItens cadastroItens) {
         this.cadastroItens = cadastroItens;
@@ -43,11 +49,42 @@ public class Estoque extends javax.swing.JFrame {
         conteudo.setLayout(new java.awt.BorderLayout(0, 0));
 
         painelTelas.add(painelConteudoEstoque, "estoque");
-        painelTelas.add(new RegistrarEntrada(cadastroItens), "entrada");
+        painelTelas.add(
+                new RegistrarEntrada(
+                        cadastroItens,
+                        controleEstoque,
+                        () -> {
+                            atualizarTabelaEstoque();
+                            layoutTelas.show(painelTelas, "estoque");
+                        }
+                ),
+                "entrada");
         conteudo.add(bgNav, java.awt.BorderLayout.WEST);
         conteudo.add(painelTelas, java.awt.BorderLayout.CENTER);
 
         layoutTelas.show(painelTelas, "estoque");
+
+    }
+
+    private void atualizarTabelaEstoque() {
+        DefaultTableModel modelo = (DefaultTableModel) tblEstoque.getModel();
+
+        modelo.setRowCount(0);
+
+        for (Map.Entry<Item, Integer> registro : controleEstoque.listarSaldos().entrySet()) {
+
+            Item item = registro.getKey();
+            int saldo = registro.getValue();
+
+            System.out.println("Key:" + item + " Value: " + saldo);
+
+            modelo.addRow(new Object[]{
+                item.getNome(),
+                item.getUnidadeMedida(),
+                saldo
+            });
+
+        }
 
     }
 
@@ -361,6 +398,7 @@ public class Estoque extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstoqueActionPerformed
+        atualizarTabelaEstoque();
         layoutTelas.show(painelTelas, "estoque");
     }//GEN-LAST:event_btnEstoqueActionPerformed
 
@@ -385,7 +423,7 @@ public class Estoque extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistrarEntradaMouseEntered
 
     private void btnRegistrarEntradaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarEntradaMouseExited
-       btnRegistrarEntrada.setBackground(new java.awt.Color(76, 150, 53));
+        btnRegistrarEntrada.setBackground(new java.awt.Color(76, 150, 53));
     }//GEN-LAST:event_btnRegistrarEntradaMouseExited
 
     /**
