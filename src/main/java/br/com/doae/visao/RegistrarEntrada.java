@@ -2,6 +2,7 @@ package br.com.doae.visao;
 
 import br.com.doae.servico.CadastroItens;
 import br.com.doae.modelo.Item;
+import br.com.doae.servico.ControleEstoque;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -12,9 +13,13 @@ import javax.swing.JOptionPane;
 public class RegistrarEntrada extends javax.swing.JPanel {
 
     private List<Item> itensDisponiveis = List.of();
+    private final ControleEstoque controleEstoque;
     private final Runnable aoCancelar;
 
-    public RegistrarEntrada(CadastroItens cadastroItens, Runnable aoCancelar) {
+    public RegistrarEntrada(CadastroItens cadastroItens,
+            ControleEstoque controleEstoque,
+            Runnable aoCancelar) {
+        this.controleEstoque = controleEstoque;
         this.aoCancelar = aoCancelar;
 
         initComponents();
@@ -371,14 +376,30 @@ public class RegistrarEntrada extends javax.swing.JPanel {
 
     private void btnRevisarEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevisarEntradaActionPerformed
 
+        // Recebe valor de qtd String
         String textoQuantidade = txtQuantidade.getText();
 
+        // Chama método que verifica se é num inteiro ou não
         boolean quantidadeValida = verificaQuantidade(textoQuantidade);
 
         if (!quantidadeValida) {
             return;
         }
 
+        Item itemSelecionado = (Item) cmbItem.getSelectedItem();
+
+        if (itemSelecionado == null) {
+            JOptionPane.showMessageDialog(this, "Selecione um item.");
+            return;
+        }
+
+        int quantidade = Integer.parseInt(textoQuantidade.trim());
+
+        controleEstoque.registrarEntrada(itemSelecionado, quantidade);
+
+        JOptionPane.showMessageDialog(this, "Entrada registrada com suceso!");
+
+        aoCancelar.run();
     }//GEN-LAST:event_btnRevisarEntradaActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
