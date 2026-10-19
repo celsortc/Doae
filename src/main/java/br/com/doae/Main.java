@@ -1,7 +1,7 @@
 package br.com.doae;
 
 import br.com.doae.servico.CadastroItens;
-import br.com.doae.visao.Estoque;
+import br.com.doae.visao.JanelaPrincipal;
 
 public class Main {
 
@@ -20,7 +20,7 @@ public class Main {
             cadastro.cadastrar("Leite", "Italac", "Litro");
             cadastro.cadastrar("Arroz", "Arroz por peso", "kg");
 
-            new Estoque(cadastro).setVisible(true);
+            new JanelaPrincipal(cadastro).setVisible(true);
 
         });
 

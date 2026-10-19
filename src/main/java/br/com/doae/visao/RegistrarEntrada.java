@@ -62,6 +62,12 @@ public class RegistrarEntrada extends javax.swing.JPanel {
         }
     }
 
+    private void limparFormulario() {
+        txtQuantidade.setText("");
+        txtObservacao.setText("");
+        chkDoacaoAnonima.setSelected(false);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -213,7 +219,8 @@ public class RegistrarEntrada extends javax.swing.JPanel {
         btnRevisarEntrada.setBackground(new java.awt.Color(76, 150, 53));
         btnRevisarEntrada.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnRevisarEntrada.setForeground(new java.awt.Color(255, 255, 255));
-        btnRevisarEntrada.setText("Revisar entrada");
+        btnRevisarEntrada.setText("Registrar Entrada");
+        btnRevisarEntrada.setToolTipText("");
         btnRevisarEntrada.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(76, 150, 53), 2, true));
         btnRevisarEntrada.setContentAreaFilled(false);
         btnRevisarEntrada.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -388,6 +395,7 @@ public class RegistrarEntrada extends javax.swing.JPanel {
 
         Item itemSelecionado = (Item) cmbItem.getSelectedItem();
 
+        // Trata erro caso item não seja selecionado
         if (itemSelecionado == null) {
             JOptionPane.showMessageDialog(this, "Selecione um item.");
             return;
@@ -398,6 +406,7 @@ public class RegistrarEntrada extends javax.swing.JPanel {
         controleEstoque.registrarEntrada(itemSelecionado, quantidade);
 
         JOptionPane.showMessageDialog(this, "Entrada registrada com suceso!");
+        limparFormulario();
 
         aoCancelar.run();
     }//GEN-LAST:event_btnRevisarEntradaActionPerformed
@@ -410,13 +419,11 @@ public class RegistrarEntrada extends javax.swing.JPanel {
         Item itemSelecionado = (Item) cmbItem.getSelectedItem();
 
         if (itemSelecionado == null) {
-
+            txtUnidade.setText("");
             return;
         }
 
         txtUnidade.setText(itemSelecionado.getUnidadeMedida());
-
-
     }//GEN-LAST:event_cmbItemActionPerformed
 
 
