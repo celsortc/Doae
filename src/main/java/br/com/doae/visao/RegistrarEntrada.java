@@ -62,6 +62,12 @@ public class RegistrarEntrada extends javax.swing.JPanel {
         }
     }
 
+    private void limparFormulario() {
+        txtQuantidade.setText("");
+        txtObservacao.setText("");
+        chkDoacaoAnonima.setSelected(false);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -388,6 +394,7 @@ public class RegistrarEntrada extends javax.swing.JPanel {
 
         Item itemSelecionado = (Item) cmbItem.getSelectedItem();
 
+        // Trata erro caso item não seja selecionado
         if (itemSelecionado == null) {
             JOptionPane.showMessageDialog(this, "Selecione um item.");
             return;
@@ -398,6 +405,7 @@ public class RegistrarEntrada extends javax.swing.JPanel {
         controleEstoque.registrarEntrada(itemSelecionado, quantidade);
 
         JOptionPane.showMessageDialog(this, "Entrada registrada com suceso!");
+        limparFormulario();
 
         aoCancelar.run();
     }//GEN-LAST:event_btnRevisarEntradaActionPerformed
@@ -415,8 +423,6 @@ public class RegistrarEntrada extends javax.swing.JPanel {
         }
 
         txtUnidade.setText(itemSelecionado.getUnidadeMedida());
-
-
     }//GEN-LAST:event_cmbItemActionPerformed
 
 
