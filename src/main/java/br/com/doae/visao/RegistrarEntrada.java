@@ -219,7 +219,8 @@ public class RegistrarEntrada extends javax.swing.JPanel {
         btnRevisarEntrada.setBackground(new java.awt.Color(76, 150, 53));
         btnRevisarEntrada.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnRevisarEntrada.setForeground(new java.awt.Color(255, 255, 255));
-        btnRevisarEntrada.setText("Revisar entrada");
+        btnRevisarEntrada.setText("Registrar Entrada");
+        btnRevisarEntrada.setToolTipText("");
         btnRevisarEntrada.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(76, 150, 53), 2, true));
         btnRevisarEntrada.setContentAreaFilled(false);
         btnRevisarEntrada.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -418,7 +419,7 @@ public class RegistrarEntrada extends javax.swing.JPanel {
         Item itemSelecionado = (Item) cmbItem.getSelectedItem();
 
         if (itemSelecionado == null) {
-
+            txtUnidade.setText("");
             return;
         }
 
