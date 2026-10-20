@@ -1,7 +1,9 @@
 package br.com.doae.visao;
 
+import br.com.doae.modelo.Doador;
 import br.com.doae.servico.CadastroItens;
 import br.com.doae.servico.ControleEstoque;
+import java.util.List;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -24,9 +26,12 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private final CadastroItens cadastroItens;
     private final ControleEstoque controleEstoque = new ControleEstoque();
     private PainelEstoque painelEstoque;
+    private final List<Doador> doadores;
 
-    public JanelaPrincipal(CadastroItens cadastroItens) {
+    public JanelaPrincipal(CadastroItens cadastroItens,
+            List<Doador> doadores) {
         this.cadastroItens = cadastroItens;
+        this.doadores = doadores;
 
         initComponents();
         configurarTelas();
@@ -44,15 +49,16 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         conteudo.setLayout(new java.awt.BorderLayout(0, 0));
 
         painelEstoque = new PainelEstoque(
-        controleEstoque,
-        () -> layoutTelas.show(painelTelas, "entrada"));
-        
+                controleEstoque,
+                () -> layoutTelas.show(painelTelas, "entrada"));
+
         painelTelas.add(painelEstoque, "estoque");
-        
+
         painelTelas.add(
                 new RegistrarEntrada(
                         cadastroItens,
                         controleEstoque,
+                        doadores,
                         () -> {
                             atualizarTabelaEstoque();
                             layoutTelas.show(painelTelas, "estoque");
@@ -67,8 +73,8 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     }
 
     private void atualizarTabelaEstoque() {
-    painelEstoque.atualizarTabelaEstoque();
-}
+        painelEstoque.atualizarTabelaEstoque();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -248,7 +254,12 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new JanelaPrincipal(new CadastroItens()).setVisible(true));
+        java.awt.EventQueue.invokeLater(()
+                -> new JanelaPrincipal(
+                        new CadastroItens(),
+                        List.of()
+                ).setVisible(true)
+        );
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

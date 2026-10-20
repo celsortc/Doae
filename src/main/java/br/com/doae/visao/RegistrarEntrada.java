@@ -1,5 +1,6 @@
 package br.com.doae.visao;
 
+import br.com.doae.modelo.Doador;
 import br.com.doae.servico.CadastroItens;
 import br.com.doae.modelo.Item;
 import br.com.doae.servico.ControleEstoque;
@@ -18,11 +19,13 @@ public class RegistrarEntrada extends javax.swing.JPanel {
 
     public RegistrarEntrada(CadastroItens cadastroItens,
             ControleEstoque controleEstoque,
+            List<Doador> doadores,
             Runnable aoCancelar) {
         this.controleEstoque = controleEstoque;
         this.aoCancelar = aoCancelar;
 
         initComponents();
+        carregarDoadores(doadores);
 
         scrollEntrada.getVerticalScrollBar().setUnitIncrement(20);
         carregarItens(cadastroItens);
@@ -46,6 +49,7 @@ public class RegistrarEntrada extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Quantidade não informada, digite um número inteiro!");
             return false;
         }
+
         try {
             int numero = Integer.parseInt(texto);
 
@@ -66,6 +70,42 @@ public class RegistrarEntrada extends javax.swing.JPanel {
         txtQuantidade.setText("");
         txtObservacao.setText("");
         chkDoacaoAnonima.setSelected(false);
+        cmbDoador.setEnabled(true);
+        cmbDoador.setSelectedIndex(-1);
+
+    }
+
+    private void carregarDoadores(List<Doador> doadores) {
+        cmbDoador.removeAllItems();
+
+        for (Doador doador : doadores) {
+            cmbDoador.addItem(doador);
+        }
+
+        cmbDoador.setSelectedIndex(-1);
+    }
+
+    private Doador obterDoadorSelecionado() {
+        if (chkDoacaoAnonima.isSelected()) {
+            return null;
+        }
+
+        return (Doador) cmbDoador.getSelectedItem();
+
+    }
+
+    private boolean verificaDoador() {
+        boolean anonima = chkDoacaoAnonima.isSelected();
+        Doador doadorSelecionado = obterDoadorSelecionado();
+
+        if (!anonima && doadorSelecionado == null) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Selecione um doador ou marque Doação anônima."
+            );
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -171,13 +211,14 @@ public class RegistrarEntrada extends javax.swing.JPanel {
         txtUnidade.setEnabled(false);
         txtUnidade.addActionListener(this::txtUnidadeActionPerformed);
 
+        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(36, 42, 45));
-        jLabel4.setText("Doador (opcional)");
+        jLabel4.setText("Doador");
 
         cmbDoador.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         cmbDoador.setForeground(new java.awt.Color(36, 42, 45));
-        cmbDoador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbDoador.setModel(new javax.swing.DefaultComboBoxModel<Doador>());
         cmbDoador.addActionListener(this::cmbDoadorActionPerformed);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -374,7 +415,14 @@ public class RegistrarEntrada extends javax.swing.JPanel {
     }//GEN-LAST:event_txtQuantidadeActionPerformed
 
     private void chkDoacaoAnonimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkDoacaoAnonimaActionPerformed
-        // TODO add your handling code here:
+        boolean anonima = chkDoacaoAnonima.isSelected();
+
+        if (anonima) {
+            cmbDoador.setSelectedIndex(-1);
+        }
+
+//        cmbDoador.setText("Doação Anônima");
+        cmbDoador.setEnabled(!anonima);
     }//GEN-LAST:event_chkDoacaoAnonimaActionPerformed
 
     private void txtDataHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataHoraActionPerformed
@@ -403,7 +451,16 @@ public class RegistrarEntrada extends javax.swing.JPanel {
 
         int quantidade = Integer.parseInt(textoQuantidade.trim());
 
-        controleEstoque.registrarEntrada(itemSelecionado, quantidade);
+        if (!verificaDoador()) {
+            return;
+        }
+
+        controleEstoque.registrarEntrada(itemSelecionado,
+                quantidade,
+                obterDoadorSelecionado(),
+                chkDoacaoAnonima.isSelected(),
+                txtObservacao.getText().trim()
+        );
 
         JOptionPane.showMessageDialog(this, "Entrada registrada com suceso!");
         limparFormulario();
@@ -433,7 +490,7 @@ public class RegistrarEntrada extends javax.swing.JPanel {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnRevisarEntrada;
     private javax.swing.JCheckBox chkDoacaoAnonima;
-    private javax.swing.JComboBox<String> cmbDoador;
+    private javax.swing.JComboBox<Doador> cmbDoador;
     private javax.swing.JComboBox<Item> cmbItem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -455,4 +512,5 @@ public class RegistrarEntrada extends javax.swing.JPanel {
     private javax.swing.JTextField txtQuantidade;
     private javax.swing.JTextField txtUnidade;
     // End of variables declaration//GEN-END:variables
+
 }
