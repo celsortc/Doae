@@ -15,16 +15,15 @@ public class PainelItens extends javax.swing.JPanel {
      */
     public PainelItens() {
         initComponents();
-   btnSalvar.putClientProperty("FlatLaf.style",
-        "background: #4A9B2F; foreground: #FFFFFF; font: bold");
-   final javax.swing.ListCellRenderer<? super String> original = cmbUnidade.getRenderer();
-    cmbUnidade.setSelectedIndex(-1);
-    cmbUnidade.setRenderer((list, value, index, isSelected, cellHasFocus) ->
-        original.getListCellRendererComponent(list, value == null ? "Unidade" : value,
-                                              index, isSelected, cellHasFocus));
+        btnSalvar.putClientProperty("FlatLaf.style",
+                "background: #4A9B2F; foreground: #FFFFFF; font: bold");
+        final javax.swing.ListCellRenderer<? super String> original = cmbUnidade.getRenderer();
+        cmbUnidade.setSelectedIndex(-1);
+        cmbUnidade.setRenderer((list, value, index, isSelected, cellHasFocus)
+                -> original.getListCellRendererComponent(list, value == null ? "Unidade" : value,
+                        index, isSelected, cellHasFocus));
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -54,6 +53,8 @@ public class PainelItens extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         cmbUnidade = new javax.swing.JComboBox<>();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(1280, 720));
@@ -141,20 +142,21 @@ public class PainelItens extends javax.swing.JPanel {
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel9.setText(" Unidade *");
 
-        btnSalvar.setBackground(new java.awt.Color(87, 181, 65));
+        btnSalvar.setBackground(new java.awt.Color(76, 150, 53));
         btnSalvar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnSalvar.setForeground(new java.awt.Color(255, 255, 255));
         btnSalvar.setText("Salvar");
+        btnSalvar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(76, 150, 53), 2, true));
+        btnSalvar.setContentAreaFilled(false);
+        btnSalvar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSalvar.setOpaque(true);
         btnSalvar.addActionListener(this::btnSalvarActionPerformed);
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton2.setText("Cancelar");
 
-        jTextField1.setText("Cobertor");
-
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jTextArea1.setText("Cobertor de solteiro");
         jScrollPane2.setViewportView(jTextArea1);
 
         cmbUnidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));

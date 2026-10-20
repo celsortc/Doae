@@ -53,6 +53,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 () -> layoutTelas.show(painelTelas, "entrada"));
 
         painelTelas.add(painelEstoque, "estoque");
+        painelTelas.add(new PainelItens(), "itens");
 
         painelTelas.add(
                 new RegistrarEntrada(
@@ -229,7 +230,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDoadoresActionPerformed
 
     private void btnItensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnItensActionPerformed
-        // TODO add your handling code here:
+        layoutTelas.show(painelTelas, "itens");
     }//GEN-LAST:event_btnItensActionPerformed
 
     /**
