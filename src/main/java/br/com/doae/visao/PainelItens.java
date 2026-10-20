@@ -1,20 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package br.com.doae.visao;
 
-/**
- *
- * @author goku0
- */
+import br.com.doae.servico.CadastroItens;
+
 public class PainelItens extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PainelItens
-     */
-    public PainelItens() {
+    private final CadastroItens cadastroItens;
+
+    public PainelItens(CadastroItens cadastroItens) {
+
+        this.cadastroItens = cadastroItens;
         initComponents();
+
         btnSalvar.putClientProperty("FlatLaf.style",
                 "background: #4A9B2F; foreground: #FFFFFF; font: bold");
         final javax.swing.ListCellRenderer<? super String> original = cmbUnidade.getRenderer();

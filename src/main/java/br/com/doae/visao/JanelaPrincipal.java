@@ -53,7 +53,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 () -> layoutTelas.show(painelTelas, "entrada"));
 
         painelTelas.add(painelEstoque, "estoque");
-        painelTelas.add(new PainelItens(), "itens");
+        painelTelas.add(new PainelItens(cadastroItens), "itens");
 
         painelTelas.add(
                 new RegistrarEntrada(
