@@ -1,6 +1,7 @@
 package br.com.doae.visao;
 
 import br.com.doae.servico.CadastroItens;
+import javax.swing.JOptionPane;
 
 public class PainelItens extends javax.swing.JPanel {
 
@@ -45,9 +46,9 @@ public class PainelItens extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         btnSalvar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        txtNome = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtDescricao = new javax.swing.JTextArea();
         cmbUnidade = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -151,11 +152,11 @@ public class PainelItens extends javax.swing.JPanel {
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton2.setText("Cancelar");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        txtDescricao.setColumns(20);
+        txtDescricao.setRows(5);
+        jScrollPane2.setViewportView(txtDescricao);
 
-        cmbUnidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbUnidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Caixa", "kg", "Litro", "Pacote", "Par", "Unidade", " ", " ", " ", " " }));
         cmbUnidade.setName("Unidade"); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -184,7 +185,7 @@ public class PainelItens extends javax.swing.JPanel {
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addComponent(txtNome, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addGap(26, 26, 26))
         );
         jPanel4Layout.setVerticalGroup(
@@ -197,7 +198,7 @@ public class PainelItens extends javax.swing.JPanel {
                 .addGap(32, 32, 32)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -264,7 +265,19 @@ public class PainelItens extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        // TODO add your handling code here:
+        String nome = txtNome.getText().trim();
+        String descricao = txtDescricao.getText().trim();
+        String unidade = (String) cmbUnidade.getSelectedItem();
+
+        try {
+            cadastroItens.cadastrar(nome, descricao, unidade);
+
+            JOptionPane.showMessageDialog(this, "Item cadastrado com sucesso!");
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+
+
     }//GEN-LAST:event_btnSalvarActionPerformed
 
 
@@ -287,7 +300,7 @@ public class PainelItens extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextArea txtDescricao;
+    private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
 }
