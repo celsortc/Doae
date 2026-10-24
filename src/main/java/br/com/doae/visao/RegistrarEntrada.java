@@ -28,10 +28,11 @@ public class RegistrarEntrada extends javax.swing.JPanel {
         carregarDoadores(doadores);
 
         scrollEntrada.getVerticalScrollBar().setUnitIncrement(20);
+        
         carregarItens(cadastroItens);
     }
 
-    private void carregarItens(CadastroItens cadastroItens) {
+    public void carregarItens(CadastroItens cadastroItens) {
         itensDisponiveis = cadastroItens.listar();
 
         cmbItem.removeAllItems();
