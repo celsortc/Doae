@@ -26,6 +26,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private final CadastroItens cadastroItens;
     private final ControleEstoque controleEstoque = new ControleEstoque();
     private PainelEstoque painelEstoque;
+    private RegistrarEntrada registrarEntrada;
     private final List<Doador> doadores;
 
     public JanelaPrincipal(CadastroItens cadastroItens,
@@ -48,24 +49,30 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         conteudo.setLayout(new java.awt.BorderLayout(0, 0));
 
+        //Abrir a entrada(registrarEntrada)
         painelEstoque = new PainelEstoque(
                 controleEstoque,
-                () -> layoutTelas.show(painelTelas, "entrada"));
+                () -> {
+                    registrarEntrada.carregarItens(cadastroItens);
+                    layoutTelas.show(painelTelas, "entrada");
+                }
+        );
 
         painelTelas.add(painelEstoque, "estoque");
         painelTelas.add(new PainelItens(cadastroItens), "itens");
 
-        painelTelas.add(
-                new RegistrarEntrada(
-                        cadastroItens,
-                        controleEstoque,
-                        doadores,
-                        () -> {
-                            atualizarTabelaEstoque();
-                            layoutTelas.show(painelTelas, "estoque");
-                        }
-                ),
-                "entrada");
+        registrarEntrada = new RegistrarEntrada(
+                cadastroItens,
+                controleEstoque,
+                doadores,
+                () -> {
+                    atualizarTabelaEstoque();
+                    layoutTelas.show(painelTelas, "estoque");
+                }
+        );
+
+        painelTelas.add(registrarEntrada, "entrada");
+
         conteudo.add(bgNav, java.awt.BorderLayout.WEST);
         conteudo.add(painelTelas, java.awt.BorderLayout.CENTER);
 
