@@ -59,6 +59,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                     layoutTelas.show(painelTelas, "entrada");
                 },
                 () -> {
+                    registrarSaida.carregarItens(cadastroItens);
                     layoutTelas.show(painelTelas, "saida");
                 }
         );
@@ -77,7 +78,10 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         );
 
         registrarSaida = new RegistrarSaida(
+                cadastroItens,
+                controleEstoque,
                 () -> {
+                    atualizarTabelaEstoque();
                     layoutTelas.show(painelTelas, "estoque");
                 });
 

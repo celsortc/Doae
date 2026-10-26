@@ -1,15 +1,40 @@
 package br.com.doae.visao;
 
-/** Formulário visual de saída; comportamento será implementado separadamente. */
+import br.com.doae.modelo.Item;
+import br.com.doae.servico.CadastroItens;
+import br.com.doae.servico.ControleEstoque;
+import java.util.List;
+
+/**
+ * Formulário visual de saída; comportamento será implementado separadamente.
+ */
 public class RegistrarSaida extends javax.swing.JPanel {
 
+    private List<Item> itensDisponiveis = List.of();
     private final Runnable aoCancelar;
+    private final ControleEstoque controleEstoque;
 
-    public RegistrarSaida(Runnable aoCancelar) {
+    public RegistrarSaida(CadastroItens cadastroItens,
+            ControleEstoque controleEstoque,
+            Runnable aoCancelar) {
+        this.controleEstoque = controleEstoque;
         this.aoCancelar = aoCancelar;
 
         initComponents();
         scrollSaida.getVerticalScrollBar().setUnitIncrement(20);
+
+        carregarItens(cadastroItens);
+    }
+
+    public void carregarItens(CadastroItens cadastroItens) {
+        cmbItem.removeAllItems();
+
+        for (Item item : controleEstoque.listarSaldos().keySet()) {
+
+            cmbItem.addItem(item);
+
+        }
+
     }
 
     @SuppressWarnings("unchecked")
@@ -96,6 +121,7 @@ public class RegistrarSaida extends javax.swing.JPanel {
         cmbItem.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         cmbItem.setForeground(new java.awt.Color(36, 42, 45));
         cmbItem.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(205, 211, 215)));
+        cmbItem.addActionListener(this::cmbItemActionPerformed);
 
         lblUnidade.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblUnidade.setForeground(new java.awt.Color(36, 42, 45));
@@ -105,6 +131,7 @@ public class RegistrarSaida extends javax.swing.JPanel {
         txtUnidade.setBackground(new java.awt.Color(245, 246, 247));
         txtUnidade.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         txtUnidade.setForeground(new java.awt.Color(36, 42, 45));
+        txtUnidade.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtUnidade.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(205, 211, 215)));
 
         lblSaldoDisponivel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -115,6 +142,7 @@ public class RegistrarSaida extends javax.swing.JPanel {
         txtSaldoDisponivel.setBackground(new java.awt.Color(245, 246, 247));
         txtSaldoDisponivel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         txtSaldoDisponivel.setForeground(new java.awt.Color(36, 42, 45));
+        txtSaldoDisponivel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtSaldoDisponivel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(205, 211, 215)));
 
         lblQuantidade.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -153,6 +181,7 @@ public class RegistrarSaida extends javax.swing.JPanel {
         btnRevisarSaida.setContentAreaFilled(false);
         btnRevisarSaida.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRevisarSaida.setOpaque(true);
+        btnRevisarSaida.addActionListener(this::btnRevisarSaidaActionPerformed);
 
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(36, 42, 45));
@@ -337,6 +366,25 @@ public class RegistrarSaida extends javax.swing.JPanel {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         aoCancelar.run();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnRevisarSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevisarSaidaActionPerformed
+
+    }//GEN-LAST:event_btnRevisarSaidaActionPerformed
+
+    private void cmbItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbItemActionPerformed
+        Item itemSelecionado = (Item) cmbItem.getSelectedItem();
+
+        if (itemSelecionado == null) {
+            txtUnidade.setText("");
+            txtSaldoDisponivel.setText("");
+            return;
+        }
+
+        int saldoSelecionado = controleEstoque.listarSaldos().getOrDefault(itemSelecionado, 0);
+
+        txtUnidade.setText(itemSelecionado.getUnidadeMedida());
+        txtSaldoDisponivel.setText(String.valueOf(saldoSelecionado));
+    }//GEN-LAST:event_cmbItemActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
