@@ -17,34 +17,37 @@ public class PainelEstoque extends javax.swing.JPanel {
 
     private final ControleEstoque controleEstoque;
     private final Runnable aoRegistrarEntrada;
+    private final Runnable aoRegistrarSaida;
 
     public PainelEstoque(ControleEstoque controleEstoque,
-            Runnable aoRegistrarEntrada) {
+            Runnable aoRegistrarEntrada,
+            Runnable aoRegistrarSaida) {
         this.controleEstoque = controleEstoque;
         this.aoRegistrarEntrada = aoRegistrarEntrada;
+        this.aoRegistrarSaida = aoRegistrarSaida;
         initComponents();
     }
 
     public void atualizarTabelaEstoque() {
-    DefaultTableModel modelo =
-            (DefaultTableModel) tblEstoque.getModel();
+        DefaultTableModel modelo
+                = (DefaultTableModel) tblEstoque.getModel();
 
-    modelo.setRowCount(0);
+        modelo.setRowCount(0);
 
-    for (Map.Entry<Item, Integer> registro
-            : controleEstoque.listarSaldos().entrySet()) {
+        for (Map.Entry<Item, Integer> registro
+                : controleEstoque.listarSaldos().entrySet()) {
 
-        Item item = registro.getKey();
-        int saldo = registro.getValue();
+            Item item = registro.getKey();
+            int saldo = registro.getValue();
 
-        modelo.addRow(new Object[]{
-            item.getNome(),
-            item.getUnidadeMedida(),
-            saldo
-        });
+            modelo.addRow(new Object[]{
+                item.getNome(),
+                item.getUnidadeMedida(),
+                saldo
+            });
+        }
     }
-}
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -92,6 +95,7 @@ public class PainelEstoque extends javax.swing.JPanel {
         btnRegistrarSaida.setContentAreaFilled(false);
         btnRegistrarSaida.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegistrarSaida.setOpaque(true);
+        btnRegistrarSaida.addActionListener(this::btnRegistrarSaidaActionPerformed);
 
         painelCabecalhoEstoque.setBackground(new java.awt.Color(255, 255, 255));
         painelCabecalhoEstoque.setMinimumSize(new java.awt.Dimension(400, 66));
@@ -232,6 +236,10 @@ public class PainelEstoque extends javax.swing.JPanel {
     private void btnRegistrarEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarEntradaActionPerformed
         aoRegistrarEntrada.run();
     }//GEN-LAST:event_btnRegistrarEntradaActionPerformed
+
+    private void btnRegistrarSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarSaidaActionPerformed
+        aoRegistrarSaida.run();
+    }//GEN-LAST:event_btnRegistrarSaidaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
