@@ -76,7 +76,10 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 }
         );
 
-        registrarSaida = new RegistrarSaida();
+        registrarSaida = new RegistrarSaida(
+                () -> {
+                    layoutTelas.show(painelTelas, "estoque");
+                });
 
         painelTelas.add(registrarEntrada, "entrada");
         painelTelas.add(registrarSaida, "saida");
