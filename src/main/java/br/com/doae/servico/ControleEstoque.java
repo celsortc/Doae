@@ -67,6 +67,39 @@ public class ControleEstoque {
 
     }
 
+    public void registrarSaida(Item item,
+            int quantidade,
+            String observacao) {
+
+        int saldoAtual = saldos.getOrDefault(item, 0);
+
+        if (item == null) {
+            throw new IllegalArgumentException("Selecione um item.");
+        }
+
+        if (quantidade <= 0) {
+            throw new IllegalArgumentException("A quantidade deve ser maior que zero.");
+        }
+        if(saldoAtual - quantidade < 0) {
+            throw new IllegalArgumentException("Sem estoque suficiente");
+        }
+
+        Movimentacao movimentacao = new Movimentacao(
+                TipoMovimentacao.SAIDA,
+                item,
+                quantidade,
+                LocalDateTime.now(),
+                observacao,
+                null,
+                false
+        );
+
+
+        saldos.put(item, saldoAtual - quantidade);
+        movimentacoes.add(movimentacao);
+
+    }
+
     public Map<Item, Integer> listarSaldos() {
         return Map.copyOf(saldos);
     }

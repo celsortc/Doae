@@ -144,6 +144,12 @@ public class RegistrarEntrada extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         btnRevisarEntrada = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        painelOrientacoesEntrada = new javax.swing.JPanel();
+        painelAvisoEntrada = new javax.swing.JPanel();
+        lblTituloAvisoEntrada = new javax.swing.JLabel();
+        lblTextoAvisoEntrada = new javax.swing.JLabel();
+        lblOrientacaoEntrada = new javax.swing.JLabel();
+
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1200, 681));
@@ -371,32 +377,73 @@ public class RegistrarEntrada extends javax.swing.JPanel {
                     .addGap(515, 515, 515)))
         );
 
+        painelOrientacoesEntrada.setBackground(new java.awt.Color(255, 255, 255));
+        painelAvisoEntrada.setBackground(new java.awt.Color(245, 246, 247));
+        painelAvisoEntrada.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(205, 211, 215)));
+        lblTituloAvisoEntrada.setFont(new java.awt.Font("Segoe UI", 1, 14));
+        lblTituloAvisoEntrada.setForeground(new java.awt.Color(36, 42, 45));
+        lblTituloAvisoEntrada.setText("Antes de confirmar");
+        lblTextoAvisoEntrada.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        lblTextoAvisoEntrada.setForeground(new java.awt.Color(101, 112, 120));
+        lblTextoAvisoEntrada.setText("<html>A entrada só altera o saldo após a<br>revisão e a confirmação definitiva.</html>");
+        lblOrientacaoEntrada.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        lblOrientacaoEntrada.setForeground(new java.awt.Color(101, 112, 120));
+        lblOrientacaoEntrada.setText("<html>Para uma doação sem identificação, selecione<br>Doação anônima. O doador não é obrigatório.</html>");
+        javax.swing.GroupLayout painelAvisoEntradaLayout = new javax.swing.GroupLayout(painelAvisoEntrada);
+        painelAvisoEntrada.setLayout(painelAvisoEntradaLayout);
+        painelAvisoEntradaLayout.setHorizontalGroup(
+            painelAvisoEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelAvisoEntradaLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(painelAvisoEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTituloAvisoEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 270, Short.MAX_VALUE)
+                    .addComponent(lblTextoAvisoEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 270, Short.MAX_VALUE))
+                .addGap(16, 16, 16)));
+        painelAvisoEntradaLayout.setVerticalGroup(
+            painelAvisoEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelAvisoEntradaLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(lblTituloAvisoEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(lblTextoAvisoEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)));
+
+        javax.swing.GroupLayout painelOrientacoesEntradaLayout = new javax.swing.GroupLayout(painelOrientacoesEntrada);
+        painelOrientacoesEntrada.setLayout(painelOrientacoesEntradaLayout);
+        painelOrientacoesEntradaLayout.setHorizontalGroup(
+            painelOrientacoesEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(painelAvisoEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 304, Short.MAX_VALUE)
+            .addComponent(lblOrientacaoEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 304, Short.MAX_VALUE));
+        painelOrientacoesEntradaLayout.setVerticalGroup(
+            painelOrientacoesEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelOrientacoesEntradaLayout.createSequentialGroup()
+                .addComponent(painelAvisoEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
+                .addComponent(lblOrientacaoEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)));
+
         javax.swing.GroupLayout PainelFormularioLayout = new javax.swing.GroupLayout(PainelFormulario);
         PainelFormulario.setLayout(PainelFormularioLayout);
         PainelFormularioLayout.setHorizontalGroup(
             PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1203, Short.MAX_VALUE)
-            .addGroup(PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(PainelFormularioLayout.createSequentialGroup()
-                    .addGap(40, 40, 40)
-                    .addGroup(PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(PainelFormularioLayout.createSequentialGroup()
-                            .addComponent(PainelDadosEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(377, 377, 377))
-                        .addComponent(painelCabecalhoRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, 1137, Short.MAX_VALUE))
-                    .addGap(26, 26, 26)))
-        );
+            .addGroup(PainelFormularioLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(painelCabecalhoRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 1086, Short.MAX_VALUE)
+                    .addGroup(PainelFormularioLayout.createSequentialGroup()
+                        .addComponent(PainelDadosEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)
+                        .addComponent(painelOrientacoesEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(40, 40, 40)));
         PainelFormularioLayout.setVerticalGroup(
             PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 888, Short.MAX_VALUE)
-            .addGroup(PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(PainelFormularioLayout.createSequentialGroup()
-                    .addGap(40, 40, 40)
-                    .addComponent(painelCabecalhoRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(PainelFormularioLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(painelCabecalhoRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addGroup(PainelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(PainelDadosEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(78, Short.MAX_VALUE)))
-        );
+                    .addComponent(painelOrientacoesEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(78, 78, Short.MAX_VALUE)));
 
         scrollEntrada.setViewportView(PainelFormulario);
 
@@ -512,6 +559,11 @@ public class RegistrarEntrada extends javax.swing.JPanel {
     private javax.swing.JTextArea txtObservacao;
     private javax.swing.JTextField txtQuantidade;
     private javax.swing.JTextField txtUnidade;
+    private javax.swing.JPanel painelOrientacoesEntrada;
+    private javax.swing.JPanel painelAvisoEntrada;
+    private javax.swing.JLabel lblTituloAvisoEntrada;
+    private javax.swing.JLabel lblTextoAvisoEntrada;
+    private javax.swing.JLabel lblOrientacaoEntrada;
     // End of variables declaration//GEN-END:variables
 
 }
