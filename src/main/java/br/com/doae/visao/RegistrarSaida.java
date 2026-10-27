@@ -4,6 +4,7 @@ import br.com.doae.modelo.Item;
 import br.com.doae.servico.CadastroItens;
 import br.com.doae.servico.ControleEstoque;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  * Formulário visual de saída; comportamento será implementado separadamente.
@@ -35,6 +36,11 @@ public class RegistrarSaida extends javax.swing.JPanel {
 
         }
 
+    }
+
+    private void limparFormulario() {
+        txtQuantidade.setText("");
+        txtObservacao.setText("");
     }
 
     @SuppressWarnings("unchecked")
@@ -86,7 +92,7 @@ public class RegistrarSaida extends javax.swing.JPanel {
 
         lblDescricao.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblDescricao.setForeground(new java.awt.Color(101, 112, 120));
-        lblDescricao.setText("Informe os itens retirados. Revise os dados antes de confirmar.");
+        lblDescricao.setText("Informe os itens retirados. Informe os itens e a quantidade retirada.");
 
         javax.swing.GroupLayout painelTituloLayout = new javax.swing.GroupLayout(painelTitulo);
         painelTitulo.setLayout(painelTituloLayout);
@@ -176,7 +182,7 @@ public class RegistrarSaida extends javax.swing.JPanel {
         btnRevisarSaida.setBackground(new java.awt.Color(172, 62, 64));
         btnRevisarSaida.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnRevisarSaida.setForeground(new java.awt.Color(255, 255, 255));
-        btnRevisarSaida.setText("Revisar saída");
+        btnRevisarSaida.setText("Registrar saída");
         btnRevisarSaida.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(205, 211, 215)));
         btnRevisarSaida.setContentAreaFilled(false);
         btnRevisarSaida.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -212,24 +218,24 @@ public class RegistrarSaida extends javax.swing.JPanel {
                     .addGroup(painelDadosSaidaLayout.createSequentialGroup()
                         .addGroup(painelDadosSaidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblItem)
-                            .addComponent(cmbItem, javax.swing.GroupLayout.PREFERRED_SIZE, 370, Short.MAX_VALUE))
+                            .addComponent(cmbItem, javax.swing.GroupLayout.PREFERRED_SIZE, 424, Short.MAX_VALUE))
                         .addGap(20, 20, 20)
                         .addGroup(painelDadosSaidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblUnidade)
-                            .addComponent(txtUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 200, Short.MAX_VALUE)))
+                            .addComponent(txtUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 255, Short.MAX_VALUE)))
                     .addGroup(painelDadosSaidaLayout.createSequentialGroup()
                         .addGroup(painelDadosSaidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblSaldoDisponivel)
-                            .addComponent(txtSaldoDisponivel, javax.swing.GroupLayout.PREFERRED_SIZE, 285, Short.MAX_VALUE))
+                            .addComponent(txtSaldoDisponivel, javax.swing.GroupLayout.PREFERRED_SIZE, 339, Short.MAX_VALUE))
                         .addGap(20, 20, 20)
                         .addGroup(painelDadosSaidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblQuantidade)
-                            .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 285, Short.MAX_VALUE)
+                            .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 340, Short.MAX_VALUE)
                             .addComponent(lblAjudaQuantidade)))
                     .addComponent(lblObservacao)
-                    .addComponent(scrollObservacao, javax.swing.GroupLayout.PREFERRED_SIZE, 590, Short.MAX_VALUE)
+                    .addComponent(scrollObservacao, javax.swing.GroupLayout.PREFERRED_SIZE, 699, Short.MAX_VALUE)
                     .addComponent(lblDataHora)
-                    .addComponent(txtDataHora, javax.swing.GroupLayout.PREFERRED_SIZE, 590, Short.MAX_VALUE)
+                    .addComponent(txtDataHora, javax.swing.GroupLayout.PREFERRED_SIZE, 699, Short.MAX_VALUE)
                     .addComponent(lblAjudaDataHora)
                     .addGroup(painelDadosSaidaLayout.createSequentialGroup()
                         .addComponent(btnRevisarSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -368,6 +374,27 @@ public class RegistrarSaida extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnRevisarSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevisarSaidaActionPerformed
+        String textoQuantidade = txtQuantidade.getText();
+
+        Item itemSelecionado = (Item) cmbItem.getSelectedItem();
+
+
+        try {
+            int qtd = Integer.parseInt(textoQuantidade);
+
+            controleEstoque.registrarSaida(itemSelecionado,
+                    qtd,
+                    txtObservacao.getText().trim());
+
+            JOptionPane.showMessageDialog(this, "Retirada do estoque registrada com suceso!");
+            limparFormulario();
+
+            aoCancelar.run();
+
+        } catch (IllegalArgumentException e) {
+            //A mensagem que retorna aqui vem da class ControleEstoque.
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
 
     }//GEN-LAST:event_btnRevisarSaidaActionPerformed
 
