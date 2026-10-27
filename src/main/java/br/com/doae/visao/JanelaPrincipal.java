@@ -28,6 +28,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private PainelEstoque painelEstoque;
     private RegistrarEntrada registrarEntrada;
     private RegistrarSaida registrarSaida;
+    private PainelHistorico painelHistorico;
 
     private final List<Doador> doadores;
 
@@ -66,6 +67,12 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         painelTelas.add(painelEstoque, "estoque");
         painelTelas.add(new PainelItens(cadastroItens), "itens");
+
+        painelHistorico = new PainelHistorico(controleEstoque) {
+
+        };
+
+        painelTelas.add(painelHistorico, "historico");
 
         registrarEntrada = new RegistrarEntrada(
                 cadastroItens,
@@ -244,7 +251,8 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEstoqueActionPerformed
 
     private void btnHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoricoActionPerformed
-        // TODO add your handling code here:
+        painelHistorico.atualizarTabelaHistorico();
+        layoutTelas.show(painelTelas, "historico");
     }//GEN-LAST:event_btnHistoricoActionPerformed
 
     private void btnDoadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoadoresActionPerformed

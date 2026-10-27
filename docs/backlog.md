@@ -11,6 +11,21 @@
 - [x] Limpar quantidade, observação e marcação de doação anônima após registrar uma entrada com sucesso, preservando o preenchimento quando houver erro de validação.
 - [ ] Completar a limpeza do formulário após o sucesso: definir o estado inicial dos seletores de item e doador e manter a unidade coerente com a seleção.
 
+## Histórico — checklist de retomada
+
+- [x] Criar o visual de Histórico e Doadores, sem implementar o cadastro de doadores.
+- [x] Abrir o Histórico pelo menu e compartilhar o mesmo `ControleEstoque` da janela principal.
+- [x] Carregar as sete colunas na ordem correta, consultando nome e unidade pelo item da movimentação.
+- [x] Atualizar a tabela ao abrir e limpar as linhas antes de preencher, evitando duplicação.
+- [x] Compor `textoDoador` como texto, usando um valor padrão para ausência de doador e substituindo-o conforme anonimato ou nome identificado.
+- [x] Validar a exibição de entrada identificada, entrada anônima e saída, incluindo histórico vazio, recarga e novas movimentações.
+- [ ] Atualizar `lblTotalRegistros` após preencher a tabela, usando a quantidade real de linhas.
+- [ ] Implementar os filtros do Histórico em uma etapa posterior.
+
+Retomada: atualizar o contador em `PainelHistorico.atualizarTabelaHistorico()`, depois do `for`, a partir de `modelo.getRowCount()`. Os filtros e o cadastro funcional de doadores continuam para etapas posteriores. Continuar na branch `doae/registro-saida-estoque`.
+
 ## Pós-MVP
 
-- [ ] Criar tela de revisão da entrada: exibir os dados informados, permitir voltar para corrigir e registrar somente após confirmar. Após o sucesso, atualizar a tabela e voltar ao estoque. Manter o fluxo atual até implementar essa etapa.
+- [ ] Exibir os erros de validação da saída no próprio formulário, com aviso vermelho inspirado no [modelo do Figma](https://www.figma.com/design/r3bBzEHkAIVfzjvepdOEzX/Doae-v2?node-id=2-3580), em vez do popup atual. Usar um `JLabel` no designer do NetBeans, preenchido após a tentativa de envio e limpo ao tentar novamente ou limpar o formulário; manter as validações no `ControleEstoque` e apresentar uma mensagem amigável para quantidade que não seja um inteiro. Melhoria independente da tela de revisão/confirmação e fora do escopo de histórico, hover e doadores.
+- [ ] Criar tela de revisão da entrada: exibir os dados informados, permitir voltar para corrigir sem perder o preenchimento e registrar somente após confirmar. Após o sucesso, atualizar a tabela e voltar ao estoque. Manter o registro direto atual até implementar essa etapa.
+- [ ] Criar tela de revisão da saída: exibir item, unidade, saldo disponível, quantidade e observação; permitir voltar para corrigir sem perder o preenchimento. Descontar e registrar a movimentação somente após confirmar, validando novamente o saldo. Após o sucesso, limpar o formulário, atualizar a tabela e voltar ao estoque. Manter o registro direto atual até implementar essa etapa.
