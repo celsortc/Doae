@@ -51,7 +51,7 @@ public class PainelHistorico extends javax.swing.JPanel {
         
         int linhas = modelo.getRowCount();
         
-        lblTotalRegistros.setText(linhas + " registros encontrados • As saídas não possuem doador.");
+        lblTotalRegistros.setText(linhas == 1 ? "1 registro encontrado • As saídas não possuem doador." : linhas + " registros encontrados • As saídas não possuem doador.");
 
     }
 
