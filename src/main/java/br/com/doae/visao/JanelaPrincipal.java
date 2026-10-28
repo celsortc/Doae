@@ -95,6 +95,8 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         painelTelas.add(registrarEntrada, "entrada");
         painelTelas.add(registrarSaida, "saida");
 
+        painelTelas.add(new PainelDoadores(), "doadores");
+
         conteudo.add(bgNav, java.awt.BorderLayout.WEST);
         conteudo.add(painelTelas, java.awt.BorderLayout.CENTER);
 
@@ -268,6 +270,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
     private void btnDoadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoadoresActionPerformed
         selecionarMenu(btnDoadores);
+        layoutTelas.show(painelTelas, "doadores");
     }//GEN-LAST:event_btnDoadoresActionPerformed
 
     private void btnItensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnItensActionPerformed
