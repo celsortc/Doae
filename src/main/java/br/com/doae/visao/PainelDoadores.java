@@ -61,7 +61,7 @@ public class PainelDoadores extends javax.swing.JPanel {
         tblDoadores.setRowHeight(40);
         tblDoadores.setShowVerticalLines(false);
         tblDoadores.setGridColor(new java.awt.Color(230, 233, 235));
-        tblDoadores.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {}, new String[] { "Nome", "Contato", "Editar" }) {
+        tblDoadores.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {}, new String[] { "Nome", "Contato" }) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;

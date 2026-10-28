@@ -29,13 +29,6 @@ public class PainelItens extends javax.swing.JPanel {
         tblItens.getColumnModel().getColumn(0).setPreferredWidth(160);
         tblItens.getColumnModel().getColumn(1).setPreferredWidth(250);
         tblItens.getColumnModel().getColumn(2).setPreferredWidth(100);
-        tblItens.getColumnModel().getColumn(3).setPreferredWidth(70);
-        javax.swing.table.DefaultTableCellRenderer editarRenderer = new javax.swing.table.DefaultTableCellRenderer();
-        tblItens.getColumnModel().getColumn(3).setCellRenderer((table, value, selected, focus, row, column) -> {
-            java.awt.Component cell = editarRenderer.getTableCellRendererComponent(table, value, selected, focus, row, column);
-            cell.setForeground(new java.awt.Color(52, 110, 35));
-            return cell;
-        });
         scrollConteudo.getVerticalScrollBar().setUnitIncrement(20);
 
         atualizarTabelaItens();
@@ -51,8 +44,7 @@ public class PainelItens extends javax.swing.JPanel {
             modelo.addRow(new Object[]{
                 item.getNome(),
                 item.getDescricao(),
-                item.getUnidadeMedida(),
-                "Editar"
+                item.getUnidadeMedida()
             });
         }
         int total = modelo.getRowCount();
@@ -110,7 +102,7 @@ public class PainelItens extends javax.swing.JPanel {
         tblItens.setRowHeight(40);
         tblItens.setShowVerticalLines(false);
         tblItens.setGridColor(new java.awt.Color(230, 233, 235));
-        tblItens.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {}, new String[] { "Nome", "Descrição", "Unidade", "Editar" }) {
+        tblItens.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {}, new String[] { "Nome", "Descrição", "Unidade" }) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
