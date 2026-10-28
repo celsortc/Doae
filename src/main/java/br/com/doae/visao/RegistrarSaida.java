@@ -42,28 +42,6 @@ public class RegistrarSaida extends javax.swing.JPanel {
         txtObservacao.setText("");
     }
 
-    private boolean verificaQuantidade(String qtd) {
-        String texto = qtd.trim();
-
-        if (texto.isBlank()) {
-            JOptionPane.showMessageDialog(this, "Quantidade não informada, digite um número inteiro!");
-            return false;
-        }
-
-        try {
-            int numero = Integer.parseInt(texto);
-
-            if (numero <= 0) {
-                JOptionPane.showMessageDialog(this, "Informe uma quantidade maior que zero.");
-                return false;
-            }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Digite apenas números inteiros!");
-            return false;
-        }
-        return true;
-    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -403,27 +381,10 @@ public class RegistrarSaida extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnRevisarSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevisarSaidaActionPerformed
-        String textoQuantidade = txtQuantidade.getText();
-
-        // Chama método que verifica se é num inteiro ou não
-        boolean quantidadeValida = verificaQuantidade(textoQuantidade);
-
-        if (!quantidadeValida) {
-            return;
-        }
-
-        Item itemSelecionado = (Item) cmbItem.getSelectedItem();
-
-        // Trata erro caso item não seja selecionado
-        if (itemSelecionado == null) {
-            JOptionPane.showMessageDialog(this, "Selecione um item.");
-            return;
-        }
-
-        int qtd = Integer.parseInt(textoQuantidade.trim());
-
         try {
-            controleEstoque.registrarSaida(itemSelecionado,
+            int qtd = Integer.parseInt(txtQuantidade.getText().trim());
+
+            controleEstoque.registrarSaida((Item) cmbItem.getSelectedItem(),
                     qtd,
                     txtObservacao.getText().trim());
 
@@ -431,8 +392,11 @@ public class RegistrarSaida extends javax.swing.JPanel {
             limparFormulario();
             aoCancelar.run();
 
+        } catch (NumberFormatException e) {
+            // o texto não virou número: vazio, letras, decimal...
+            JOptionPane.showMessageDialog(this, "Informe a quantidade com um número inteiro.");
         } catch (IllegalArgumentException e) {
-            // A mensagem vem do ControleEstoque, por exemplo "Sem estoque suficiente"
+            // regras do ControleEstoque: item, quantidade > 0, estoque
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
 
