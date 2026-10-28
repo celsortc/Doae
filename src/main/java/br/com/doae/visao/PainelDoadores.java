@@ -64,7 +64,6 @@ public class PainelDoadores extends javax.swing.JPanel {
         btnCancelar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(1200, 760));
         setLayout(new java.awt.BorderLayout());
 
         scrollConteudo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(205, 211, 215)));
@@ -104,8 +103,6 @@ public class PainelDoadores extends javax.swing.JPanel {
 
         scrollDoadores.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(205, 211, 215)));
 
-        tblDoadores.setBackground(new java.awt.Color(255, 255, 255));
-
         tblDoadores.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tblDoadores.setForeground(new java.awt.Color(36, 42, 45));
         tblDoadores.setModel(new javax.swing.table.DefaultTableModel(
@@ -127,7 +124,6 @@ public class PainelDoadores extends javax.swing.JPanel {
         tblDoadores.setFillsViewportHeight(true);
         tblDoadores.setGridColor(new java.awt.Color(230, 233, 235));
         tblDoadores.setRowHeight(40);
-        tblDoadores.setShowVerticalLines(false);
         scrollDoadores.setViewportView(tblDoadores);
 
         lblTotalDoadores.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
@@ -139,7 +135,7 @@ public class PainelDoadores extends javax.swing.JPanel {
         painelListaLayout.setHorizontalGroup(
             painelListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblCadastrados)
-            .addComponent(scrollDoadores, 0, 903, Short.MAX_VALUE)
+            .addComponent(scrollDoadores, 0, 530, Short.MAX_VALUE)
             .addComponent(lblTotalDoadores)
         );
         painelListaLayout.setVerticalGroup(
@@ -167,8 +163,6 @@ public class PainelDoadores extends javax.swing.JPanel {
         lblNome.setForeground(new java.awt.Color(36, 42, 45));
         lblNome.setText("Nome *");
 
-        txtNome.setBackground(new java.awt.Color(255, 255, 255));
-
         txtNome.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         txtNome.setForeground(new java.awt.Color(36, 42, 45));
         txtNome.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(205, 211, 215)));
@@ -177,14 +171,11 @@ public class PainelDoadores extends javax.swing.JPanel {
         lblContato.setForeground(new java.awt.Color(36, 42, 45));
         lblContato.setText("Contato (opcional)");
 
-        txtContato.setBackground(new java.awt.Color(255, 255, 255));
-
         txtContato.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         txtContato.setForeground(new java.awt.Color(36, 42, 45));
         txtContato.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(205, 211, 215)));
 
         lblAjudaContato.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
         lblAjudaContato.setForeground(new java.awt.Color(101, 112, 120));
         lblAjudaContato.setText("Telefone ou e-mail.");
 
@@ -197,8 +188,6 @@ public class PainelDoadores extends javax.swing.JPanel {
         btnSalvar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSalvar.setOpaque(true);
         btnSalvar.addActionListener(this::btnSalvarActionPerformed);
-
-        btnCancelar.setBackground(new java.awt.Color(255, 255, 255));
 
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(36, 42, 45));
