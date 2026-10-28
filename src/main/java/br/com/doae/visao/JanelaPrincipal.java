@@ -98,12 +98,22 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         conteudo.add(bgNav, java.awt.BorderLayout.WEST);
         conteudo.add(painelTelas, java.awt.BorderLayout.CENTER);
 
+        selecionarMenu(btnEstoque);
         layoutTelas.show(painelTelas, "estoque");
 
     }
 
     private void atualizarTabelaEstoque() {
         painelEstoque.atualizarTabelaEstoque();
+    }
+
+    private void selecionarMenu(javax.swing.JButton botaoAtivo) {
+        btnEstoque.setBackground(new java.awt.Color(255, 255, 255));
+        btnHistorico.setBackground(new java.awt.Color(255, 255, 255));
+        btnItens.setBackground(new java.awt.Color(255, 255, 255));
+        btnDoadores.setBackground(new java.awt.Color(255, 255, 255));
+
+        botaoAtivo.setBackground(new java.awt.Color(220, 240, 210));
     }
 
     /**
@@ -130,7 +140,6 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         bgNav.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(205, 211, 215)));
         bgNav.setPreferredSize(new java.awt.Dimension(240, 481));
 
-        btnEstoque.setBackground(new java.awt.Color(220, 240, 210));
         btnEstoque.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnEstoque.setText("Estoque");
         btnEstoque.setBorder(null);
@@ -246,20 +255,23 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstoqueActionPerformed
+        selecionarMenu(btnEstoque);
         atualizarTabelaEstoque();
         layoutTelas.show(painelTelas, "estoque");
     }//GEN-LAST:event_btnEstoqueActionPerformed
 
     private void btnHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoricoActionPerformed
+        selecionarMenu(btnHistorico);
         painelHistorico.atualizarTabelaHistorico();
         layoutTelas.show(painelTelas, "historico");
     }//GEN-LAST:event_btnHistoricoActionPerformed
 
     private void btnDoadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoadoresActionPerformed
-        // TODO add your handling code here:
+        selecionarMenu(btnDoadores);
     }//GEN-LAST:event_btnDoadoresActionPerformed
 
     private void btnItensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnItensActionPerformed
+        selecionarMenu(btnItens);
         layoutTelas.show(painelTelas, "itens");
     }//GEN-LAST:event_btnItensActionPerformed
 
