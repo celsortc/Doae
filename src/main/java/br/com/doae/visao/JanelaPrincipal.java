@@ -1,9 +1,8 @@
 package br.com.doae.visao;
 
-import br.com.doae.modelo.Doador;
+import br.com.doae.servico.CadastroDoadores;
 import br.com.doae.servico.CadastroItens;
 import br.com.doae.servico.ControleEstoque;
-import java.util.List;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -28,13 +27,14 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private PainelEstoque painelEstoque;
     private RegistrarEntrada registrarEntrada;
     private RegistrarSaida registrarSaida;
+    private PainelHistorico painelHistorico;
 
-    private final List<Doador> doadores;
+    private final CadastroDoadores cadastroDoadores;
 
     public JanelaPrincipal(CadastroItens cadastroItens,
-            List<Doador> doadores) {
+            CadastroDoadores cadastroDoadores) {
         this.cadastroItens = cadastroItens;
-        this.doadores = doadores;
+        this.cadastroDoadores = cadastroDoadores;
 
         initComponents();
         configurarTelas();
@@ -55,6 +55,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         painelEstoque = new PainelEstoque(
                 controleEstoque,
                 () -> {
+                    registrarEntrada.carregarDoadores(cadastroDoadores);
                     registrarEntrada.carregarItens(cadastroItens);
                     layoutTelas.show(painelTelas, "entrada");
                 },
@@ -67,10 +68,16 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         painelTelas.add(painelEstoque, "estoque");
         painelTelas.add(new PainelItens(cadastroItens), "itens");
 
+        painelHistorico = new PainelHistorico(controleEstoque) {
+
+        };
+
+        painelTelas.add(painelHistorico, "historico");
+
         registrarEntrada = new RegistrarEntrada(
                 cadastroItens,
                 controleEstoque,
-                doadores,
+                cadastroDoadores,
                 () -> {
                     atualizarTabelaEstoque();
                     layoutTelas.show(painelTelas, "estoque");
@@ -88,15 +95,27 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         painelTelas.add(registrarEntrada, "entrada");
         painelTelas.add(registrarSaida, "saida");
 
+        painelTelas.add(new PainelDoadores(cadastroDoadores), "doadores");
+
         conteudo.add(bgNav, java.awt.BorderLayout.WEST);
         conteudo.add(painelTelas, java.awt.BorderLayout.CENTER);
 
+        selecionarMenu(btnEstoque);
         layoutTelas.show(painelTelas, "estoque");
 
     }
 
     private void atualizarTabelaEstoque() {
         painelEstoque.atualizarTabelaEstoque();
+    }
+
+    private void selecionarMenu(javax.swing.JButton botaoAtivo) {
+        btnEstoque.setBackground(new java.awt.Color(255, 255, 255));
+        btnHistorico.setBackground(new java.awt.Color(255, 255, 255));
+        btnItens.setBackground(new java.awt.Color(255, 255, 255));
+        btnDoadores.setBackground(new java.awt.Color(255, 255, 255));
+
+        botaoAtivo.setBackground(new java.awt.Color(220, 240, 210));
     }
 
     /**
@@ -123,7 +142,6 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         bgNav.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(205, 211, 215)));
         bgNav.setPreferredSize(new java.awt.Dimension(240, 481));
 
-        btnEstoque.setBackground(new java.awt.Color(220, 240, 210));
         btnEstoque.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnEstoque.setText("Estoque");
         btnEstoque.setBorder(null);
@@ -239,19 +257,24 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstoqueActionPerformed
+        selecionarMenu(btnEstoque);
         atualizarTabelaEstoque();
         layoutTelas.show(painelTelas, "estoque");
     }//GEN-LAST:event_btnEstoqueActionPerformed
 
     private void btnHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoricoActionPerformed
-        // TODO add your handling code here:
+        selecionarMenu(btnHistorico);
+        painelHistorico.atualizarTabelaHistorico();
+        layoutTelas.show(painelTelas, "historico");
     }//GEN-LAST:event_btnHistoricoActionPerformed
 
     private void btnDoadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoadoresActionPerformed
-        // TODO add your handling code here:
+        selecionarMenu(btnDoadores);
+        layoutTelas.show(painelTelas, "doadores");
     }//GEN-LAST:event_btnDoadoresActionPerformed
 
     private void btnItensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnItensActionPerformed
+        selecionarMenu(btnItens);
         layoutTelas.show(painelTelas, "itens");
     }//GEN-LAST:event_btnItensActionPerformed
 
@@ -280,7 +303,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(()
                 -> new JanelaPrincipal(
                         new CadastroItens(),
-                        List.of()
+                        new CadastroDoadores()
                 ).setVisible(true)
         );
     }

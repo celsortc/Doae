@@ -95,6 +95,14 @@ public class PainelEstoque extends javax.swing.JPanel {
         btnRegistrarSaida.setContentAreaFilled(false);
         btnRegistrarSaida.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegistrarSaida.setOpaque(true);
+        btnRegistrarSaida.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRegistrarSaidaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRegistrarSaidaMouseExited(evt);
+            }
+        });
         btnRegistrarSaida.addActionListener(this::btnRegistrarSaidaActionPerformed);
 
         painelCabecalhoEstoque.setBackground(new java.awt.Color(255, 255, 255));
@@ -241,6 +249,15 @@ public class PainelEstoque extends javax.swing.JPanel {
         aoRegistrarSaida.run();
     }//GEN-LAST:event_btnRegistrarSaidaActionPerformed
 
+
+
+    private void btnRegistrarSaidaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarSaidaMouseEntered
+        btnRegistrarSaida.setBackground(new java.awt.Color(130, 40, 42));
+    }//GEN-LAST:event_btnRegistrarSaidaMouseEntered
+
+    private void btnRegistrarSaidaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarSaidaMouseExited
+        btnRegistrarSaida.setBackground(new java.awt.Color(172, 62, 64));
+    }//GEN-LAST:event_btnRegistrarSaidaMouseExited
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPesquisar;
