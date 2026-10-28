@@ -33,7 +33,6 @@ public class RegistrarSaida extends javax.swing.JPanel {
         for (Item item : controleEstoque.listarSaldos().keySet()) {
 
             cmbItem.addItem(item);
-
         }
 
     }
@@ -41,6 +40,28 @@ public class RegistrarSaida extends javax.swing.JPanel {
     private void limparFormulario() {
         txtQuantidade.setText("");
         txtObservacao.setText("");
+    }
+
+    private boolean verificaQuantidade(String qtd) {
+        String texto = qtd.trim();
+
+        if (texto.isBlank()) {
+            JOptionPane.showMessageDialog(this, "Quantidade não informada, digite um número inteiro!");
+            return false;
+        }
+
+        try {
+            int numero = Integer.parseInt(texto);
+
+            if (numero <= 0) {
+                JOptionPane.showMessageDialog(this, "Informe uma quantidade maior que zero.");
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Digite apenas números inteiros!");
+            return false;
+        }
+        return true;
     }
 
     @SuppressWarnings("unchecked")
@@ -384,23 +405,34 @@ public class RegistrarSaida extends javax.swing.JPanel {
     private void btnRevisarSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevisarSaidaActionPerformed
         String textoQuantidade = txtQuantidade.getText();
 
+        // Chama método que verifica se é num inteiro ou não
+        boolean quantidadeValida = verificaQuantidade(textoQuantidade);
+
+        if (!quantidadeValida) {
+            return;
+        }
+
         Item itemSelecionado = (Item) cmbItem.getSelectedItem();
 
+        // Trata erro caso item não seja selecionado
+        if (itemSelecionado == null) {
+            JOptionPane.showMessageDialog(this, "Selecione um item.");
+            return;
+        }
+
+        int qtd = Integer.parseInt(textoQuantidade.trim());
 
         try {
-            int qtd = Integer.parseInt(textoQuantidade);
-
             controleEstoque.registrarSaida(itemSelecionado,
                     qtd,
                     txtObservacao.getText().trim());
 
-            JOptionPane.showMessageDialog(this, "Retirada do estoque registrada com suceso!");
+            JOptionPane.showMessageDialog(this, "Retirada do estoque registrada com sucesso!");
             limparFormulario();
-
             aoCancelar.run();
 
         } catch (IllegalArgumentException e) {
-            //A mensagem que retorna aqui vem da class ControleEstoque.
+            // A mensagem vem do ControleEstoque, por exemplo "Sem estoque suficiente"
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
 
