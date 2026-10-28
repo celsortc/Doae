@@ -42,6 +42,8 @@ public class RegistrarEntrada extends javax.swing.JPanel {
 
             cmbItem.addItem(item);
         }
+
+        cmbItem.setSelectedIndex(-1);
     }
 
     private boolean verificaQuantidade(String qtd) {
