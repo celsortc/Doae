@@ -20,9 +20,6 @@ public class CadastroItens {
 
         Item item = new Item(nome, descricao, unidadeMedida);
         itens.add(item);
-        System.out.println("Item adicionado: " + item.getNome());
-        System.out.println("Total de itens: " + itens.size());
-        System.out.println(itens);
         return item;
     }
 
