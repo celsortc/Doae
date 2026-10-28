@@ -22,6 +22,7 @@ public class RegistrarSaida extends javax.swing.JPanel {
         this.aoCancelar = aoCancelar;
 
         initComponents();
+        limparErro();
         scrollSaida.getVerticalScrollBar().setUnitIncrement(20);
 
         carregarItens(cadastroItens);
@@ -48,12 +49,14 @@ public class RegistrarSaida extends javax.swing.JPanel {
         lblAvisoTexto.setText("<html><div style='width:600px'>" + texto + "</div></html>");
         lblErroQuantidade.setText(dicaCampo);
         txtQuantidade.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(200, 40, 40)));
+        lblAjudaQuantidade.setVisible(dicaCampo.isEmpty());
         painelAvisoErro.setVisible(true);
     }
 
     private void limparErro() {
         painelAvisoErro.setVisible(false);
         lblErroQuantidade.setText("");
+        lblAjudaQuantidade.setVisible(true);
         txtQuantidade.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(205, 211, 215)));
     }
 
@@ -180,12 +183,10 @@ public class RegistrarSaida extends javax.swing.JPanel {
         lblAjudaQuantidade.setForeground(new java.awt.Color(101, 112, 120));
         lblAjudaQuantidade.setText("Informe uma quantidade maior que zero.");
 
-        lblErroQuantidade.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         lblErroQuantidade.setForeground(new java.awt.Color(200, 40, 40));
 
         painelAvisoErro.setBackground(new java.awt.Color(252, 235, 235));
         painelAvisoErro.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(220, 120, 120)));
-        painelAvisoErro.setVisible(false);
 
         lblAvisoTitulo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblAvisoTitulo.setForeground(new java.awt.Color(180, 40, 40));
@@ -441,6 +442,9 @@ public class RegistrarSaida extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnRevisarSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevisarSaidaActionPerformed
+
+        limparErro();
+
         try {
             int qtd = Integer.parseInt(txtQuantidade.getText().trim());
 
@@ -454,10 +458,14 @@ public class RegistrarSaida extends javax.swing.JPanel {
 
         } catch (NumberFormatException e) {
             // o texto não virou número: vazio, letras, decimal...
-            JOptionPane.showMessageDialog(this, "Informe a quantidade com um número inteiro.");
+            mostrarErro("Quantidade inválida",
+                    "Informe a quantidade com um número inteiro.",
+                    "Digite apenas números inteiros.");
         } catch (IllegalArgumentException e) {
             // regras do ControleEstoque: item, quantidade > 0, estoque
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            mostrarErro("Não foi possível registrar a saída",
+                    e.getMessage(),
+                    "");
         }
 
     }//GEN-LAST:event_btnRevisarSaidaActionPerformed
