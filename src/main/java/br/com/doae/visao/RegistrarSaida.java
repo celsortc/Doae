@@ -187,6 +187,14 @@ public class RegistrarSaida extends javax.swing.JPanel {
         btnRevisarSaida.setContentAreaFilled(false);
         btnRevisarSaida.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRevisarSaida.setOpaque(true);
+        btnRevisarSaida.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRevisarSaidaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRevisarSaidaMouseExited(evt);
+            }
+        });
         btnRevisarSaida.addActionListener(this::btnRevisarSaidaActionPerformed);
 
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -412,6 +420,15 @@ public class RegistrarSaida extends javax.swing.JPanel {
         txtUnidade.setText(itemSelecionado.getUnidadeMedida());
         txtSaldoDisponivel.setText(String.valueOf(saldoSelecionado));
     }//GEN-LAST:event_cmbItemActionPerformed
+
+
+    private void btnRevisarSaidaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRevisarSaidaMouseEntered
+        btnRevisarSaida.setBackground(new java.awt.Color(130, 40, 42));
+    }//GEN-LAST:event_btnRevisarSaidaMouseEntered
+
+    private void btnRevisarSaidaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRevisarSaidaMouseExited
+        btnRevisarSaida.setBackground(new java.awt.Color(172, 62, 64));
+    }//GEN-LAST:event_btnRevisarSaidaMouseExited
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
