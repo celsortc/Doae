@@ -22,7 +22,21 @@
 - [x] Atualizar `lblTotalRegistros` após preencher a tabela, usando a quantidade real de linhas (validado com histórico vazio, recarga e novas movimentações).
 - [ ] Filtros do Histórico — adiados para o Pós-MVP.
 
-Retomada: a listagem básica do Histórico e o contador estão concluídos. Os filtros foram adiados para o Pós-MVP; o cadastro funcional de doadores continua pendente. Continuar na branch `doae/registro-saida-estoque`.
+Retomada: a listagem básica do Histórico e o contador estão concluídos. Os filtros foram adiados para o Pós-MVP.
+
+## Menu e Doadores
+
+- [x] Destacar no menu lateral o botão da tela aberta, iniciando com Estoque.
+- [x] Abrir a tela de Doadores pelo menu.
+- [x] Remover a coluna Editar, sem ação, das tabelas de Itens e Doadores.
+- [x] Guardar os doadores em memória no `CadastroDoadores`, substituindo a lista fixa do `Main`.
+- [x] Listar os doadores na tabela, com o total de cadastrados.
+- [x] Cadastrar doador pelo botão Salvar, validando o nome e limpando os campos após o sucesso.
+- [x] Limpar os campos pelo botão Cancelar.
+- [x] Recarregar os doadores da tela de entrada sempre que ela for aberta, incluindo os cadastrados na mesma execução.
+- [ ] Conferir visualmente o crescimento vertical da tabela de Doadores e a fonte da ajuda do contato.
+
+Retomada: o cadastro funcional de doadores está concluído (fluxos de Salvar, nome vazio, Cancelar e combo da entrada verificados por um harness Swing temporário, fora do repositório). Pendências locais fora dos commits: `RegistrarEntrada.form`/`.java` com alterações locais (form dessincronizado do `initComponents`) e `System.out.println` de depuração em `RegistrarSaida.java`. Continuar na branch `doae/registro-saida-estoque`.
 
 ## Pós-MVP
 
