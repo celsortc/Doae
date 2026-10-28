@@ -77,7 +77,7 @@ public class RegistrarEntrada extends javax.swing.JPanel {
 
     }
 
-    private void carregarDoadores(CadastroDoadores cadastroDoadores) {
+    public void carregarDoadores(CadastroDoadores cadastroDoadores) {
         cmbDoador.removeAllItems();
 
         for (Doador doador : cadastroDoadores.listar()) {

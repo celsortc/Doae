@@ -55,6 +55,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         painelEstoque = new PainelEstoque(
                 controleEstoque,
                 () -> {
+                    registrarEntrada.carregarDoadores(cadastroDoadores);
                     registrarEntrada.carregarItens(cadastroItens);
                     layoutTelas.show(painelTelas, "entrada");
                 },
