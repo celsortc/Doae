@@ -139,7 +139,7 @@ public class PainelDoadores extends javax.swing.JPanel {
         painelListaLayout.setHorizontalGroup(
             painelListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblCadastrados)
-            .addComponent(scrollDoadores, 0, 520, Short.MAX_VALUE)
+            .addComponent(scrollDoadores, 0, 903, Short.MAX_VALUE)
             .addComponent(lblTotalDoadores)
         );
         painelListaLayout.setVerticalGroup(
@@ -147,7 +147,7 @@ public class PainelDoadores extends javax.swing.JPanel {
             .addGroup(painelListaLayout.createSequentialGroup()
                 .addComponent(lblCadastrados)
                 .addGap(16, 16, 16)
-                .addComponent(scrollDoadores, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scrollDoadores, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addGap(16, 16, 16)
                 .addComponent(lblTotalDoadores))
         );
@@ -183,7 +183,7 @@ public class PainelDoadores extends javax.swing.JPanel {
         txtContato.setForeground(new java.awt.Color(36, 42, 45));
         txtContato.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(205, 211, 215)));
 
-        lblAjudaContato.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        lblAjudaContato.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lblAjudaContato.setForeground(new java.awt.Color(101, 112, 120));
         lblAjudaContato.setText("Telefone ou e-mail.");
@@ -207,6 +207,7 @@ public class PainelDoadores extends javax.swing.JPanel {
         btnCancelar.setContentAreaFilled(false);
         btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCancelar.setOpaque(true);
+        btnCancelar.addActionListener(this::btnCancelarActionPerformed);
 
         javax.swing.GroupLayout painelNovoDoadorLayout = new javax.swing.GroupLayout(painelNovoDoador);
         painelNovoDoador.setLayout(painelNovoDoadorLayout);
@@ -273,9 +274,11 @@ public class PainelDoadores extends javax.swing.JPanel {
                 .addComponent(painelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addGroup(painelConteudoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(painelLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(painelConteudoLayout.createSequentialGroup()
+                        .addComponent(painelLista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(40, 40, 40))
                     .addComponent(painelNovoDoador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(40, 40, 40))
         );
 
         scrollConteudo.setViewportView(painelConteudo);
@@ -299,6 +302,11 @@ public class PainelDoadores extends javax.swing.JPanel {
 
         atualizarTabelaDoadores();
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        txtNome.setText("");
+        txtContato.setText("");
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
