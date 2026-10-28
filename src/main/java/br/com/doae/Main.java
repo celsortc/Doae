@@ -2,8 +2,7 @@ package br.com.doae;
 
 import br.com.doae.servico.CadastroItens;
 import br.com.doae.visao.JanelaPrincipal;
-import br.com.doae.modelo.Doador;
-import java.util.List;
+import br.com.doae.servico.CadastroDoadores;
 
 public class Main {
 
@@ -17,18 +16,18 @@ public class Main {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            CadastroItens cadastro = new CadastroItens();
-            cadastro.cadastrar("Arroz", "arroz top", "pacote");
-            cadastro.cadastrar("Leite", "Italac", "Litro");
-            cadastro.cadastrar("Arroz", "Arroz por peso", "kg");
+            CadastroItens cadastroItens = new CadastroItens();
+            cadastroItens.cadastrar("Arroz", "arroz top", "pacote");
+            cadastroItens.cadastrar("Leite", "Italac", "Litro");
+            cadastroItens.cadastrar("Arroz", "Arroz por peso", "kg");
 
-            List<Doador> doadores = List.of(
-                    new Doador("Maria Oliveira", ""),
-                    new Doador("João Santos", ""),
-                    new Doador("Mercado Solidário", "")
-            );
+            CadastroDoadores cadastroDoadores = new CadastroDoadores();
 
-            new JanelaPrincipal(cadastro, doadores).setVisible(true);
+            cadastroDoadores.cadastrar("Maria Oliveira", "");
+            cadastroDoadores.cadastrar("João Santos", "11900000000");
+            cadastroDoadores.cadastrar("Mercado Solidário", "");
+
+            new JanelaPrincipal(cadastroItens, cadastroDoadores).setVisible(true);
 
         });
 

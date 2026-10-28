@@ -3,6 +3,7 @@ package br.com.doae.visao;
 import br.com.doae.modelo.Doador;
 import br.com.doae.servico.CadastroItens;
 import br.com.doae.modelo.Item;
+import br.com.doae.servico.CadastroDoadores;
 import br.com.doae.servico.ControleEstoque;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -19,16 +20,16 @@ public class RegistrarEntrada extends javax.swing.JPanel {
 
     public RegistrarEntrada(CadastroItens cadastroItens,
             ControleEstoque controleEstoque,
-            List<Doador> doadores,
+            CadastroDoadores cadastroDoadores,
             Runnable aoCancelar) {
         this.controleEstoque = controleEstoque;
         this.aoCancelar = aoCancelar;
 
         initComponents();
-        carregarDoadores(doadores);
+        carregarDoadores(cadastroDoadores);
 
         scrollEntrada.getVerticalScrollBar().setUnitIncrement(20);
-        
+
         carregarItens(cadastroItens);
     }
 
@@ -76,10 +77,10 @@ public class RegistrarEntrada extends javax.swing.JPanel {
 
     }
 
-    private void carregarDoadores(List<Doador> doadores) {
+    private void carregarDoadores(CadastroDoadores cadastroDoadores) {
         cmbDoador.removeAllItems();
 
-        for (Doador doador : doadores) {
+        for (Doador doador : cadastroDoadores.listar()) {
             cmbDoador.addItem(doador);
         }
 

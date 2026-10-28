@@ -1,15 +1,40 @@
 package br.com.doae.visao;
 
-/** Tela visual; ações e carregamento de dados serão implementados separadamente. */
+import br.com.doae.modelo.Doador;
+import br.com.doae.servico.CadastroDoadores;
+import javax.swing.table.DefaultTableModel;
+
 public class PainelDoadores extends javax.swing.JPanel {
 
-    public PainelDoadores() {
+    private final CadastroDoadores cadastroDoadores;
+
+    public PainelDoadores(CadastroDoadores cadastroDoadores) {
+        this.cadastroDoadores = cadastroDoadores;
         initComponents();
+
         scrollConteudo.getVerticalScrollBar().setUnitIncrement(20);
         tblDoadores.getTableHeader().setFont(new java.awt.Font("Segoe UI", 1, 14));
         tblDoadores.getTableHeader().setBackground(new java.awt.Color(245, 246, 247));
         tblDoadores.getTableHeader().setForeground(new java.awt.Color(36, 42, 45));
         tblDoadores.getTableHeader().setReorderingAllowed(false);
+
+        atualizarTabelaDoadores();
+    }
+
+    private void atualizarTabelaDoadores() {
+        DefaultTableModel modelo
+                = (DefaultTableModel) tblDoadores.getModel();
+
+        modelo.setRowCount(0);
+
+        for (Doador doador : cadastroDoadores.listar()) {
+            modelo.addRow(new Object[]{
+                doador.getNome(),
+                doador.getContato()
+            });
+        }
+        int total = modelo.getRowCount();
+        lblTotalDoadores.setText(total == 1 ? "1 doador cadastrado" : total + " doadores cadastrados");
     }
 
     @SuppressWarnings("unchecked")

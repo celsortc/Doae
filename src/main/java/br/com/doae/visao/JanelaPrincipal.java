@@ -1,9 +1,8 @@
 package br.com.doae.visao;
 
-import br.com.doae.modelo.Doador;
+import br.com.doae.servico.CadastroDoadores;
 import br.com.doae.servico.CadastroItens;
 import br.com.doae.servico.ControleEstoque;
-import java.util.List;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -30,12 +29,12 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private RegistrarSaida registrarSaida;
     private PainelHistorico painelHistorico;
 
-    private final List<Doador> doadores;
+    private final CadastroDoadores cadastroDoadores;
 
     public JanelaPrincipal(CadastroItens cadastroItens,
-            List<Doador> doadores) {
+            CadastroDoadores cadastroDoadores) {
         this.cadastroItens = cadastroItens;
-        this.doadores = doadores;
+        this.cadastroDoadores = cadastroDoadores;
 
         initComponents();
         configurarTelas();
@@ -77,7 +76,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         registrarEntrada = new RegistrarEntrada(
                 cadastroItens,
                 controleEstoque,
-                doadores,
+                cadastroDoadores,
                 () -> {
                     atualizarTabelaEstoque();
                     layoutTelas.show(painelTelas, "estoque");
@@ -95,7 +94,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         painelTelas.add(registrarEntrada, "entrada");
         painelTelas.add(registrarSaida, "saida");
 
-        painelTelas.add(new PainelDoadores(), "doadores");
+        painelTelas.add(new PainelDoadores(cadastroDoadores), "doadores");
 
         conteudo.add(bgNav, java.awt.BorderLayout.WEST);
         conteudo.add(painelTelas, java.awt.BorderLayout.CENTER);
@@ -303,7 +302,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(()
                 -> new JanelaPrincipal(
                         new CadastroItens(),
-                        List.of()
+                        new CadastroDoadores()
                 ).setVisible(true)
         );
     }
