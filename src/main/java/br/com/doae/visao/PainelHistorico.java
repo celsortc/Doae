@@ -48,6 +48,10 @@ public class PainelHistorico extends javax.swing.JPanel {
                 movimentacao.getObservacao()
             });
         }
+        
+        int linhas = modelo.getRowCount();
+        
+        lblTotalRegistros.setText(linhas + " registros encontrados • As saídas não possuem doador.");
 
     }
 
@@ -246,8 +250,8 @@ public class PainelHistorico extends javax.swing.JPanel {
             }
         });
         tblMovimentacoes.setFillsViewportHeight(true);
-        tblMovimentacoes.setRowHeight(40);
         tblMovimentacoes.setGridColor(new java.awt.Color(230, 233, 235));
+        tblMovimentacoes.setRowHeight(40);
         scrollMovimentacoes.setViewportView(tblMovimentacoes);
 
         lblTotalRegistros.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
