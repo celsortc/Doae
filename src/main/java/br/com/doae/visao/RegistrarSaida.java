@@ -22,6 +22,7 @@ public class RegistrarSaida extends javax.swing.JPanel {
         this.aoCancelar = aoCancelar;
 
         initComponents();
+        limparErro();
         scrollSaida.getVerticalScrollBar().setUnitIncrement(20);
 
         carregarItens(cadastroItens);
@@ -33,7 +34,6 @@ public class RegistrarSaida extends javax.swing.JPanel {
         for (Item item : controleEstoque.listarSaldos().keySet()) {
 
             cmbItem.addItem(item);
-
         }
 
     }
@@ -41,6 +41,23 @@ public class RegistrarSaida extends javax.swing.JPanel {
     private void limparFormulario() {
         txtQuantidade.setText("");
         txtObservacao.setText("");
+        limparErro();
+    }
+
+    private void mostrarErro(String titulo, String texto, String dicaCampo) {
+        lblAvisoTitulo.setText(titulo);
+        lblAvisoTexto.setText("<html><div style='width:600px'>" + texto + "</div></html>");
+        lblErroQuantidade.setText(dicaCampo);
+        txtQuantidade.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(200, 40, 40)));
+        lblAjudaQuantidade.setVisible(dicaCampo.isEmpty());
+        painelAvisoErro.setVisible(true);
+    }
+
+    private void limparErro() {
+        painelAvisoErro.setVisible(false);
+        lblErroQuantidade.setText("");
+        lblAjudaQuantidade.setVisible(true);
+        txtQuantidade.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(205, 211, 215)));
     }
 
     @SuppressWarnings("unchecked")
@@ -64,6 +81,10 @@ public class RegistrarSaida extends javax.swing.JPanel {
         lblQuantidade = new javax.swing.JLabel();
         txtQuantidade = new javax.swing.JTextField();
         lblAjudaQuantidade = new javax.swing.JLabel();
+        lblErroQuantidade = new javax.swing.JLabel();
+        painelAvisoErro = new javax.swing.JPanel();
+        lblAvisoTitulo = new javax.swing.JLabel();
+        lblAvisoTexto = new javax.swing.JLabel();
         lblObservacao = new javax.swing.JLabel();
         lblDataHora = new javax.swing.JLabel();
         txtDataHora = new javax.swing.JTextField();
@@ -162,6 +183,40 @@ public class RegistrarSaida extends javax.swing.JPanel {
         lblAjudaQuantidade.setForeground(new java.awt.Color(101, 112, 120));
         lblAjudaQuantidade.setText("Informe uma quantidade maior que zero.");
 
+        lblErroQuantidade.setForeground(new java.awt.Color(200, 40, 40));
+
+        painelAvisoErro.setBackground(new java.awt.Color(252, 235, 235));
+        painelAvisoErro.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(220, 120, 120)));
+
+        lblAvisoTitulo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblAvisoTitulo.setForeground(new java.awt.Color(180, 40, 40));
+        lblAvisoTitulo.setText("Estoque insuficiente");
+
+        lblAvisoTexto.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        lblAvisoTexto.setForeground(new java.awt.Color(36, 42, 45));
+        lblAvisoTexto.setText("Detalhes do erro");
+
+        javax.swing.GroupLayout painelAvisoErroLayout = new javax.swing.GroupLayout(painelAvisoErro);
+        painelAvisoErro.setLayout(painelAvisoErroLayout);
+        painelAvisoErroLayout.setHorizontalGroup(
+            painelAvisoErroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelAvisoErroLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(painelAvisoErroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblAvisoTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblAvisoTexto, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
+                .addGap(16, 16, 16))
+        );
+        painelAvisoErroLayout.setVerticalGroup(
+            painelAvisoErroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelAvisoErroLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(lblAvisoTitulo)
+                .addGap(6, 6, 6)
+                .addComponent(lblAvisoTexto)
+                .addGap(12, 12, 12))
+        );
+
         lblObservacao.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblObservacao.setForeground(new java.awt.Color(36, 42, 45));
         lblObservacao.setText("Observação (opcional)");
@@ -239,7 +294,9 @@ public class RegistrarSaida extends javax.swing.JPanel {
                         .addGroup(painelDadosSaidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblQuantidade)
                             .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 340, Short.MAX_VALUE)
-                            .addComponent(lblAjudaQuantidade)))
+                            .addComponent(lblAjudaQuantidade)
+                            .addComponent(lblErroQuantidade)))
+                    .addComponent(painelAvisoErro, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(lblObservacao)
                     .addComponent(scrollObservacao, javax.swing.GroupLayout.PREFERRED_SIZE, 699, Short.MAX_VALUE)
                     .addComponent(lblDataHora)
@@ -276,6 +333,9 @@ public class RegistrarSaida extends javax.swing.JPanel {
                     .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
                 .addComponent(lblAjudaQuantidade)
+                .addComponent(lblErroQuantidade)
+                .addGap(20, 20, 20)
+                .addComponent(painelAvisoErro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(lblObservacao)
                 .addGap(8, 8, 8)
@@ -382,26 +442,30 @@ public class RegistrarSaida extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnRevisarSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevisarSaidaActionPerformed
-        String textoQuantidade = txtQuantidade.getText();
 
-        Item itemSelecionado = (Item) cmbItem.getSelectedItem();
-
+        limparErro();
 
         try {
-            int qtd = Integer.parseInt(textoQuantidade);
+            int qtd = Integer.parseInt(txtQuantidade.getText().trim());
 
-            controleEstoque.registrarSaida(itemSelecionado,
+            controleEstoque.registrarSaida((Item) cmbItem.getSelectedItem(),
                     qtd,
                     txtObservacao.getText().trim());
 
-            JOptionPane.showMessageDialog(this, "Retirada do estoque registrada com suceso!");
+            JOptionPane.showMessageDialog(this, "Retirada do estoque registrada com sucesso!");
             limparFormulario();
-
             aoCancelar.run();
 
+        } catch (NumberFormatException e) {
+            // o texto não virou número: vazio, letras, decimal...
+            mostrarErro("Quantidade inválida",
+                    "Informe a quantidade com um número inteiro.",
+                    "Digite apenas números inteiros.");
         } catch (IllegalArgumentException e) {
-            //A mensagem que retorna aqui vem da class ControleEstoque.
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            // regras do ControleEstoque: item, quantidade > 0, estoque
+            mostrarErro("Não foi possível registrar a saída",
+                    e.getMessage(),
+                    "");
         }
 
     }//GEN-LAST:event_btnRevisarSaidaActionPerformed
@@ -436,8 +500,11 @@ public class RegistrarSaida extends javax.swing.JPanel {
     private javax.swing.JComboBox cmbItem;
     private javax.swing.JLabel lblAjudaDataHora;
     private javax.swing.JLabel lblAjudaQuantidade;
+    private javax.swing.JLabel lblAvisoTexto;
+    private javax.swing.JLabel lblAvisoTitulo;
     private javax.swing.JLabel lblDados;
     private javax.swing.JLabel lblDataHora;
+    private javax.swing.JLabel lblErroQuantidade;
     private javax.swing.JLabel lblDescricao;
     private javax.swing.JLabel lblItem;
     private javax.swing.JLabel lblObrigatorios;
@@ -449,6 +516,7 @@ public class RegistrarSaida extends javax.swing.JPanel {
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblTituloAvisoSaida;
     private javax.swing.JLabel lblUnidade;
+    private javax.swing.JPanel painelAvisoErro;
     private javax.swing.JPanel painelAvisoSaida;
     private javax.swing.JPanel painelDadosSaida;
     private javax.swing.JPanel painelFormulario;

@@ -165,8 +165,10 @@
                                       <Component id="lblQuantidade" min="-2" max="-2" attributes="0"/>
                                       <Component id="txtQuantidade" min="-2" pref="340" max="32767" attributes="0"/>
                                       <Component id="lblAjudaQuantidade" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblErroQuantidade" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+                              <Component id="painelAvisoErro" pref="0" max="32767" attributes="0"/>
                               <Component id="lblObservacao" min="-2" max="-2" attributes="0"/>
                               <Component id="scrollObservacao" min="-2" pref="699" max="32767" attributes="0"/>
                               <Component id="lblDataHora" min="-2" max="-2" attributes="0"/>
@@ -211,6 +213,10 @@
                           </Group>
                           <EmptySpace min="8" pref="8" max="8" attributes="0"/>
                           <Component id="lblAjudaQuantidade" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                          <Component id="lblErroQuantidade" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="20" pref="20" max="20" attributes="0"/>
+                          <Component id="painelAvisoErro" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="20" pref="20" max="20" attributes="0"/>
                           <Component id="lblObservacao" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="8" pref="8" max="8" attributes="0"/>
@@ -387,6 +393,77 @@
                     <Property name="text" type="java.lang.String" value="Informe uma quantidade maior que zero."/>
                   </Properties>
                 </Component>
+                <Component class="javax.swing.JLabel" name="lblErroQuantidade">
+                  <Properties>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="28" green="28" red="c8" type="rgb"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Container class="javax.swing.JPanel" name="painelAvisoErro">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="eb" green="eb" red="fc" type="rgb"/>
+                    </Property>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                        <LineBorder>
+                          <Color PropertyName="color" blue="78" green="78" red="dc" type="rgb"/>
+                        </LineBorder>
+                      </Border>
+                    </Property>
+                  </Properties>
+
+                  <Layout>
+                    <DimensionLayout dim="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="16" pref="16" max="16" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblAvisoTitulo" max="32767" attributes="0"/>
+                                  <Component id="lblAvisoTexto" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="16" pref="16" max="16" attributes="0"/>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                    <DimensionLayout dim="1">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="12" pref="12" max="12" attributes="0"/>
+                              <Component id="lblAvisoTitulo" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                              <Component id="lblAvisoTexto" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="12" pref="12" max="12" attributes="0"/>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                  </Layout>
+                  <SubComponents>
+                    <Component class="javax.swing.JLabel" name="lblAvisoTitulo">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="14" style="1"/>
+                        </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="28" green="28" red="b4" type="rgb"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Estoque insuficiente"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lblAvisoTexto">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="13" style="0"/>
+                        </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="2d" green="2a" red="24" type="rgb"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Detalhes do erro"/>
+                      </Properties>
+                    </Component>
+                  </SubComponents>
+                </Container>
                 <Component class="javax.swing.JLabel" name="lblObservacao">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
