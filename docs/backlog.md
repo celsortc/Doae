@@ -40,6 +40,7 @@ Retomada: o cadastro funcional de doadores está concluído (fluxos de Salvar, n
 
 ## Pós-MVP
 
+- [ ] Proteger a saída contra registros simultâneos: em `ControleEstoque.registrarSaida`, conferir o saldo e inserir a movimentação na mesma transação (`setAutoCommit(false)`, `SELECT ... FOR UPDATE` na linha do item, commit/rollback). Hoje a checagem e o INSERT são separados; com duas saídas do mesmo item ao mesmo tempo, o saldo pode ficar negativo. Sem impacto com um único usuário.
 - [ ] Implementar os filtros do Histórico por item, tipo de movimentação e período, com as ações Aplicar e Limpar; atualizar a tabela e o contador conforme os resultados exibidos.
 - [ ] Exibir os erros de validação da saída no próprio formulário, com aviso vermelho inspirado no [modelo do Figma](https://www.figma.com/design/r3bBzEHkAIVfzjvepdOEzX/Doae-v2?node-id=2-3580), em vez do popup atual. Usar um `JLabel` no designer do NetBeans, preenchido após a tentativa de envio e limpo ao tentar novamente ou limpar o formulário; manter as validações no `ControleEstoque` e apresentar uma mensagem amigável para quantidade que não seja um inteiro. Melhoria independente da tela de revisão/confirmação e fora do escopo de histórico, hover e doadores.
 - [ ] Criar tela de revisão da entrada: exibir os dados informados, permitir voltar para corrigir sem perder o preenchimento e registrar somente após confirmar. Após o sucesso, atualizar a tabela e voltar ao estoque. Manter o registro direto atual até implementar essa etapa.
