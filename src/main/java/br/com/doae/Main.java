@@ -17,9 +17,6 @@ public class Main {
                 e.printStackTrace();
             }
             CadastroItens cadastroItens = new CadastroItens();
-            cadastroItens.cadastrar("Arroz", "arroz top", "pacote");
-            cadastroItens.cadastrar("Leite", "Italac", "Litro");
-            cadastroItens.cadastrar("Arroz", "Arroz por peso", "kg");
 
             CadastroDoadores cadastroDoadores = new CadastroDoadores();
 
