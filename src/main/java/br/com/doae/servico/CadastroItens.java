@@ -1,12 +1,12 @@
 package br.com.doae.servico;
 
 import br.com.doae.modelo.Item;
-import java.util.ArrayList;
+import br.com.doae.persistencia.ItemRepositorio;
 import java.util.List;
 
 public class CadastroItens {
 
-    private final List<Item> itens = new ArrayList<>();
+    private final ItemRepositorio repositorio = new ItemRepositorio();
 
     public Item cadastrar(String nome, String descricao, String unidadeMedida) {
 
@@ -19,12 +19,12 @@ public class CadastroItens {
         }
 
         Item item = new Item(nome, descricao, unidadeMedida);
-        itens.add(item);
+        repositorio.salvar(item);
         return item;
     }
 
     public List<Item> listar() {
-        return List.copyOf(itens);
+        return repositorio.listarTodos();
     }
 
 }

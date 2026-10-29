@@ -1,7 +1,10 @@
 package br.com.doae.modelo;
 
+import java.util.Objects;
+
 public class Doador {
 
+    private Integer id;
     private final String nome;
     private final String contato;
 
@@ -14,12 +17,36 @@ public class Doador {
         this.contato = contato;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public String getNome() {
         return nome;
     }
 
     public String getContato() {
         return contato;
+    }
+
+    @Override
+    public boolean equals(Object outro) {
+        if (this == outro) {
+            return true;
+        }
+        if (!(outro instanceof Doador doador)) {
+            return false;
+        }
+        return id != null && id.equals(doador.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 
     @Override

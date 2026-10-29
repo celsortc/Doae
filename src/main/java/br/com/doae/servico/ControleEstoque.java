@@ -1,18 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.com.doae.servico;
 
 import br.com.doae.modelo.Item;
 import br.com.doae.modelo.Movimentacao;
-import java.util.ArrayList;
 import java.util.Map;
-import java.util.HashMap;
 import java.util.List;
 import br.com.doae.modelo.Doador;
 import br.com.doae.modelo.TipoMovimentacao;
 import java.time.LocalDateTime;
+import br.com.doae.persistencia.MovimentacaoRepositorio;
 
 /**
  *
@@ -20,8 +15,7 @@ import java.time.LocalDateTime;
  */
 public class ControleEstoque {
 
-    private final Map<Item, Integer> saldos = new HashMap<>();
-    private final List<Movimentacao> movimentacoes = new ArrayList<>();
+    private final MovimentacaoRepositorio repositorio = new MovimentacaoRepositorio();
 
     public void registrarEntrada(Item item,
             int quantidade,
@@ -58,12 +52,7 @@ public class ControleEstoque {
                 anonima
         );
 
-        //Caso o item não exista ainda, ele define 0 para o estoque atual
-        int saldoAtual = saldos.getOrDefault(item, 0);
-        //Atualiza o saldo + quantidade cadastrada
-        saldos.put(item, saldoAtual + quantidade);
-
-        movimentacoes.add(movimentacao);
+        repositorio.inserir(movimentacao);
 
     }
 
@@ -71,7 +60,7 @@ public class ControleEstoque {
             int quantidade,
             String observacao) {
 
-        int saldoAtual = saldos.getOrDefault(item, 0);
+        int saldoAtual = repositorio.listarSaldos().getOrDefault(item, 0);
 
         if (item == null) {
             throw new IllegalArgumentException("Selecione um item.");
@@ -80,7 +69,7 @@ public class ControleEstoque {
         if (quantidade <= 0) {
             throw new IllegalArgumentException("A quantidade deve ser maior que zero.");
         }
-        if(saldoAtual - quantidade < 0) {
+        if (saldoAtual - quantidade < 0) {
             throw new IllegalArgumentException("Sem estoque suficiente");
         }
 
@@ -94,18 +83,17 @@ public class ControleEstoque {
                 false
         );
 
-
-        saldos.put(item, saldoAtual - quantidade);
-        movimentacoes.add(movimentacao);
+        repositorio.inserir(movimentacao);
 
     }
 
     public Map<Item, Integer> listarSaldos() {
-        return Map.copyOf(saldos);
+        return repositorio.listarSaldos();
     }
 
     public List<Movimentacao> listarMovimentacoes() {
-        return List.copyOf(movimentacoes);
+        return repositorio.listarTodas();
+
     }
 
 }
