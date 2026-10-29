@@ -10,6 +10,13 @@
         <maven.compiler.release>21</maven.compiler.release>
         <exec.mainClass>br.com.doae.Main</exec.mainClass>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>8.4.0</version>
+        </dependency>
+    </dependencies>
     <build>
         <resources>
             <resource>
