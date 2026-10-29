@@ -20,10 +20,6 @@ public class Main {
 
             CadastroDoadores cadastroDoadores = new CadastroDoadores();
 
-            cadastroDoadores.cadastrar("Maria Oliveira", "");
-            cadastroDoadores.cadastrar("João Santos", "11900000000");
-            cadastroDoadores.cadastrar("Mercado Solidário", "");
-
             new JanelaPrincipal(cadastroItens, cadastroDoadores).setVisible(true);
 
         });
