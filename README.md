@@ -1,6 +1,47 @@
-# Doae
+<p align="center">
+  <img src="src/main/resources/imgs/Logo.png" alt="Logo do Doaê" width="160">
+</p>
 
-Sistema desktop (Java + Swing) para controlar o estoque de doações: itens, doadores, entradas e saídas.
+# Doaê 💜
+
+Sistema desktop de gestão de doações, desenvolvido para ajudar instituições a organizar o que recebem e dar um novo destino a cada item doado.
+
+[Projeto](#-projeto)     |     [Aprendizados](#-aprendizados)     |     [Tecnologias](#-tecnologias)     |     [Como rodar](#como-rodar-na-sua-máquina)
+
+<!-- Coloque aqui um print da tela de Estoque: arraste a imagem para a edição do README no GitHub -->
+
+## 💻 Projeto
+
+O Doaê ajuda instituições a gerenciar as doações que recebem. Ele registra a **entrada** de itens (como roupas e brinquedos), identificando o doador ou marcando a doação como anônima, e a **saída** desses itens quando são distribuídos. O estoque fica sempre atualizado e cada movimentação vai para um histórico, o que dá transparência para a instituição prestar contas aos doadores.
+
+### Funcionalidades
+
+- 📦 **Estoque** — veja o saldo de cada item em tempo real, calculado a partir das entradas e saídas.
+- ➕ **Registro de entrada** — informe o item, a quantidade e o doador, ou marque a doação como anônima.
+- ➖ **Registro de saída** — dê baixa nos itens distribuídos; o sistema impede sair mais do que há em estoque.
+- 🏷️ **Cadastro de itens** — cadastre cada tipo de item com sua unidade de medida (unidades, kg, pacotes...).
+- 🤝 **Cadastro de doadores** — guarde nome e contato de quem ajuda a instituição.
+- 🕒 **Histórico** — consulte todas as movimentações, com data e hora no padrão brasileiro.
+
+## 🧠 Aprendizados
+
+Este projeto foi desenvolvido com foco em aprendizado prático. Alguns dos principais conceitos aplicados:
+
+- 🧱 **Arquitetura em camadas** — código separado em `modelo`, `persistencia`, `servico` e `visao`, cada camada com uma responsabilidade.
+- 🗄️ **Banco de dados relacional** — modelagem no MySQL com chaves estrangeiras e restrições (`CHECK`) que protegem os dados direto no banco.
+- 🔌 **JDBC** — conexão do Java com o MySQL, com a senha em um arquivo de configuração que não vai para o GitHub.
+- ⚠️ **Regras de negócio e validações** — saldo nunca negativo, quantidade sempre positiva e mensagens claras para o usuário.
+- 🖥️ **Interfaces com Swing** — telas montadas no designer do NetBeans, com navegação por menu lateral.
+- 🌿 **Git no dia a dia** — branches por assunto, commits pequenos no padrão Conventional Commits e integração por pull request.
+
+## 🚀 Tecnologias
+
+- **Java 21**
+- **Swing** (interface gráfica)
+- **MySQL 8**
+- **Maven**
+
+---
 
 ## Como rodar na sua máquina
 
