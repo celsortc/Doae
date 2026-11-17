@@ -26,6 +26,9 @@ public class PainelEstoque extends javax.swing.JPanel {
         this.aoRegistrarEntrada = aoRegistrarEntrada;
         this.aoRegistrarSaida = aoRegistrarSaida;
         initComponents();
+
+        // Carrega os saldos já ao abrir o sistema, como Itens e Doadores fazem.
+        atualizarTabelaEstoque();
     }
 
     public void atualizarTabelaEstoque() {
