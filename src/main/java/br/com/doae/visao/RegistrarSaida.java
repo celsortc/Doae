@@ -22,6 +22,7 @@ public class RegistrarSaida extends javax.swing.JPanel {
         this.aoCancelar = aoCancelar;
 
         initComponents();
+        br.com.doae.visao.componentes.RelogioCampo.ligar(this, txtDataHora);
         limparErro();
         scrollSaida.getVerticalScrollBar().setUnitIncrement(20);
 
