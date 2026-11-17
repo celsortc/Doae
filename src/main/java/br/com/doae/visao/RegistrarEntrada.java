@@ -26,6 +26,7 @@ public class RegistrarEntrada extends javax.swing.JPanel {
         this.aoCancelar = aoCancelar;
 
         initComponents();
+        br.com.doae.visao.componentes.RelogioCampo.ligar(this, txtDataHora);
         carregarDoadores(cadastroDoadores);
 
         scrollEntrada.getVerticalScrollBar().setUnitIncrement(20);
