@@ -1,8 +1,13 @@
 package br.com.doae.visao;
 
 import br.com.doae.modelo.Movimentacao;
+import br.com.doae.modelo.TipoMovimentacao;
 import br.com.doae.servico.ControleEstoque;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -13,12 +18,34 @@ public class PainelHistorico extends javax.swing.JPanel {
     private static final DateTimeFormatter FORMATO_DATA_HORA
             = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
+    // Estrito: recusa datas que não existem, como 31/02/2026.
+    private static final DateTimeFormatter FORMATO_DATA
+            = DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
+
+    private static final String DICA_DATA = "dd/mm/aaaa";
+
     private final ControleEstoque controleEstoque;
+
+    // Últimas movimentações lidas do banco; Aplicar filtra esta cópia, sem nova consulta.
+    private java.util.List<Movimentacao> movimentacoes = new java.util.ArrayList<>();
 
     public PainelHistorico(ControleEstoque controleEstoque) {
         this.controleEstoque = controleEstoque;
 
         initComponents();
+        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(
+                new String[]{"Todos os tipos", "Entrada", "Saída"}));
+        cmbItem.addItem("Todos os itens");
+        btnAplicar.addActionListener(e -> filtrarTabela());
+        configurarCampoData(txtDataInicial);
+        configurarCampoData(txtDataFinal);
+        btnLimpar.addActionListener(e -> {
+            cmbItem.setSelectedIndex(0);
+            cmbTipo.setSelectedIndex(0);
+            restaurarDica(txtDataInicial);
+            restaurarDica(txtDataFinal);
+            filtrarTabela();
+        });
         scrollConteudo.getVerticalScrollBar().setUnitIncrement(20);
         tblMovimentacoes.getTableHeader().setFont(new java.awt.Font("Segoe UI", 1, 14));
         tblMovimentacoes.getTableHeader().setBackground(new java.awt.Color(245, 246, 247));
@@ -26,13 +53,100 @@ public class PainelHistorico extends javax.swing.JPanel {
         tblMovimentacoes.getTableHeader().setReorderingAllowed(false);
     }
 
+    // Busca as movimentações no banco, zera os filtros e mostra tudo.
     public void atualizarTabelaHistorico() {
+        movimentacoes = controleEstoque.listarMovimentacoes();
+
+        cmbItem.removeAllItems();
+        cmbItem.addItem("Todos os itens");
+        movimentacoes.stream()
+                .map(m -> m.getItem().getNome())
+                .distinct()
+                .sorted()
+                .forEach(cmbItem::addItem);
+        cmbTipo.setSelectedIndex(0);
+        restaurarDica(txtDataInicial);
+        restaurarDica(txtDataFinal);
+
+        filtrarTabela();
+    }
+
+    // O campo de data mostra a dica "dd/mm/aaaa" quando está vazio e a esconde ao digitar.
+    private void configurarCampoData(javax.swing.JTextField campo) {
+        campo.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent e) {
+                if (campo.getText().equals(DICA_DATA)) {
+                    campo.setText("");
+                    campo.setForeground(new java.awt.Color(36, 42, 45));
+                }
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent e) {
+                if (campo.getText().isBlank()) {
+                    restaurarDica(campo);
+                }
+            }
+        });
+    }
+
+    private void restaurarDica(javax.swing.JTextField campo) {
+        campo.setText(DICA_DATA);
+        campo.setForeground(new java.awt.Color(101, 112, 120));
+    }
+
+    // Devolve a data digitada, ou null se o campo está vazio (só com a dica).
+    private LocalDate lerData(javax.swing.JTextField campo) {
+        String texto = campo.getText().trim();
+        if (texto.isEmpty() || texto.equals(DICA_DATA)) {
+            return null;
+        }
+        return LocalDate.parse(texto, FORMATO_DATA);
+    }
+
+    // Refaz a tabela a partir das movimentações já carregadas, aplicando item, tipo e período.
+    private void filtrarTabela() {
+        LocalDate inicio;
+        LocalDate fim;
+        try {
+            inicio = lerData(txtDataInicial);
+            fim = lerData(txtDataFinal);
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(this, "Data inválida. Use o formato dd/mm/aaaa.");
+            return;
+        }
+        if (inicio != null && fim != null && fim.isBefore(inicio)) {
+            JOptionPane.showMessageDialog(this, "A data final não pode ser anterior à data inicial.");
+            return;
+        }
+
         DefaultTableModel modelo
                 = (DefaultTableModel) tblMovimentacoes.getModel();
 
         modelo.setRowCount(0);
 
-        for (Movimentacao movimentacao : controleEstoque.listarMovimentacoes()) {
+        String itemEscolhido = (String) cmbItem.getSelectedItem();
+        int tipoEscolhido = cmbTipo.getSelectedIndex(); // 0 = todos, 1 = entrada, 2 = saída
+
+        for (Movimentacao movimentacao : movimentacoes) {
+
+            if (cmbItem.getSelectedIndex() > 0
+                    && !movimentacao.getItem().getNome().equals(itemEscolhido)) {
+                continue;
+            }
+            if (tipoEscolhido == 1 && movimentacao.getTipo() != TipoMovimentacao.ENTRADA) {
+                continue;
+            }
+            if (tipoEscolhido == 2 && movimentacao.getTipo() != TipoMovimentacao.SAIDA) {
+                continue;
+            }
+
+            // O período é inclusivo: vale do começo da data inicial ao fim da data final.
+            LocalDate dia = movimentacao.getDataHora().toLocalDate();
+            if ((inicio != null && dia.isBefore(inicio)) || (fim != null && dia.isAfter(fim))) {
+                continue;
+            }
 
             String textoDoador = "-";
 
