@@ -6,6 +6,7 @@ package br.com.doae.visao;
 
 import br.com.doae.modelo.Item;
 import br.com.doae.servico.ControleEstoque;
+import java.text.Normalizer;
 import java.util.Map;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,6 +20,9 @@ public class PainelEstoque extends javax.swing.JPanel {
     private final Runnable aoRegistrarEntrada;
     private final Runnable aoRegistrarSaida;
 
+    // Últimos saldos lidos do banco; a busca filtra esta cópia a cada letra digitada.
+    private Map<Item, Integer> saldos = new java.util.LinkedHashMap<>();
+
     public PainelEstoque(ControleEstoque controleEstoque,
             Runnable aoRegistrarEntrada,
             Runnable aoRegistrarSaida) {
@@ -27,21 +31,66 @@ public class PainelEstoque extends javax.swing.JPanel {
         this.aoRegistrarSaida = aoRegistrarSaida;
         initComponents();
 
+        // Filtra enquanto digita (sem ir ao banco); o botão e o Enter recarregam do banco.
+        txtBuscaItem.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            @Override
+            public void insertUpdate(javax.swing.event.DocumentEvent e) {
+                filtrarTabela();
+            }
+
+            @Override
+            public void removeUpdate(javax.swing.event.DocumentEvent e) {
+                filtrarTabela();
+            }
+
+            @Override
+            public void changedUpdate(javax.swing.event.DocumentEvent e) {
+                filtrarTabela();
+            }
+        });
+        btnPesquisar.addActionListener(e -> atualizarTabelaEstoque());
+        txtBuscaItem.addActionListener(e -> atualizarTabelaEstoque());
+
+        // Ao sair da tela (o CardLayout só a esconde), limpa a busca para a próxima visita.
+        addHierarchyListener(e -> {
+            if ((e.getChangeFlags() & java.awt.event.HierarchyEvent.SHOWING_CHANGED) != 0
+                    && !isShowing()) {
+                txtBuscaItem.setText("");
+            }
+        });
+
         // Carrega os saldos já ao abrir o sistema, como Itens e Doadores fazem.
         atualizarTabelaEstoque();
     }
 
+    // Minúsculas e sem acentos, para "açúcar" e "ACUCAR" serem tratados como iguais.
+    private static String normalizar(String texto) {
+        return Normalizer.normalize(texto.trim(), Normalizer.Form.NFD)
+                .replaceAll("\\p{M}", "").toLowerCase();
+    }
+
+    // Busca os saldos no banco e mostra os que combinam com o campo de busca.
     public void atualizarTabelaEstoque() {
+        saldos = controleEstoque.listarSaldos();
+        filtrarTabela();
+    }
+
+    // Refaz a tabela a partir dos saldos já carregados, aplicando o texto da busca.
+    private void filtrarTabela() {
         DefaultTableModel modelo
                 = (DefaultTableModel) tblEstoque.getModel();
 
         modelo.setRowCount(0);
+        String busca = normalizar(txtBuscaItem.getText());
 
-        for (Map.Entry<Item, Integer> registro
-                : controleEstoque.listarSaldos().entrySet()) {
+        for (Map.Entry<Item, Integer> registro : saldos.entrySet()) {
 
             Item item = registro.getKey();
             int saldo = registro.getValue();
+
+            if (!normalizar(item.getNome()).contains(busca)) {
+                continue;
+            }
 
             modelo.addRow(new Object[]{
                 item.getNome(),
