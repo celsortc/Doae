@@ -2,12 +2,16 @@ package br.com.doae.visao;
 
 import br.com.doae.modelo.Movimentacao;
 import br.com.doae.servico.ControleEstoque;
+import java.time.format.DateTimeFormatter;
 import javax.swing.table.DefaultTableModel;
 
 /**
  * Tela visual; ações e carregamento de dados serão implementados separadamente.
  */
 public class PainelHistorico extends javax.swing.JPanel {
+
+    private static final DateTimeFormatter FORMATO_DATA_HORA
+            = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
     private final ControleEstoque controleEstoque;
 
@@ -39,7 +43,7 @@ public class PainelHistorico extends javax.swing.JPanel {
             }
 
             modelo.addRow(new Object[]{
-                movimentacao.getDataHora(),
+                movimentacao.getDataHora().format(FORMATO_DATA_HORA),
                 movimentacao.getTipo(),
                 movimentacao.getItem().getNome(),
                 movimentacao.getQuantidade(),
