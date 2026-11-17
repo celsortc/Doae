@@ -14,6 +14,10 @@ public class PainelItens extends javax.swing.JPanel {
 
     // Criado no código (não no designer) para não alterar o initComponents gerado.
     private final javax.swing.JButton btnExcluir = new javax.swing.JButton("Excluir");
+    private final javax.swing.JButton btnEditar = new javax.swing.JButton("Editar");
+
+    // Item que está sendo editado no formulário; null quando o formulário é de cadastro.
+    private Item itemEmEdicao;
 
     public PainelItens(CadastroItens cadastroItens) {
 
@@ -52,16 +56,56 @@ public class PainelItens extends javax.swing.JPanel {
         btnExcluir.setPreferredSize(new java.awt.Dimension(110, 42));
         btnExcluir.addActionListener(this::btnExcluirActionPerformed);
 
+        // O Editar copia o visual do Excluir, para os dois botões combinarem.
+        btnEditar.setFont(btnExcluir.getFont());
+        btnEditar.setForeground(btnExcluir.getForeground());
+        btnEditar.setBorder(btnExcluir.getBorder());
+        btnEditar.setContentAreaFilled(false);
+        btnEditar.setOpaque(true);
+        btnEditar.setCursor(btnExcluir.getCursor());
+        btnEditar.setPreferredSize(btnExcluir.getPreferredSize());
+        btnEditar.addActionListener(this::btnEditarActionPerformed);
+
+        javax.swing.JPanel botoes = new javax.swing.JPanel(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 8, 0));
+        botoes.setBackground(new java.awt.Color(255, 255, 255));
+        botoes.add(btnEditar);
+        botoes.add(btnExcluir);
+
         javax.swing.JPanel rodape = new javax.swing.JPanel(new java.awt.BorderLayout());
         rodape.setBackground(new java.awt.Color(255, 255, 255));
         rodape.add(lblTotalItens, java.awt.BorderLayout.WEST);
-        rodape.add(btnExcluir, java.awt.BorderLayout.EAST);
+        rodape.add(botoes, java.awt.BorderLayout.EAST);
 
         painelLista.removeAll();
         painelLista.setLayout(new java.awt.BorderLayout(0, 16));
         painelLista.add(lblCadastrados, java.awt.BorderLayout.NORTH);
         painelLista.add(scrollItens, java.awt.BorderLayout.CENTER);
         painelLista.add(rodape, java.awt.BorderLayout.SOUTH);
+    }
+
+    // Carrega o item selecionado no formulário; o Salvar passa a atualizar em vez de cadastrar.
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {
+        int linha = tblItens.getSelectedRow();
+
+        if (linha < 0) {
+            JOptionPane.showMessageDialog(this, "Selecione um item na tabela para editar.");
+            return;
+        }
+
+        itemEmEdicao = itensExibidos.get(tblItens.convertRowIndexToModel(linha));
+        txtNome.setText(itemEmEdicao.getNome());
+        txtDescricao.setText(itemEmEdicao.getDescricao());
+        cmbUnidade.setSelectedItem(itemEmEdicao.getUnidadeMedida());
+        lblNovoItem.setText("Editar item");
+    }
+
+    // Volta o formulário ao estado de cadastro, sem item em edição.
+    private void limparFormulario() {
+        itemEmEdicao = null;
+        lblNovoItem.setText("Novo item");
+        txtNome.setText("");
+        txtDescricao.setText("");
+        cmbUnidade.setSelectedIndex(-1);
     }
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,6 +136,11 @@ public class PainelItens extends javax.swing.JPanel {
         try {
             cadastroItens.excluir(item);
             JOptionPane.showMessageDialog(this, "Item excluído com sucesso!");
+
+            // Não deixa o formulário editando um item que acabou de sumir.
+            if (item.equals(itemEmEdicao)) {
+                limparFormulario();
+            }
         } catch (IllegalArgumentException | IllegalStateException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
@@ -376,12 +425,14 @@ public class PainelItens extends javax.swing.JPanel {
         String unidade = (String) cmbUnidade.getSelectedItem();
 
         try {
-            cadastroItens.cadastrar(nome, descricao, unidade);
-
-            JOptionPane.showMessageDialog(this, "Item cadastrado com sucesso!");
-            txtNome.setText("");
-            txtDescricao.setText("");
-            cmbUnidade.setSelectedIndex(-1);
+            if (itemEmEdicao == null) {
+                cadastroItens.cadastrar(nome, descricao, unidade);
+                JOptionPane.showMessageDialog(this, "Item cadastrado com sucesso!");
+            } else {
+                cadastroItens.atualizar(itemEmEdicao, nome, descricao, unidade);
+                JOptionPane.showMessageDialog(this, "Item atualizado com sucesso!");
+            }
+            limparFormulario();
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
@@ -390,9 +441,7 @@ public class PainelItens extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        txtNome.setText("");
-        txtDescricao.setText("");
-        cmbUnidade.setSelectedIndex(-1);
+        limparFormulario();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
 

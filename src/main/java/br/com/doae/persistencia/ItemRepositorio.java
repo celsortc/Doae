@@ -72,6 +72,22 @@ public class ItemRepositorio {
         }
     }
 
+    public void atualizar(Item item) {
+        String sql = "UPDATE itens SET nome = ?, descricao = ?, unidade_medida = ? WHERE id = ?";
+
+        try (Connection conexao = Conexao.abrir();
+                PreparedStatement comando = conexao.prepareStatement(sql)) {
+
+            comando.setString(1, item.getNome());
+            comando.setString(2, item.getDescricao());
+            comando.setString(3, item.getUnidadeMedida());
+            comando.setInt(4, item.getId());
+            comando.executeUpdate();
+        } catch (SQLException e) {
+            throw new IllegalStateException("Erro ao atualizar o item no banco.", e);
+        }
+    }
+
     public void excluir(int id) {
         String sql = "DELETE FROM itens WHERE id = ?";
 
