@@ -9,9 +9,16 @@ public class PainelDoadores extends javax.swing.JPanel {
 
     private final CadastroDoadores cadastroDoadores;
 
+    // Doadores na mesma ordem das linhas da tabela: a linha selecionada aponta para o doador a excluir.
+    private java.util.List<Doador> doadoresExibidos = new java.util.ArrayList<>();
+
+    // Criado no código (não no designer) para não alterar o initComponents gerado.
+    private final javax.swing.JButton btnExcluir = new javax.swing.JButton("Excluir");
+
     public PainelDoadores(CadastroDoadores cadastroDoadores) {
         this.cadastroDoadores = cadastroDoadores;
         initComponents();
+        configurarBotaoExcluir();
 
         scrollConteudo.getVerticalScrollBar().setUnitIncrement(20);
         tblDoadores.getTableHeader().setFont(new java.awt.Font("Segoe UI", 1, 14));
@@ -22,13 +29,66 @@ public class PainelDoadores extends javax.swing.JPanel {
         atualizarTabelaDoadores();
     }
 
+    // Coloca o botão Excluir no rodapé da lista, ao lado do total de doadores.
+    private void configurarBotaoExcluir() {
+        btnExcluir.setFont(new java.awt.Font("Segoe UI", 1, 14));
+        btnExcluir.setForeground(new java.awt.Color(36, 42, 45));
+        btnExcluir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(205, 211, 215)));
+        btnExcluir.setContentAreaFilled(false);
+        btnExcluir.setOpaque(true);
+        btnExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExcluir.setPreferredSize(new java.awt.Dimension(110, 42));
+        btnExcluir.addActionListener(this::btnExcluirActionPerformed);
+
+        javax.swing.JPanel rodape = new javax.swing.JPanel(new java.awt.BorderLayout());
+        rodape.setBackground(new java.awt.Color(255, 255, 255));
+        rodape.add(lblTotalDoadores, java.awt.BorderLayout.WEST);
+        rodape.add(btnExcluir, java.awt.BorderLayout.EAST);
+
+        painelLista.removeAll();
+        painelLista.setLayout(new java.awt.BorderLayout(0, 16));
+        painelLista.add(lblCadastrados, java.awt.BorderLayout.NORTH);
+        painelLista.add(scrollDoadores, java.awt.BorderLayout.CENTER);
+        painelLista.add(rodape, java.awt.BorderLayout.SOUTH);
+    }
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {
+        int linha = tblDoadores.getSelectedRow();
+
+        if (linha < 0) {
+            JOptionPane.showMessageDialog(this, "Selecione um doador na tabela para excluir.");
+            return;
+        }
+
+        Doador doador = doadoresExibidos.get(tblDoadores.convertRowIndexToModel(linha));
+
+        int resposta = JOptionPane.showConfirmDialog(this,
+                "Excluir o doador \"" + doador.getNome() + "\"? Essa ação não pode ser desfeita.",
+                "Confirmar exclusão",
+                JOptionPane.YES_NO_OPTION);
+
+        if (resposta != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        try {
+            cadastroDoadores.excluir(doador);
+            JOptionPane.showMessageDialog(this, "Doador excluído com sucesso!");
+        } catch (IllegalArgumentException | IllegalStateException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+
+        atualizarTabelaDoadores();
+    }
+
     private void atualizarTabelaDoadores() {
         DefaultTableModel modelo
                 = (DefaultTableModel) tblDoadores.getModel();
 
         modelo.setRowCount(0);
+        doadoresExibidos = cadastroDoadores.listar();
 
-        for (Doador doador : cadastroDoadores.listar()) {
+        for (Doador doador : doadoresExibidos) {
             modelo.addRow(new Object[]{
                 doador.getNome(),
                 doador.getContato()
