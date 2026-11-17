@@ -54,4 +54,35 @@ public class ItemRepositorio {
         }
         return itens;
     }
+
+    // Diz se o item já aparece em alguma entrada ou saída do histórico.
+    public boolean possuiMovimentacoes(int id) {
+        String sql = "SELECT 1 FROM movimentacoes WHERE item_id = ? LIMIT 1";
+
+        try (Connection conexao = Conexao.abrir();
+                PreparedStatement comando = conexao.prepareStatement(sql)) {
+
+            comando.setInt(1, id);
+
+            try (ResultSet resultado = comando.executeQuery()) {
+                return resultado.next();
+            }
+        } catch (SQLException e) {
+            throw new IllegalStateException("Erro ao verificar as movimentações do item.", e);
+        }
+    }
+
+    public void excluir(int id) {
+        String sql = "DELETE FROM itens WHERE id = ?";
+
+        try (Connection conexao = Conexao.abrir();
+                PreparedStatement comando = conexao.prepareStatement(sql)) {
+
+            comando.setInt(1, id);
+            comando.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new IllegalStateException("Erro ao excluir o item do banco.", e);
+        }
+    }
 }

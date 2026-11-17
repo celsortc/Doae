@@ -9,10 +9,17 @@ public class PainelItens extends javax.swing.JPanel {
 
     private final CadastroItens cadastroItens;
 
+    // Itens na mesma ordem das linhas da tabela: a linha selecionada aponta para o item a excluir.
+    private java.util.List<Item> itensExibidos = new java.util.ArrayList<>();
+
+    // Criado no código (não no designer) para não alterar o initComponents gerado.
+    private final javax.swing.JButton btnExcluir = new javax.swing.JButton("Excluir");
+
     public PainelItens(CadastroItens cadastroItens) {
 
         this.cadastroItens = cadastroItens;
         initComponents();
+        configurarBotaoExcluir();
 
         btnSalvar.putClientProperty("FlatLaf.style",
                 "background: #4A9B2F; foreground: #FFFFFF; font: bold");
@@ -34,13 +41,66 @@ public class PainelItens extends javax.swing.JPanel {
         atualizarTabelaItens();
     }
 
+    // Coloca o botão Excluir no rodapé da lista, ao lado do total de itens.
+    private void configurarBotaoExcluir() {
+        btnExcluir.setFont(new java.awt.Font("Segoe UI", 1, 14));
+        btnExcluir.setForeground(new java.awt.Color(36, 42, 45));
+        btnExcluir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(205, 211, 215)));
+        btnExcluir.setContentAreaFilled(false);
+        btnExcluir.setOpaque(true);
+        btnExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExcluir.setPreferredSize(new java.awt.Dimension(110, 42));
+        btnExcluir.addActionListener(this::btnExcluirActionPerformed);
+
+        javax.swing.JPanel rodape = new javax.swing.JPanel(new java.awt.BorderLayout());
+        rodape.setBackground(new java.awt.Color(255, 255, 255));
+        rodape.add(lblTotalItens, java.awt.BorderLayout.WEST);
+        rodape.add(btnExcluir, java.awt.BorderLayout.EAST);
+
+        painelLista.removeAll();
+        painelLista.setLayout(new java.awt.BorderLayout(0, 16));
+        painelLista.add(lblCadastrados, java.awt.BorderLayout.NORTH);
+        painelLista.add(scrollItens, java.awt.BorderLayout.CENTER);
+        painelLista.add(rodape, java.awt.BorderLayout.SOUTH);
+    }
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {
+        int linha = tblItens.getSelectedRow();
+
+        if (linha < 0) {
+            JOptionPane.showMessageDialog(this, "Selecione um item na tabela para excluir.");
+            return;
+        }
+
+        Item item = itensExibidos.get(tblItens.convertRowIndexToModel(linha));
+
+        int resposta = JOptionPane.showConfirmDialog(this,
+                "Excluir o item \"" + item.getNome() + "\"? Essa ação não pode ser desfeita.",
+                "Confirmar exclusão",
+                JOptionPane.YES_NO_OPTION);
+
+        if (resposta != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        try {
+            cadastroItens.excluir(item);
+            JOptionPane.showMessageDialog(this, "Item excluído com sucesso!");
+        } catch (IllegalArgumentException | IllegalStateException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+
+        atualizarTabelaItens();
+    }
+
     private void atualizarTabelaItens() {
         DefaultTableModel modelo
                 = (DefaultTableModel) tblItens.getModel();
 
         modelo.setRowCount(0);
+        itensExibidos = cadastroItens.listar();
 
-        for (Item item : cadastroItens.listar()) {
+        for (Item item : itensExibidos) {
             modelo.addRow(new Object[]{
                 item.getNome(),
                 item.getDescricao(),
