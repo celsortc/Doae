@@ -27,4 +27,19 @@ public class CadastroItens {
         return repositorio.listarTodos();
     }
 
+    public void excluir(Item item) {
+
+        if (item == null || item.getId() == null) {
+            throw new IllegalArgumentException("Selecione um item para excluir.");
+        }
+
+        // Item com histórico não pode sumir: o estoque e o histórico dependem dele.
+        if (repositorio.possuiMovimentacoes(item.getId())) {
+            throw new IllegalArgumentException(
+                    "Este item possui movimentações no histórico e não pode ser excluído.");
+        }
+
+        repositorio.excluir(item.getId());
+    }
+
 }
