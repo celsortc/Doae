@@ -1,6 +1,7 @@
 package br.com.doae.visao;
 
 import br.com.doae.modelo.Movimentacao;
+import br.com.doae.modelo.TipoMovimentacao;
 import br.com.doae.servico.ControleEstoque;
 import java.time.format.DateTimeFormatter;
 import javax.swing.table.DefaultTableModel;
@@ -15,10 +16,22 @@ public class PainelHistorico extends javax.swing.JPanel {
 
     private final ControleEstoque controleEstoque;
 
+    // Últimas movimentações lidas do banco; Aplicar filtra esta cópia, sem nova consulta.
+    private java.util.List<Movimentacao> movimentacoes = new java.util.ArrayList<>();
+
     public PainelHistorico(ControleEstoque controleEstoque) {
         this.controleEstoque = controleEstoque;
 
         initComponents();
+        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(
+                new String[]{"Todos os tipos", "Entrada", "Saída"}));
+        cmbItem.addItem("Todos os itens");
+        btnAplicar.addActionListener(e -> filtrarTabela());
+        btnLimpar.addActionListener(e -> {
+            cmbItem.setSelectedIndex(0);
+            cmbTipo.setSelectedIndex(0);
+            filtrarTabela();
+        });
         scrollConteudo.getVerticalScrollBar().setUnitIncrement(20);
         tblMovimentacoes.getTableHeader().setFont(new java.awt.Font("Segoe UI", 1, 14));
         tblMovimentacoes.getTableHeader().setBackground(new java.awt.Color(245, 246, 247));
@@ -26,13 +39,44 @@ public class PainelHistorico extends javax.swing.JPanel {
         tblMovimentacoes.getTableHeader().setReorderingAllowed(false);
     }
 
+    // Busca as movimentações no banco, zera os filtros e mostra tudo.
     public void atualizarTabelaHistorico() {
+        movimentacoes = controleEstoque.listarMovimentacoes();
+
+        cmbItem.removeAllItems();
+        cmbItem.addItem("Todos os itens");
+        movimentacoes.stream()
+                .map(m -> m.getItem().getNome())
+                .distinct()
+                .sorted()
+                .forEach(cmbItem::addItem);
+        cmbTipo.setSelectedIndex(0);
+
+        filtrarTabela();
+    }
+
+    // Refaz a tabela a partir das movimentações já carregadas, aplicando item e tipo.
+    private void filtrarTabela() {
         DefaultTableModel modelo
                 = (DefaultTableModel) tblMovimentacoes.getModel();
 
         modelo.setRowCount(0);
 
-        for (Movimentacao movimentacao : controleEstoque.listarMovimentacoes()) {
+        String itemEscolhido = (String) cmbItem.getSelectedItem();
+        int tipoEscolhido = cmbTipo.getSelectedIndex(); // 0 = todos, 1 = entrada, 2 = saída
+
+        for (Movimentacao movimentacao : movimentacoes) {
+
+            if (cmbItem.getSelectedIndex() > 0
+                    && !movimentacao.getItem().getNome().equals(itemEscolhido)) {
+                continue;
+            }
+            if (tipoEscolhido == 1 && movimentacao.getTipo() != TipoMovimentacao.ENTRADA) {
+                continue;
+            }
+            if (tipoEscolhido == 2 && movimentacao.getTipo() != TipoMovimentacao.SAIDA) {
+                continue;
+            }
 
             String textoDoador = "-";
 
