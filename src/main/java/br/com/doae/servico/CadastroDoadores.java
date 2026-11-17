@@ -19,4 +19,19 @@ public class CadastroDoadores {
         return repositorio.listarTodos();
     }
 
+    public void excluir(Doador doador) {
+
+        if (doador == null || doador.getId() == null) {
+            throw new IllegalArgumentException("Selecione um doador para excluir.");
+        }
+
+        // Doador com doações registradas não pode sumir: o histórico depende dele.
+        if (repositorio.possuiMovimentacoes(doador.getId())) {
+            throw new IllegalArgumentException(
+                    "Este doador possui doações no histórico e não pode ser excluído.");
+        }
+
+        repositorio.excluir(doador.getId());
+    }
+
 }
