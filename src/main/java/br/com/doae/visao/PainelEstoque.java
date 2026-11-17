@@ -30,6 +30,7 @@ public class PainelEstoque extends javax.swing.JPanel {
         this.aoRegistrarEntrada = aoRegistrarEntrada;
         this.aoRegistrarSaida = aoRegistrarSaida;
         initComponents();
+        centralizarColunas();
 
         // Filtra enquanto digita (sem ir ao banco); o botão e o Enter recarregam do banco.
         txtBuscaItem.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
@@ -61,6 +62,26 @@ public class PainelEstoque extends javax.swing.JPanel {
 
         // Carrega os saldos já ao abrir o sistema, como Itens e Doadores fazem.
         atualizarTabelaEstoque();
+    }
+
+    // Centraliza Unidade e Saldo (cabeçalho e células); o nome do item fica à esquerda.
+    private void centralizarColunas() {
+        javax.swing.table.DefaultTableCellRenderer centro = new javax.swing.table.DefaultTableCellRenderer();
+        centro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tblEstoque.getColumnModel().getColumn(1).setCellRenderer(centro);
+        tblEstoque.getColumnModel().getColumn(2).setCellRenderer(centro);
+
+        javax.swing.table.JTableHeader cabecalho = tblEstoque.getTableHeader();
+        javax.swing.table.TableCellRenderer original = cabecalho.getDefaultRenderer();
+        cabecalho.setDefaultRenderer((tabela, valor, selecionado, foco, linha, coluna) -> {
+            java.awt.Component componente = original.getTableCellRendererComponent(
+                    tabela, valor, selecionado, foco, linha, coluna);
+            if (componente instanceof javax.swing.JLabel rotulo) {
+                rotulo.setHorizontalAlignment(coluna == 0
+                        ? javax.swing.SwingConstants.LEFT : javax.swing.SwingConstants.CENTER);
+            }
+            return componente;
+        });
     }
 
     // Minúsculas e sem acentos, para "açúcar" e "ACUCAR" serem tratados como iguais.
