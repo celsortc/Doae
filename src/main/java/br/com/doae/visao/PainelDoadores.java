@@ -62,12 +62,18 @@ public class PainelDoadores extends javax.swing.JPanel {
 
         Doador doador = doadoresExibidos.get(tblDoadores.convertRowIndexToModel(linha));
 
-        int resposta = JOptionPane.showConfirmDialog(this,
+        // "Não" é o botão padrão: um Enter distraído não exclui nada.
+        Object[] opcoes = {"Sim", "Não"};
+        int resposta = JOptionPane.showOptionDialog(this,
                 "Excluir o doador \"" + doador.getNome() + "\"? Essa ação não pode ser desfeita.",
                 "Confirmar exclusão",
-                JOptionPane.YES_NO_OPTION);
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE,
+                null,
+                opcoes,
+                opcoes[1]);
 
-        if (resposta != JOptionPane.YES_OPTION) {
+        if (resposta != 0) {
             return;
         }
 
